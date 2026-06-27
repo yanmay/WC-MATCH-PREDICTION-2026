@@ -124,13 +124,11 @@ def render_sidebar():
 
 def make_live_timer_html(elapsed_mins: int, elapsed_secs: int, timer_id: str = "live-timer-1") -> str:
     """
-    Returns compact HTML + JavaScript for a live-ticking match minute counter.
+    Returns compact HTML for a live-ticking match minute counter.
     
-    The Python server computes the starting elapsed_mins/elapsed_secs from the
-    kick_off_utc timestamp. The JavaScript then ticks the clock every 1 second
-    in the browser — no page reload needed. Works perfectly locally.
-    
-    Example output: "90+2' 34" → "90+2' 35" → "90+3' 00" ...
+    Uses a hidden Streamlit components.html iframe to run background JavaScript.
+    The JavaScript queries the parent page DOM to find the timer element and increments
+    it every second in the browser without reloading the page.
     """
     # Build initial display string
     if elapsed_mins >= 90:
@@ -139,27 +137,60 @@ def make_live_timer_html(elapsed_mins: int, elapsed_secs: int, timer_id: str = "
     else:
         init_display = f"{elapsed_mins}&#39; {str(elapsed_secs).zfill(2)}"
 
-    # Compact JS — uses data attributes so no inline script injection issues
-    js = (
-        f"(function(){{"
-        f"var el=document.getElementById('{timer_id}');"
-        f"if(!el)return;"
-        f"var m=parseInt(el.getAttribute('data-m'));"
-        f"var s=parseInt(el.getAttribute('data-s'));"
-        f"setInterval(function(){{"
-        f"s++;if(s>=60){{s=0;m++;}}"
-        f"var d;"
-        f"if(m>=90){{d='90+'+(m-90)+\"' \"+String(s).padStart(2,'0');}}"
-        f"else{{d=m+\"' \"+String(s).padStart(2,'0');}}"
-        f"el.textContent=d;"
-        f"}},1000);"
-        f"}})();"
+    import streamlit.components.v1 as components
+    components.html(
+        f"""
+        <script>
+        (function() {{
+            var parentDoc = window.parent.document;
+            function tick() {{
+                var el = parentDoc.getElementById('{timer_id}');
+                if (!el) return;
+                if (el.getAttribute('data-ticking') === 'true') return;
+                el.setAttribute('data-ticking', 'true');
+                var m = parseInt(el.getAttribute('data-m')) || 0;
+                var s = parseInt(el.getAttribute('data-s')) || 0;
+                setInterval(function() {{
+                    s++;
+                    if (s >= 60) {{
+                        s = 0;
+                        m++;
+                    }}
+                    var d;
+                    if (m >= 90) {{
+                        d = '90+' + (m - 90) + "' " + String(s).padStart(2, '0');
+                    }} else {{
+                        d = m + "' " + String(s).padStart(2, '0');
+                    }}
+                    el.textContent = d;
+                    el.setAttribute('data-m', m);
+                    el.setAttribute('data-s', s);
+                }}, 1000);
+            }}
+            tick();
+            // Retry locating the element in case it takes a split second to mount
+            var attempts = 0;
+            var interval = setInterval(function() {{
+                var el = parentDoc.getElementById('{timer_id}');
+                if (el) {{
+                    tick();
+                    clearInterval(interval);
+                }}
+                attempts++;
+                if (attempts > 30) {{
+                    clearInterval(interval);
+                }}
+            }}, 100);
+        }})();
+        </script>
+        """,
+        height=0,
+        width=0
     )
 
     return (
         f'<span id="{timer_id}" data-m="{elapsed_mins}" data-s="{elapsed_secs}" '
         f'style="font-weight:700;letter-spacing:1px;">{init_display}</span>'
-        f'<script>{js}</script>'
     )
 
 

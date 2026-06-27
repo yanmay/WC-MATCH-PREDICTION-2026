@@ -128,6 +128,20 @@ def fetch_live_matches(force_refresh: bool = False) -> Optional[Dict[str, Any]]:
     global _live_cache, _live_cache_ts
     now = datetime.datetime.utcnow()
 
+    # 0. Check local live scores config first to support local debugging/mocking
+    live_path = DATA_DIR / "live_scores.json"
+    if live_path.exists():
+        try:
+            with open(live_path, encoding="utf-8") as f:
+                data = json.load(f)
+                if data and (data.get("matches") or data.get("games")):
+                    _live_cache = data
+                    _live_cache_ts = now
+                    print("[live_scores] Loaded mock/local matches from live_scores.json.")
+                    return data
+        except Exception as err:
+            print(f"[live_scores] Failed to read live_scores.json: {err}")
+
     if (
         not force_refresh
         and _live_cache is not None
@@ -462,27 +476,86 @@ def get_live_matches_data() -> list:
             kick_off_utc = m.get("kick_off_utc", "")
             elapsed_mins = 0
             elapsed_secs = 0
-            if elapsed_raw.endswith("'"):
-                try:
-                    elapsed_mins = int(elapsed_raw.replace("'", ""))
-                except Exception:
-                    pass
+            
+            # Clean up elapsed_raw to extract numeric minutes if possible
+            elapsed_clean = elapsed_raw.replace("'", "").strip()
+            try:
+                elapsed_mins = int(elapsed_clean)
+            except Exception:
+                pass
+                
             minute_str = m.get("minute", f"{elapsed_mins}'")
 
             if kick_off_utc:
                 try:
                     kick_off = dt.datetime.fromisoformat(kick_off_utc.replace("Z", "+00:00"))
                     now = dt.datetime.now(dt.timezone.utc)
-                    elapsed_total = max(0, (now - kick_off).total_seconds())
-                    elapsed_mins = int(elapsed_total // 60)
-                    elapsed_secs = int(elapsed_total % 60)
-                    if elapsed_mins >= 90:
-                        extra = elapsed_mins - 90
-                        minute_str = f"90+{extra}'"
-                    else:
-                        minute_str = f"{elapsed_mins}'"
+                    if now >= kick_off:
+                        elapsed_total = (now - kick_off).total_seconds()
+                        elapsed_mins = int(elapsed_total // 60)
+                        elapsed_secs = int(elapsed_total % 60)
+                        if elapsed_mins >= 90:
+                            extra = elapsed_mins - 90
+                            minute_str = f"90+{extra}'"
+                        else:
+                            minute_str = f"{elapsed_mins}'"
                 except Exception:
                     pass
+            else:
+                # If kick_off_utc is missing, estimate from local_date using stadium timezone
+                local_date_str = m.get("local_date", "")
+                if local_date_str:
+                    try:
+                        local_dt = dt.datetime.strptime(local_date_str, "%m/%d/%Y %H:%M")
+                        now_utc = dt.datetime.now(dt.timezone.utc)
+                        best_kickoff = None
+                        min_diff = float("inf")
+                        
+                        # Map stadium IDs to timezones where possible
+                        stadium_offsets = {
+                            "1": -5, "2": -7, "3": -4, "4": -4, "5": -4, "6": -5,
+                            "7": -5, "8": -4, "9": -4, "10": -7, "11": -4, "12": -4,
+                            "13": -7, "14": -7, "15": -5, "16": -5
+                        }
+                        st_id = str(m.get("stadium_id", ""))
+                        if st_id in stadium_offsets:
+                            best_kickoff = (local_dt - dt.timedelta(hours=stadium_offsets[st_id])).replace(tzinfo=dt.timezone.utc)
+                        else:
+                            # Heuristic fallback: test offsets and find one that places kickoff in the past (within 3 hours)
+                            for offset in [-4, -5, -6, -7]:
+                                candidate = (local_dt - dt.timedelta(hours=offset)).replace(tzinfo=dt.timezone.utc)
+                                diff = (now_utc - candidate).total_seconds()
+                                if 0 <= diff < 150 * 60:
+                                    if diff < min_diff:
+                                        min_diff = diff
+                                        best_kickoff = candidate
+                        
+                        if best_kickoff is None:
+                            # Fallback: assume Eastern Time (-4)
+                            best_kickoff = (local_dt - dt.timedelta(hours=-4)).replace(tzinfo=dt.timezone.utc)
+                            
+                        kick_off = best_kickoff
+                        now = dt.datetime.now(dt.timezone.utc)
+                        if now >= kick_off:
+                            elapsed_total = (now - kick_off).total_seconds()
+                            elapsed_mins = int(elapsed_total // 60)
+                            elapsed_secs = int(elapsed_total % 60)
+                            
+                            # Halftime adjustment: if elapsed is more than 45 minutes, subtract typical 15-minute break
+                            if elapsed_mins > 45:
+                                if elapsed_mins <= 60:
+                                    elapsed_mins = 45
+                                    elapsed_secs = 0
+                                else:
+                                    elapsed_mins = elapsed_mins - 15
+                                    
+                            if elapsed_mins >= 90:
+                                extra = elapsed_mins - 90
+                                minute_str = f"90+{extra}'"
+                            else:
+                                minute_str = f"{elapsed_mins}'"
+                    except Exception:
+                        pass
             
             results.append({
                 "home_team": home,

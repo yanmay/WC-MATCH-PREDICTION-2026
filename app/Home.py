@@ -24,19 +24,61 @@ def make_live_timer_html(elapsed_mins: int, elapsed_secs: int, timer_id: str = "
         init_display = f"90+{extra}' {str(elapsed_secs).zfill(2)}"
     else:
         init_display = f"{elapsed_mins}' {str(elapsed_secs).zfill(2)}"
-    js = (
-        f"(function(){{var el=document.getElementById('{timer_id}');"
-        f"if(!el)return;"
-        f"var m=parseInt(el.getAttribute('data-m')),s=parseInt(el.getAttribute('data-s'));"
-        f"setInterval(function(){{s++;if(s>=60){{s=0;m++;}}var d;"
-        f"if(m>=90){{d='90+'+(m-90)+\"' \"+String(s).padStart(2,'0');}}"
-        f"else{{d=m+\"' \"+String(s).padStart(2,'0');}}"
-        f"el.textContent=d;}},1000);}})();"
+
+    import streamlit.components.v1 as components
+    components.html(
+        f"""
+        <script>
+        (function() {{
+            var parentDoc = window.parent.document;
+            function tick() {{
+                var el = parentDoc.getElementById('{timer_id}');
+                if (!el) return;
+                if (el.getAttribute('data-ticking') === 'true') return;
+                el.setAttribute('data-ticking', 'true');
+                var m = parseInt(el.getAttribute('data-m')) || 0;
+                var s = parseInt(el.getAttribute('data-s')) || 0;
+                setInterval(function() {{
+                    s++;
+                    if (s >= 60) {{
+                        s = 0;
+                        m++;
+                    }}
+                    var d;
+                    if (m >= 90) {{
+                        d = '90+' + (m - 90) + "' " + String(s).padStart(2, '0');
+                    }} else {{
+                        d = m + "' " + String(s).padStart(2, '0');
+                    }}
+                    el.textContent = d;
+                    el.setAttribute('data-m', m);
+                    el.setAttribute('data-s', s);
+                }}, 1000);
+            }}
+            tick();
+            // Retry locating the element in case it takes a split second to mount
+            var attempts = 0;
+            var interval = setInterval(function() {{
+                var el = parentDoc.getElementById('{timer_id}');
+                if (el) {{
+                    tick();
+                    clearInterval(interval);
+                }}
+                attempts++;
+                if (attempts > 30) {{
+                    clearInterval(interval);
+                }}
+            }}, 100);
+        }})();
+        </script>
+        """,
+        height=0,
+        width=0
     )
+
     return (
         f'<span id="{timer_id}" data-m="{elapsed_mins}" data-s="{elapsed_secs}" '
         f'style="font-weight:700;letter-spacing:1px;">{init_display}</span>'
-        f'<script>{js}</script>'
     )
 
 

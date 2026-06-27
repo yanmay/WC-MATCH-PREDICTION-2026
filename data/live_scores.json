@@ -4,13 +4,13 @@
       "home_team": "Panama",
       "away_team": "England",
       "home_score": 0,
-      "away_score": 1,
+      "away_score": 0,
       "status": "live",
-      "time_elapsed": "14'",
-      "kick_off_utc": "2026-06-28T16:00:00Z",
+      "time_elapsed": "57'",
+      "kick_off_utc": "2026-06-27T21:19:00Z",
       "scorers": {
         "Panama": [],
-        "England": ["Harry Kane 10'"]
+        "England": []
       }
     }
   ]

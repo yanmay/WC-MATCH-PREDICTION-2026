@@ -18,9 +18,9 @@
       "away": []
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 102,
@@ -44,9 +44,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 103,
@@ -68,9 +68,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 104,
@@ -93,9 +93,9 @@
       "away": []
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 105,
@@ -112,9 +112,9 @@
       "away": []
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 106,
@@ -133,9 +133,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 107,
@@ -154,9 +154,9 @@
       "away": []
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 108,
@@ -178,9 +178,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 109,
@@ -203,9 +203,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 110,
@@ -230,9 +230,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 111,
@@ -253,9 +253,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 112,
@@ -274,9 +274,9 @@
       "away": []
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 113,
@@ -297,9 +297,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 114,
@@ -319,9 +319,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 115,
@@ -343,9 +343,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 116,
@@ -368,9 +368,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 117,
@@ -391,9 +391,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 118,
@@ -417,9 +417,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 119,
@@ -436,9 +436,9 @@
       "away": []
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 120,
@@ -462,9 +462,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 121,
@@ -487,9 +487,9 @@
       "away": []
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 122,
@@ -506,9 +506,9 @@
       "away": []
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 123,
@@ -527,9 +527,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 124,
@@ -554,9 +554,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 125,
@@ -577,9 +577,9 @@
       ]
     },
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 126,
@@ -587,15 +587,18 @@
     "date": "2026-06-28",
     "home_team": "Panama",
     "away_team": "England",
-    "status": "scheduled",
-    "home_score": null,
-    "away_score": null,
+    "status": "live",
+    "home_score": 0,
+    "away_score": 0,
     "group": "L",
-    "scorers": null,
-    "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "scorers": {
+      "Panama": [],
+      "England": []
+    },
+    "minute": "90+12'",
+    "elapsed_mins": 102.0,
+    "elapsed_secs": 42.0,
+    "kick_off_utc": "2026-06-27T21:19:00Z"
   },
   {
     "match_id": 127,
@@ -609,9 +612,9 @@
     "group": "L",
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 128,
@@ -625,9 +628,9 @@
     "group": "K",
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 129,
@@ -641,9 +644,9 @@
     "group": "K",
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 130,
@@ -657,9 +660,9 @@
     "group": "J",
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 131,
@@ -673,9 +676,9 @@
     "group": "J",
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 1,
@@ -689,9 +692,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 2,
@@ -705,25 +708,25 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 3,
     "round": "Round of 32",
     "date": "2026-06-30",
     "home_team": "Germany",
-    "away_team": "Senegal",
+    "away_team": "Norway",
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 4,
@@ -737,9 +740,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 5,
@@ -753,25 +756,25 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 6,
     "round": "Round of 32",
     "date": "2026-07-01",
     "home_team": "France",
-    "away_team": "Jordan",
+    "away_team": "Argentina",
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 7,
@@ -785,15 +788,15 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 8,
     "round": "Round of 32",
     "date": "2026-07-01",
-    "home_team": "New Zealand",
+    "home_team": "Belgium",
     "away_team": "Cabo Verde",
     "status": "scheduled",
     "home_score": null,
@@ -801,9 +804,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 9,
@@ -817,9 +820,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 10,
@@ -833,25 +836,25 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 11,
     "round": "Round of 32",
     "date": "2026-07-03",
     "home_team": "Spain",
-    "away_team": "Iran",
+    "away_team": "Egypt",
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 12,
@@ -865,25 +868,25 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 13,
     "round": "Round of 32",
     "date": "2026-07-03",
     "home_team": "Switzerland",
-    "away_team": "Saudi Arabia",
+    "away_team": "Iran",
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 14,
@@ -897,15 +900,31 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 15,
     "round": "Round of 32",
     "date": "2026-07-04",
     "home_team": "Argentina",
+    "away_team": "Saudi Arabia",
+    "status": "scheduled",
+    "home_score": null,
+    "away_score": null,
+    "group": NaN,
+    "scorers": null,
+    "minute": null,
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
+  },
+  {
+    "match_id": 16,
+    "round": "Round of 32",
+    "date": "2026-07-04",
+    "home_team": "Senegal",
     "away_team": "Ghana",
     "status": "scheduled",
     "home_score": null,
@@ -913,25 +932,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
-  },
-  {
-    "match_id": 16,
-    "round": "Round of 32",
-    "date": "2026-07-04",
-    "home_team": "Norway",
-    "away_team": "Germany",
-    "status": "scheduled",
-    "home_score": null,
-    "away_score": null,
-    "group": NaN,
-    "scorers": null,
-    "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 17,
@@ -945,9 +948,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 18,
@@ -961,9 +964,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 19,
@@ -977,9 +980,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 20,
@@ -993,9 +996,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 21,
@@ -1009,9 +1012,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 22,
@@ -1025,9 +1028,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 23,
@@ -1041,9 +1044,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 24,
@@ -1057,9 +1060,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 25,
@@ -1073,9 +1076,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 26,
@@ -1089,9 +1092,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 27,
@@ -1105,9 +1108,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 28,
@@ -1121,9 +1124,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 29,
@@ -1137,9 +1140,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 30,
@@ -1153,9 +1156,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 31,
@@ -1169,9 +1172,9 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   },
   {
     "match_id": 32,
@@ -1185,8 +1188,8 @@
     "group": NaN,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": null,
-    "elapsed_secs": null,
-    "kick_off_utc": null
+    "elapsed_mins": NaN,
+    "elapsed_secs": NaN,
+    "kick_off_utc": NaN
   }
 ]
