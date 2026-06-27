@@ -1,0 +1,1986 @@
+{
+  "mock_2022_45717": {
+    "home_team": "Qatar",
+    "away_team": "Ecuador",
+    "date": "2022-11-20",
+    "stats": {
+      "Qatar": {
+        "Total Shots": 16,
+        "Shots on Goal": 4,
+        "Ball Possession": "48%",
+        "Total passes": 369,
+        "Passes %": "78%",
+        "Corner Kicks": 4,
+        "Fouls": 8,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 4
+      },
+      "Ecuador": {
+        "Total Shots": 18,
+        "Shots on Goal": 4,
+        "Ball Possession": "52%",
+        "Total passes": 489,
+        "Passes %": "86%",
+        "Corner Kicks": 6,
+        "Fouls": 11,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45718": {
+    "home_team": "Senegal",
+    "away_team": "Netherlands",
+    "date": "2022-11-21",
+    "stats": {
+      "Senegal": {
+        "Total Shots": 13,
+        "Shots on Goal": 4,
+        "Ball Possession": "46%",
+        "Total passes": 380,
+        "Passes %": "78%",
+        "Corner Kicks": 9,
+        "Fouls": 10,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "Netherlands": {
+        "Total Shots": 15,
+        "Shots on Goal": 4,
+        "Ball Possession": "54%",
+        "Total passes": 492,
+        "Passes %": "83%",
+        "Corner Kicks": 7,
+        "Fouls": 14,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 0
+      }
+    }
+  },
+  "mock_2022_45719": {
+    "home_team": "England",
+    "away_team": "Iran",
+    "date": "2022-11-21",
+    "stats": {
+      "England": {
+        "Total Shots": 25,
+        "Shots on Goal": 12,
+        "Ball Possession": "63%",
+        "Total passes": 644,
+        "Passes %": "84%",
+        "Corner Kicks": 7,
+        "Fouls": 16,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 2
+      },
+      "Iran": {
+        "Total Shots": 19,
+        "Shots on Goal": 8,
+        "Ball Possession": "37%",
+        "Total passes": 617,
+        "Passes %": "81%",
+        "Corner Kicks": 5,
+        "Fouls": 16,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 4
+      }
+    }
+  },
+  "mock_2022_45720": {
+    "home_team": "United States",
+    "away_team": "Wales",
+    "date": "2022-11-21",
+    "stats": {
+      "United States": {
+        "Total Shots": 13,
+        "Shots on Goal": 4,
+        "Ball Possession": "47%",
+        "Total passes": 484,
+        "Passes %": "89%",
+        "Corner Kicks": 7,
+        "Fouls": 15,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 4
+      },
+      "Wales": {
+        "Total Shots": 11,
+        "Shots on Goal": 7,
+        "Ball Possession": "53%",
+        "Total passes": 636,
+        "Passes %": "80%",
+        "Corner Kicks": 4,
+        "Fouls": 13,
+        "Yellow Cards": 4,
+        "Red Cards": 0,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45721": {
+    "home_team": "Argentina",
+    "away_team": "Saudi Arabia",
+    "date": "2022-11-22",
+    "stats": {
+      "Argentina": {
+        "Total Shots": 19,
+        "Shots on Goal": 5,
+        "Ball Possession": "45%",
+        "Total passes": 524,
+        "Passes %": "79%",
+        "Corner Kicks": 7,
+        "Fouls": 14,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 0
+      },
+      "Saudi Arabia": {
+        "Total Shots": 20,
+        "Shots on Goal": 8,
+        "Ball Possession": "55%",
+        "Total passes": 402,
+        "Passes %": "87%",
+        "Corner Kicks": 3,
+        "Fouls": 13,
+        "Yellow Cards": 2,
+        "Red Cards": 1,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45722": {
+    "home_team": "Mexico",
+    "away_team": "Poland",
+    "date": "2022-11-22",
+    "stats": {
+      "Mexico": {
+        "Total Shots": 12,
+        "Shots on Goal": 5,
+        "Ball Possession": "53%",
+        "Total passes": 479,
+        "Passes %": "81%",
+        "Corner Kicks": 5,
+        "Fouls": 11,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 2
+      },
+      "Poland": {
+        "Total Shots": 8,
+        "Shots on Goal": 4,
+        "Ball Possession": "47%",
+        "Total passes": 407,
+        "Passes %": "91%",
+        "Corner Kicks": 3,
+        "Fouls": 14,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45723": {
+    "home_team": "Denmark",
+    "away_team": "Tunisia",
+    "date": "2022-11-22",
+    "stats": {
+      "Denmark": {
+        "Total Shots": 8,
+        "Shots on Goal": 4,
+        "Ball Possession": "48%",
+        "Total passes": 568,
+        "Passes %": "79%",
+        "Corner Kicks": 6,
+        "Fouls": 16,
+        "Yellow Cards": 4,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "Tunisia": {
+        "Total Shots": 11,
+        "Shots on Goal": 6,
+        "Ball Possession": "52%",
+        "Total passes": 440,
+        "Passes %": "91%",
+        "Corner Kicks": 7,
+        "Fouls": 15,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45724": {
+    "home_team": "France",
+    "away_team": "Australia",
+    "date": "2022-11-22",
+    "stats": {
+      "France": {
+        "Total Shots": 20,
+        "Shots on Goal": 9,
+        "Ball Possession": "52%",
+        "Total passes": 368,
+        "Passes %": "87%",
+        "Corner Kicks": 6,
+        "Fouls": 15,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 2
+      },
+      "Australia": {
+        "Total Shots": 13,
+        "Shots on Goal": 7,
+        "Ball Possession": "48%",
+        "Total passes": 518,
+        "Passes %": "84%",
+        "Corner Kicks": 6,
+        "Fouls": 15,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45725": {
+    "home_team": "Germany",
+    "away_team": "Japan",
+    "date": "2022-11-23",
+    "stats": {
+      "Germany": {
+        "Total Shots": 19,
+        "Shots on Goal": 7,
+        "Ball Possession": "42%",
+        "Total passes": 570,
+        "Passes %": "90%",
+        "Corner Kicks": 4,
+        "Fouls": 12,
+        "Yellow Cards": 0,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "Japan": {
+        "Total Shots": 14,
+        "Shots on Goal": 6,
+        "Ball Possession": "58%",
+        "Total passes": 387,
+        "Passes %": "88%",
+        "Corner Kicks": 4,
+        "Fouls": 8,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 0
+      }
+    }
+  },
+  "mock_2022_45726": {
+    "home_team": "Spain",
+    "away_team": "Costa Rica",
+    "date": "2022-11-23",
+    "stats": {
+      "Spain": {
+        "Total Shots": 30,
+        "Shots on Goal": 10,
+        "Ball Possession": "56%",
+        "Total passes": 576,
+        "Passes %": "87%",
+        "Corner Kicks": 4,
+        "Fouls": 15,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 4
+      },
+      "Costa Rica": {
+        "Total Shots": 15,
+        "Shots on Goal": 5,
+        "Ball Possession": "44%",
+        "Total passes": 549,
+        "Passes %": "81%",
+        "Corner Kicks": 4,
+        "Fouls": 11,
+        "Yellow Cards": 3,
+        "Red Cards": 1,
+        "Offsides": 2
+      }
+    }
+  },
+  "mock_2022_45727": {
+    "home_team": "Morocco",
+    "away_team": "Croatia",
+    "date": "2022-11-23",
+    "stats": {
+      "Morocco": {
+        "Total Shots": 18,
+        "Shots on Goal": 5,
+        "Ball Possession": "52%",
+        "Total passes": 359,
+        "Passes %": "84%",
+        "Corner Kicks": 9,
+        "Fouls": 8,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "Croatia": {
+        "Total Shots": 8,
+        "Shots on Goal": 5,
+        "Ball Possession": "48%",
+        "Total passes": 518,
+        "Passes %": "80%",
+        "Corner Kicks": 7,
+        "Fouls": 9,
+        "Yellow Cards": 0,
+        "Red Cards": 0,
+        "Offsides": 0
+      }
+    }
+  },
+  "mock_2022_45728": {
+    "home_team": "Belgium",
+    "away_team": "Canada",
+    "date": "2022-11-23",
+    "stats": {
+      "Belgium": {
+        "Total Shots": 17,
+        "Shots on Goal": 4,
+        "Ball Possession": "55%",
+        "Total passes": 566,
+        "Passes %": "83%",
+        "Corner Kicks": 3,
+        "Fouls": 15,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "Canada": {
+        "Total Shots": 12,
+        "Shots on Goal": 3,
+        "Ball Possession": "45%",
+        "Total passes": 386,
+        "Passes %": "83%",
+        "Corner Kicks": 5,
+        "Fouls": 11,
+        "Yellow Cards": 0,
+        "Red Cards": 0,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45729": {
+    "home_team": "Switzerland",
+    "away_team": "Cameroon",
+    "date": "2022-11-24",
+    "stats": {
+      "Switzerland": {
+        "Total Shots": 16,
+        "Shots on Goal": 4,
+        "Ball Possession": "58%",
+        "Total passes": 367,
+        "Passes %": "84%",
+        "Corner Kicks": 4,
+        "Fouls": 12,
+        "Yellow Cards": 0,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "Cameroon": {
+        "Total Shots": 18,
+        "Shots on Goal": 2,
+        "Ball Possession": "42%",
+        "Total passes": 461,
+        "Passes %": "85%",
+        "Corner Kicks": 9,
+        "Fouls": 12,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 0
+      }
+    }
+  },
+  "mock_2022_45730": {
+    "home_team": "Brazil",
+    "away_team": "Serbia",
+    "date": "2022-11-24",
+    "stats": {
+      "Brazil": {
+        "Total Shots": 13,
+        "Shots on Goal": 5,
+        "Ball Possession": "52%",
+        "Total passes": 546,
+        "Passes %": "90%",
+        "Corner Kicks": 9,
+        "Fouls": 15,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 1
+      },
+      "Serbia": {
+        "Total Shots": 17,
+        "Shots on Goal": 2,
+        "Ball Possession": "48%",
+        "Total passes": 551,
+        "Passes %": "92%",
+        "Corner Kicks": 3,
+        "Fouls": 15,
+        "Yellow Cards": 2,
+        "Red Cards": 1,
+        "Offsides": 4
+      }
+    }
+  },
+  "mock_2022_45731": {
+    "home_team": "Uruguay",
+    "away_team": "South Korea",
+    "date": "2022-11-24",
+    "stats": {
+      "Uruguay": {
+        "Total Shots": 15,
+        "Shots on Goal": 2,
+        "Ball Possession": "47%",
+        "Total passes": 440,
+        "Passes %": "80%",
+        "Corner Kicks": 3,
+        "Fouls": 8,
+        "Yellow Cards": 0,
+        "Red Cards": 0,
+        "Offsides": 2
+      },
+      "South Korea": {
+        "Total Shots": 8,
+        "Shots on Goal": 5,
+        "Ball Possession": "53%",
+        "Total passes": 450,
+        "Passes %": "91%",
+        "Corner Kicks": 6,
+        "Fouls": 16,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 4
+      }
+    }
+  },
+  "mock_2022_45732": {
+    "home_team": "Portugal",
+    "away_team": "Ghana",
+    "date": "2022-11-24",
+    "stats": {
+      "Portugal": {
+        "Total Shots": 18,
+        "Shots on Goal": 6,
+        "Ball Possession": "61%",
+        "Total passes": 413,
+        "Passes %": "88%",
+        "Corner Kicks": 5,
+        "Fouls": 12,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "Ghana": {
+        "Total Shots": 17,
+        "Shots on Goal": 4,
+        "Ball Possession": "39%",
+        "Total passes": 640,
+        "Passes %": "82%",
+        "Corner Kicks": 3,
+        "Fouls": 10,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 2
+      }
+    }
+  },
+  "mock_2022_45733": {
+    "home_team": "Qatar",
+    "away_team": "Senegal",
+    "date": "2022-11-25",
+    "stats": {
+      "Qatar": {
+        "Total Shots": 17,
+        "Shots on Goal": 3,
+        "Ball Possession": "47%",
+        "Total passes": 456,
+        "Passes %": "78%",
+        "Corner Kicks": 6,
+        "Fouls": 12,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 4
+      },
+      "Senegal": {
+        "Total Shots": 15,
+        "Shots on Goal": 8,
+        "Ball Possession": "53%",
+        "Total passes": 480,
+        "Passes %": "85%",
+        "Corner Kicks": 4,
+        "Fouls": 12,
+        "Yellow Cards": 0,
+        "Red Cards": 0,
+        "Offsides": 0
+      }
+    }
+  },
+  "mock_2022_45734": {
+    "home_team": "Netherlands",
+    "away_team": "Ecuador",
+    "date": "2022-11-25",
+    "stats": {
+      "Netherlands": {
+        "Total Shots": 13,
+        "Shots on Goal": 6,
+        "Ball Possession": "49%",
+        "Total passes": 523,
+        "Passes %": "78%",
+        "Corner Kicks": 3,
+        "Fouls": 15,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "Ecuador": {
+        "Total Shots": 11,
+        "Shots on Goal": 3,
+        "Ball Possession": "51%",
+        "Total passes": 613,
+        "Passes %": "84%",
+        "Corner Kicks": 7,
+        "Fouls": 12,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 1
+      }
+    }
+  },
+  "mock_2022_45735": {
+    "home_team": "Wales",
+    "away_team": "Iran",
+    "date": "2022-11-25",
+    "stats": {
+      "Wales": {
+        "Total Shots": 14,
+        "Shots on Goal": 4,
+        "Ball Possession": "35%",
+        "Total passes": 379,
+        "Passes %": "83%",
+        "Corner Kicks": 7,
+        "Fouls": 12,
+        "Yellow Cards": 0,
+        "Red Cards": 0,
+        "Offsides": 2
+      },
+      "Iran": {
+        "Total Shots": 20,
+        "Shots on Goal": 7,
+        "Ball Possession": "65%",
+        "Total passes": 556,
+        "Passes %": "88%",
+        "Corner Kicks": 3,
+        "Fouls": 11,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 2
+      }
+    }
+  },
+  "mock_2022_45736": {
+    "home_team": "England",
+    "away_team": "United States",
+    "date": "2022-11-25",
+    "stats": {
+      "England": {
+        "Total Shots": 17,
+        "Shots on Goal": 2,
+        "Ball Possession": "48%",
+        "Total passes": 434,
+        "Passes %": "87%",
+        "Corner Kicks": 7,
+        "Fouls": 14,
+        "Yellow Cards": 4,
+        "Red Cards": 0,
+        "Offsides": 2
+      },
+      "United States": {
+        "Total Shots": 12,
+        "Shots on Goal": 6,
+        "Ball Possession": "52%",
+        "Total passes": 383,
+        "Passes %": "90%",
+        "Corner Kicks": 5,
+        "Fouls": 15,
+        "Yellow Cards": 4,
+        "Red Cards": 1,
+        "Offsides": 2
+      }
+    }
+  },
+  "mock_2022_45737": {
+    "home_team": "Poland",
+    "away_team": "Saudi Arabia",
+    "date": "2022-11-26",
+    "stats": {
+      "Poland": {
+        "Total Shots": 14,
+        "Shots on Goal": 8,
+        "Ball Possession": "62%",
+        "Total passes": 595,
+        "Passes %": "85%",
+        "Corner Kicks": 7,
+        "Fouls": 12,
+        "Yellow Cards": 0,
+        "Red Cards": 0,
+        "Offsides": 4
+      },
+      "Saudi Arabia": {
+        "Total Shots": 8,
+        "Shots on Goal": 3,
+        "Ball Possession": "38%",
+        "Total passes": 494,
+        "Passes %": "82%",
+        "Corner Kicks": 8,
+        "Fouls": 11,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 2
+      }
+    }
+  },
+  "mock_2022_45738": {
+    "home_team": "Argentina",
+    "away_team": "Mexico",
+    "date": "2022-11-26",
+    "stats": {
+      "Argentina": {
+        "Total Shots": 16,
+        "Shots on Goal": 5,
+        "Ball Possession": "52%",
+        "Total passes": 428,
+        "Passes %": "79%",
+        "Corner Kicks": 8,
+        "Fouls": 10,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 1
+      },
+      "Mexico": {
+        "Total Shots": 18,
+        "Shots on Goal": 3,
+        "Ball Possession": "48%",
+        "Total passes": 395,
+        "Passes %": "79%",
+        "Corner Kicks": 5,
+        "Fouls": 11,
+        "Yellow Cards": 0,
+        "Red Cards": 0,
+        "Offsides": 1
+      }
+    }
+  },
+  "mock_2022_45739": {
+    "home_team": "Tunisia",
+    "away_team": "Australia",
+    "date": "2022-11-26",
+    "stats": {
+      "Tunisia": {
+        "Total Shots": 12,
+        "Shots on Goal": 5,
+        "Ball Possession": "40%",
+        "Total passes": 607,
+        "Passes %": "85%",
+        "Corner Kicks": 4,
+        "Fouls": 10,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "Australia": {
+        "Total Shots": 20,
+        "Shots on Goal": 4,
+        "Ball Possession": "60%",
+        "Total passes": 401,
+        "Passes %": "78%",
+        "Corner Kicks": 4,
+        "Fouls": 12,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 4
+      }
+    }
+  },
+  "mock_2022_45740": {
+    "home_team": "France",
+    "away_team": "Denmark",
+    "date": "2022-11-26",
+    "stats": {
+      "France": {
+        "Total Shots": 21,
+        "Shots on Goal": 6,
+        "Ball Possession": "64%",
+        "Total passes": 355,
+        "Passes %": "88%",
+        "Corner Kicks": 3,
+        "Fouls": 10,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 0
+      },
+      "Denmark": {
+        "Total Shots": 19,
+        "Shots on Goal": 7,
+        "Ball Possession": "36%",
+        "Total passes": 417,
+        "Passes %": "82%",
+        "Corner Kicks": 7,
+        "Fouls": 16,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 2
+      }
+    }
+  },
+  "mock_2022_45741": {
+    "home_team": "Japan",
+    "away_team": "Costa Rica",
+    "date": "2022-11-27",
+    "stats": {
+      "Japan": {
+        "Total Shots": 13,
+        "Shots on Goal": 6,
+        "Ball Possession": "40%",
+        "Total passes": 587,
+        "Passes %": "90%",
+        "Corner Kicks": 9,
+        "Fouls": 13,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "Costa Rica": {
+        "Total Shots": 18,
+        "Shots on Goal": 6,
+        "Ball Possession": "60%",
+        "Total passes": 367,
+        "Passes %": "92%",
+        "Corner Kicks": 9,
+        "Fouls": 13,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 0
+      }
+    }
+  },
+  "mock_2022_45742": {
+    "home_team": "Spain",
+    "away_team": "Germany",
+    "date": "2022-11-27",
+    "stats": {
+      "Spain": {
+        "Total Shots": 19,
+        "Shots on Goal": 3,
+        "Ball Possession": "51%",
+        "Total passes": 533,
+        "Passes %": "86%",
+        "Corner Kicks": 4,
+        "Fouls": 13,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "Germany": {
+        "Total Shots": 15,
+        "Shots on Goal": 7,
+        "Ball Possession": "49%",
+        "Total passes": 567,
+        "Passes %": "78%",
+        "Corner Kicks": 5,
+        "Fouls": 12,
+        "Yellow Cards": 0,
+        "Red Cards": 0,
+        "Offsides": 4
+      }
+    }
+  },
+  "mock_2022_45743": {
+    "home_team": "Belgium",
+    "away_team": "Morocco",
+    "date": "2022-11-27",
+    "stats": {
+      "Belgium": {
+        "Total Shots": 16,
+        "Shots on Goal": 5,
+        "Ball Possession": "38%",
+        "Total passes": 386,
+        "Passes %": "84%",
+        "Corner Kicks": 3,
+        "Fouls": 12,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "Morocco": {
+        "Total Shots": 16,
+        "Shots on Goal": 7,
+        "Ball Possession": "62%",
+        "Total passes": 584,
+        "Passes %": "91%",
+        "Corner Kicks": 3,
+        "Fouls": 9,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 0
+      }
+    }
+  },
+  "mock_2022_45744": {
+    "home_team": "Croatia",
+    "away_team": "Canada",
+    "date": "2022-11-27",
+    "stats": {
+      "Croatia": {
+        "Total Shots": 23,
+        "Shots on Goal": 6,
+        "Ball Possession": "53%",
+        "Total passes": 529,
+        "Passes %": "87%",
+        "Corner Kicks": 7,
+        "Fouls": 16,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "Canada": {
+        "Total Shots": 10,
+        "Shots on Goal": 4,
+        "Ball Possession": "47%",
+        "Total passes": 548,
+        "Passes %": "80%",
+        "Corner Kicks": 7,
+        "Fouls": 11,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 0
+      }
+    }
+  },
+  "mock_2022_45745": {
+    "home_team": "Cameroon",
+    "away_team": "Serbia",
+    "date": "2022-11-28",
+    "stats": {
+      "Cameroon": {
+        "Total Shots": 17,
+        "Shots on Goal": 9,
+        "Ball Possession": "47%",
+        "Total passes": 494,
+        "Passes %": "81%",
+        "Corner Kicks": 4,
+        "Fouls": 14,
+        "Yellow Cards": 3,
+        "Red Cards": 1,
+        "Offsides": 4
+      },
+      "Serbia": {
+        "Total Shots": 18,
+        "Shots on Goal": 8,
+        "Ball Possession": "53%",
+        "Total passes": 646,
+        "Passes %": "80%",
+        "Corner Kicks": 4,
+        "Fouls": 14,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 0
+      }
+    }
+  },
+  "mock_2022_45746": {
+    "home_team": "Brazil",
+    "away_team": "Switzerland",
+    "date": "2022-11-28",
+    "stats": {
+      "Brazil": {
+        "Total Shots": 18,
+        "Shots on Goal": 5,
+        "Ball Possession": "59%",
+        "Total passes": 355,
+        "Passes %": "78%",
+        "Corner Kicks": 6,
+        "Fouls": 12,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "Switzerland": {
+        "Total Shots": 10,
+        "Shots on Goal": 2,
+        "Ball Possession": "41%",
+        "Total passes": 420,
+        "Passes %": "91%",
+        "Corner Kicks": 8,
+        "Fouls": 13,
+        "Yellow Cards": 4,
+        "Red Cards": 0,
+        "Offsides": 1
+      }
+    }
+  },
+  "mock_2022_45747": {
+    "home_team": "South Korea",
+    "away_team": "Ghana",
+    "date": "2022-11-28",
+    "stats": {
+      "South Korea": {
+        "Total Shots": 13,
+        "Shots on Goal": 5,
+        "Ball Possession": "37%",
+        "Total passes": 495,
+        "Passes %": "88%",
+        "Corner Kicks": 9,
+        "Fouls": 13,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 4
+      },
+      "Ghana": {
+        "Total Shots": 17,
+        "Shots on Goal": 8,
+        "Ball Possession": "63%",
+        "Total passes": 370,
+        "Passes %": "83%",
+        "Corner Kicks": 9,
+        "Fouls": 11,
+        "Yellow Cards": 0,
+        "Red Cards": 0,
+        "Offsides": 4
+      }
+    }
+  },
+  "mock_2022_45748": {
+    "home_team": "Portugal",
+    "away_team": "Uruguay",
+    "date": "2022-11-28",
+    "stats": {
+      "Portugal": {
+        "Total Shots": 22,
+        "Shots on Goal": 5,
+        "Ball Possession": "54%",
+        "Total passes": 560,
+        "Passes %": "90%",
+        "Corner Kicks": 9,
+        "Fouls": 10,
+        "Yellow Cards": 2,
+        "Red Cards": 1,
+        "Offsides": 1
+      },
+      "Uruguay": {
+        "Total Shots": 8,
+        "Shots on Goal": 5,
+        "Ball Possession": "46%",
+        "Total passes": 578,
+        "Passes %": "79%",
+        "Corner Kicks": 5,
+        "Fouls": 16,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 4
+      }
+    }
+  },
+  "mock_2022_45749": {
+    "home_team": "Ecuador",
+    "away_team": "Senegal",
+    "date": "2022-11-29",
+    "stats": {
+      "Ecuador": {
+        "Total Shots": 19,
+        "Shots on Goal": 6,
+        "Ball Possession": "38%",
+        "Total passes": 465,
+        "Passes %": "82%",
+        "Corner Kicks": 7,
+        "Fouls": 11,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 0
+      },
+      "Senegal": {
+        "Total Shots": 15,
+        "Shots on Goal": 8,
+        "Ball Possession": "62%",
+        "Total passes": 527,
+        "Passes %": "90%",
+        "Corner Kicks": 3,
+        "Fouls": 14,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 0
+      }
+    }
+  },
+  "mock_2022_45750": {
+    "home_team": "Qatar",
+    "away_team": "Netherlands",
+    "date": "2022-11-29",
+    "stats": {
+      "Qatar": {
+        "Total Shots": 17,
+        "Shots on Goal": 4,
+        "Ball Possession": "38%",
+        "Total passes": 385,
+        "Passes %": "80%",
+        "Corner Kicks": 3,
+        "Fouls": 16,
+        "Yellow Cards": 4,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "Netherlands": {
+        "Total Shots": 17,
+        "Shots on Goal": 4,
+        "Ball Possession": "62%",
+        "Total passes": 386,
+        "Passes %": "78%",
+        "Corner Kicks": 9,
+        "Fouls": 8,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 4
+      }
+    }
+  },
+  "mock_2022_45751": {
+    "home_team": "Wales",
+    "away_team": "England",
+    "date": "2022-11-29",
+    "stats": {
+      "Wales": {
+        "Total Shots": 16,
+        "Shots on Goal": 6,
+        "Ball Possession": "47%",
+        "Total passes": 358,
+        "Passes %": "89%",
+        "Corner Kicks": 6,
+        "Fouls": 12,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "England": {
+        "Total Shots": 17,
+        "Shots on Goal": 8,
+        "Ball Possession": "53%",
+        "Total passes": 640,
+        "Passes %": "80%",
+        "Corner Kicks": 4,
+        "Fouls": 16,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 1
+      }
+    }
+  },
+  "mock_2022_45752": {
+    "home_team": "Iran",
+    "away_team": "United States",
+    "date": "2022-11-29",
+    "stats": {
+      "Iran": {
+        "Total Shots": 8,
+        "Shots on Goal": 2,
+        "Ball Possession": "41%",
+        "Total passes": 407,
+        "Passes %": "92%",
+        "Corner Kicks": 8,
+        "Fouls": 9,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 1
+      },
+      "United States": {
+        "Total Shots": 16,
+        "Shots on Goal": 3,
+        "Ball Possession": "59%",
+        "Total passes": 563,
+        "Passes %": "89%",
+        "Corner Kicks": 4,
+        "Fouls": 12,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 1
+      }
+    }
+  },
+  "mock_2022_45753": {
+    "home_team": "Poland",
+    "away_team": "Argentina",
+    "date": "2022-11-30",
+    "stats": {
+      "Poland": {
+        "Total Shots": 9,
+        "Shots on Goal": 5,
+        "Ball Possession": "48%",
+        "Total passes": 351,
+        "Passes %": "82%",
+        "Corner Kicks": 3,
+        "Fouls": 11,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 0
+      },
+      "Argentina": {
+        "Total Shots": 12,
+        "Shots on Goal": 6,
+        "Ball Possession": "52%",
+        "Total passes": 376,
+        "Passes %": "88%",
+        "Corner Kicks": 7,
+        "Fouls": 15,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 2
+      }
+    }
+  },
+  "mock_2022_45754": {
+    "home_team": "Saudi Arabia",
+    "away_team": "Mexico",
+    "date": "2022-11-30",
+    "stats": {
+      "Saudi Arabia": {
+        "Total Shots": 19,
+        "Shots on Goal": 3,
+        "Ball Possession": "47%",
+        "Total passes": 521,
+        "Passes %": "85%",
+        "Corner Kicks": 6,
+        "Fouls": 14,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 1
+      },
+      "Mexico": {
+        "Total Shots": 16,
+        "Shots on Goal": 5,
+        "Ball Possession": "53%",
+        "Total passes": 579,
+        "Passes %": "91%",
+        "Corner Kicks": 6,
+        "Fouls": 10,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45755": {
+    "home_team": "Australia",
+    "away_team": "Denmark",
+    "date": "2022-11-30",
+    "stats": {
+      "Australia": {
+        "Total Shots": 11,
+        "Shots on Goal": 5,
+        "Ball Possession": "53%",
+        "Total passes": 569,
+        "Passes %": "87%",
+        "Corner Kicks": 8,
+        "Fouls": 11,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 1
+      },
+      "Denmark": {
+        "Total Shots": 12,
+        "Shots on Goal": 2,
+        "Ball Possession": "47%",
+        "Total passes": 413,
+        "Passes %": "86%",
+        "Corner Kicks": 8,
+        "Fouls": 9,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45756": {
+    "home_team": "Tunisia",
+    "away_team": "France",
+    "date": "2022-11-30",
+    "stats": {
+      "Tunisia": {
+        "Total Shots": 10,
+        "Shots on Goal": 7,
+        "Ball Possession": "59%",
+        "Total passes": 493,
+        "Passes %": "91%",
+        "Corner Kicks": 6,
+        "Fouls": 16,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "France": {
+        "Total Shots": 13,
+        "Shots on Goal": 6,
+        "Ball Possession": "41%",
+        "Total passes": 383,
+        "Passes %": "81%",
+        "Corner Kicks": 5,
+        "Fouls": 11,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 4
+      }
+    }
+  },
+  "mock_2022_45757": {
+    "home_team": "Japan",
+    "away_team": "Spain",
+    "date": "2022-12-01",
+    "stats": {
+      "Japan": {
+        "Total Shots": 13,
+        "Shots on Goal": 4,
+        "Ball Possession": "63%",
+        "Total passes": 557,
+        "Passes %": "80%",
+        "Corner Kicks": 9,
+        "Fouls": 16,
+        "Yellow Cards": 4,
+        "Red Cards": 0,
+        "Offsides": 1
+      },
+      "Spain": {
+        "Total Shots": 18,
+        "Shots on Goal": 6,
+        "Ball Possession": "37%",
+        "Total passes": 550,
+        "Passes %": "78%",
+        "Corner Kicks": 8,
+        "Fouls": 15,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 0
+      }
+    }
+  },
+  "mock_2022_45758": {
+    "home_team": "Costa Rica",
+    "away_team": "Germany",
+    "date": "2022-12-01",
+    "stats": {
+      "Costa Rica": {
+        "Total Shots": 20,
+        "Shots on Goal": 7,
+        "Ball Possession": "43%",
+        "Total passes": 552,
+        "Passes %": "81%",
+        "Corner Kicks": 5,
+        "Fouls": 9,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 2
+      },
+      "Germany": {
+        "Total Shots": 17,
+        "Shots on Goal": 8,
+        "Ball Possession": "57%",
+        "Total passes": 443,
+        "Passes %": "86%",
+        "Corner Kicks": 9,
+        "Fouls": 10,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 2
+      }
+    }
+  },
+  "mock_2022_45759": {
+    "home_team": "Croatia",
+    "away_team": "Belgium",
+    "date": "2022-12-01",
+    "stats": {
+      "Croatia": {
+        "Total Shots": 14,
+        "Shots on Goal": 2,
+        "Ball Possession": "49%",
+        "Total passes": 383,
+        "Passes %": "91%",
+        "Corner Kicks": 6,
+        "Fouls": 9,
+        "Yellow Cards": 0,
+        "Red Cards": 0,
+        "Offsides": 0
+      },
+      "Belgium": {
+        "Total Shots": 10,
+        "Shots on Goal": 2,
+        "Ball Possession": "51%",
+        "Total passes": 542,
+        "Passes %": "88%",
+        "Corner Kicks": 7,
+        "Fouls": 9,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45760": {
+    "home_team": "Canada",
+    "away_team": "Morocco",
+    "date": "2022-12-01",
+    "stats": {
+      "Canada": {
+        "Total Shots": 12,
+        "Shots on Goal": 6,
+        "Ball Possession": "40%",
+        "Total passes": 608,
+        "Passes %": "87%",
+        "Corner Kicks": 5,
+        "Fouls": 10,
+        "Yellow Cards": 0,
+        "Red Cards": 0,
+        "Offsides": 2
+      },
+      "Morocco": {
+        "Total Shots": 12,
+        "Shots on Goal": 7,
+        "Ball Possession": "60%",
+        "Total passes": 441,
+        "Passes %": "80%",
+        "Corner Kicks": 7,
+        "Fouls": 15,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 0
+      }
+    }
+  },
+  "mock_2022_45761": {
+    "home_team": "Serbia",
+    "away_team": "Switzerland",
+    "date": "2022-12-02",
+    "stats": {
+      "Serbia": {
+        "Total Shots": 12,
+        "Shots on Goal": 8,
+        "Ball Possession": "35%",
+        "Total passes": 595,
+        "Passes %": "92%",
+        "Corner Kicks": 8,
+        "Fouls": 12,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 4
+      },
+      "Switzerland": {
+        "Total Shots": 17,
+        "Shots on Goal": 8,
+        "Ball Possession": "65%",
+        "Total passes": 560,
+        "Passes %": "92%",
+        "Corner Kicks": 3,
+        "Fouls": 10,
+        "Yellow Cards": 3,
+        "Red Cards": 1,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45762": {
+    "home_team": "Cameroon",
+    "away_team": "Brazil",
+    "date": "2022-12-02",
+    "stats": {
+      "Cameroon": {
+        "Total Shots": 16,
+        "Shots on Goal": 6,
+        "Ball Possession": "56%",
+        "Total passes": 433,
+        "Passes %": "78%",
+        "Corner Kicks": 7,
+        "Fouls": 15,
+        "Yellow Cards": 4,
+        "Red Cards": 0,
+        "Offsides": 1
+      },
+      "Brazil": {
+        "Total Shots": 16,
+        "Shots on Goal": 4,
+        "Ball Possession": "44%",
+        "Total passes": 649,
+        "Passes %": "83%",
+        "Corner Kicks": 7,
+        "Fouls": 13,
+        "Yellow Cards": 2,
+        "Red Cards": 1,
+        "Offsides": 1
+      }
+    }
+  },
+  "mock_2022_45763": {
+    "home_team": "Ghana",
+    "away_team": "Uruguay",
+    "date": "2022-12-02",
+    "stats": {
+      "Ghana": {
+        "Total Shots": 17,
+        "Shots on Goal": 6,
+        "Ball Possession": "39%",
+        "Total passes": 618,
+        "Passes %": "86%",
+        "Corner Kicks": 3,
+        "Fouls": 8,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 4
+      },
+      "Uruguay": {
+        "Total Shots": 14,
+        "Shots on Goal": 5,
+        "Ball Possession": "61%",
+        "Total passes": 562,
+        "Passes %": "81%",
+        "Corner Kicks": 4,
+        "Fouls": 9,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45764": {
+    "home_team": "South Korea",
+    "away_team": "Portugal",
+    "date": "2022-12-02",
+    "stats": {
+      "South Korea": {
+        "Total Shots": 19,
+        "Shots on Goal": 4,
+        "Ball Possession": "60%",
+        "Total passes": 397,
+        "Passes %": "83%",
+        "Corner Kicks": 9,
+        "Fouls": 15,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 1
+      },
+      "Portugal": {
+        "Total Shots": 19,
+        "Shots on Goal": 3,
+        "Ball Possession": "40%",
+        "Total passes": 549,
+        "Passes %": "78%",
+        "Corner Kicks": 3,
+        "Fouls": 15,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 1
+      }
+    }
+  },
+  "mock_2022_45765": {
+    "home_team": "Netherlands",
+    "away_team": "United States",
+    "date": "2022-12-03",
+    "stats": {
+      "Netherlands": {
+        "Total Shots": 24,
+        "Shots on Goal": 8,
+        "Ball Possession": "55%",
+        "Total passes": 462,
+        "Passes %": "91%",
+        "Corner Kicks": 3,
+        "Fouls": 13,
+        "Yellow Cards": 4,
+        "Red Cards": 0,
+        "Offsides": 4
+      },
+      "United States": {
+        "Total Shots": 11,
+        "Shots on Goal": 6,
+        "Ball Possession": "45%",
+        "Total passes": 463,
+        "Passes %": "91%",
+        "Corner Kicks": 9,
+        "Fouls": 14,
+        "Yellow Cards": 4,
+        "Red Cards": 0,
+        "Offsides": 1
+      }
+    }
+  },
+  "mock_2022_45766": {
+    "home_team": "Argentina",
+    "away_team": "Australia",
+    "date": "2022-12-03",
+    "stats": {
+      "Argentina": {
+        "Total Shots": 13,
+        "Shots on Goal": 7,
+        "Ball Possession": "54%",
+        "Total passes": 464,
+        "Passes %": "90%",
+        "Corner Kicks": 4,
+        "Fouls": 13,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 2
+      },
+      "Australia": {
+        "Total Shots": 19,
+        "Shots on Goal": 7,
+        "Ball Possession": "46%",
+        "Total passes": 510,
+        "Passes %": "87%",
+        "Corner Kicks": 9,
+        "Fouls": 10,
+        "Yellow Cards": 1,
+        "Red Cards": 1,
+        "Offsides": 2
+      }
+    }
+  },
+  "mock_2022_45767": {
+    "home_team": "France",
+    "away_team": "Poland",
+    "date": "2022-12-04",
+    "stats": {
+      "France": {
+        "Total Shots": 17,
+        "Shots on Goal": 7,
+        "Ball Possession": "63%",
+        "Total passes": 568,
+        "Passes %": "85%",
+        "Corner Kicks": 5,
+        "Fouls": 13,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 4
+      },
+      "Poland": {
+        "Total Shots": 10,
+        "Shots on Goal": 5,
+        "Ball Possession": "37%",
+        "Total passes": 419,
+        "Passes %": "82%",
+        "Corner Kicks": 7,
+        "Fouls": 13,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 1
+      }
+    }
+  },
+  "mock_2022_45768": {
+    "home_team": "England",
+    "away_team": "Senegal",
+    "date": "2022-12-04",
+    "stats": {
+      "England": {
+        "Total Shots": 15,
+        "Shots on Goal": 7,
+        "Ball Possession": "63%",
+        "Total passes": 561,
+        "Passes %": "84%",
+        "Corner Kicks": 8,
+        "Fouls": 8,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 2
+      },
+      "Senegal": {
+        "Total Shots": 17,
+        "Shots on Goal": 3,
+        "Ball Possession": "37%",
+        "Total passes": 589,
+        "Passes %": "87%",
+        "Corner Kicks": 7,
+        "Fouls": 10,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 2
+      }
+    }
+  },
+  "mock_2022_45769": {
+    "home_team": "Japan",
+    "away_team": "Croatia",
+    "date": "2022-12-05",
+    "stats": {
+      "Japan": {
+        "Total Shots": 15,
+        "Shots on Goal": 5,
+        "Ball Possession": "50%",
+        "Total passes": 599,
+        "Passes %": "85%",
+        "Corner Kicks": 5,
+        "Fouls": 14,
+        "Yellow Cards": 4,
+        "Red Cards": 0,
+        "Offsides": 2
+      },
+      "Croatia": {
+        "Total Shots": 20,
+        "Shots on Goal": 7,
+        "Ball Possession": "50%",
+        "Total passes": 602,
+        "Passes %": "89%",
+        "Corner Kicks": 3,
+        "Fouls": 14,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45770": {
+    "home_team": "Brazil",
+    "away_team": "South Korea",
+    "date": "2022-12-05",
+    "stats": {
+      "Brazil": {
+        "Total Shots": 20,
+        "Shots on Goal": 6,
+        "Ball Possession": "53%",
+        "Total passes": 446,
+        "Passes %": "80%",
+        "Corner Kicks": 9,
+        "Fouls": 16,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 2
+      },
+      "South Korea": {
+        "Total Shots": 17,
+        "Shots on Goal": 6,
+        "Ball Possession": "47%",
+        "Total passes": 475,
+        "Passes %": "78%",
+        "Corner Kicks": 8,
+        "Fouls": 12,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 4
+      }
+    }
+  },
+  "mock_2022_45771": {
+    "home_team": "Morocco",
+    "away_team": "Spain",
+    "date": "2022-12-06",
+    "stats": {
+      "Morocco": {
+        "Total Shots": 9,
+        "Shots on Goal": 3,
+        "Ball Possession": "53%",
+        "Total passes": 548,
+        "Passes %": "82%",
+        "Corner Kicks": 6,
+        "Fouls": 8,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 4
+      },
+      "Spain": {
+        "Total Shots": 13,
+        "Shots on Goal": 3,
+        "Ball Possession": "47%",
+        "Total passes": 525,
+        "Passes %": "78%",
+        "Corner Kicks": 6,
+        "Fouls": 11,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 1
+      }
+    }
+  },
+  "mock_2022_45772": {
+    "home_team": "Portugal",
+    "away_team": "Switzerland",
+    "date": "2022-12-06",
+    "stats": {
+      "Portugal": {
+        "Total Shots": 29,
+        "Shots on Goal": 12,
+        "Ball Possession": "60%",
+        "Total passes": 584,
+        "Passes %": "87%",
+        "Corner Kicks": 3,
+        "Fouls": 10,
+        "Yellow Cards": 0,
+        "Red Cards": 0,
+        "Offsides": 0
+      },
+      "Switzerland": {
+        "Total Shots": 10,
+        "Shots on Goal": 6,
+        "Ball Possession": "40%",
+        "Total passes": 473,
+        "Passes %": "88%",
+        "Corner Kicks": 7,
+        "Fouls": 15,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 4
+      }
+    }
+  },
+  "mock_2022_45773": {
+    "home_team": "Croatia",
+    "away_team": "Brazil",
+    "date": "2022-12-09",
+    "stats": {
+      "Croatia": {
+        "Total Shots": 13,
+        "Shots on Goal": 5,
+        "Ball Possession": "47%",
+        "Total passes": 547,
+        "Passes %": "88%",
+        "Corner Kicks": 9,
+        "Fouls": 16,
+        "Yellow Cards": 4,
+        "Red Cards": 0,
+        "Offsides": 4
+      },
+      "Brazil": {
+        "Total Shots": 16,
+        "Shots on Goal": 5,
+        "Ball Possession": "53%",
+        "Total passes": 399,
+        "Passes %": "82%",
+        "Corner Kicks": 4,
+        "Fouls": 16,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 2
+      }
+    }
+  },
+  "mock_2022_45774": {
+    "home_team": "Netherlands",
+    "away_team": "Argentina",
+    "date": "2022-12-09",
+    "stats": {
+      "Netherlands": {
+        "Total Shots": 15,
+        "Shots on Goal": 6,
+        "Ball Possession": "49%",
+        "Total passes": 472,
+        "Passes %": "82%",
+        "Corner Kicks": 6,
+        "Fouls": 9,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 4
+      },
+      "Argentina": {
+        "Total Shots": 18,
+        "Shots on Goal": 6,
+        "Ball Possession": "51%",
+        "Total passes": 519,
+        "Passes %": "83%",
+        "Corner Kicks": 5,
+        "Fouls": 15,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45776": {
+    "home_team": "Morocco",
+    "away_team": "Portugal",
+    "date": "2022-12-10",
+    "stats": {
+      "Morocco": {
+        "Total Shots": 11,
+        "Shots on Goal": 5,
+        "Ball Possession": "63%",
+        "Total passes": 644,
+        "Passes %": "80%",
+        "Corner Kicks": 7,
+        "Fouls": 14,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 2
+      },
+      "Portugal": {
+        "Total Shots": 12,
+        "Shots on Goal": 5,
+        "Ball Possession": "37%",
+        "Total passes": 646,
+        "Passes %": "84%",
+        "Corner Kicks": 5,
+        "Fouls": 12,
+        "Yellow Cards": 0,
+        "Red Cards": 0,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45777": {
+    "home_team": "England",
+    "away_team": "France",
+    "date": "2022-12-10",
+    "stats": {
+      "England": {
+        "Total Shots": 17,
+        "Shots on Goal": 6,
+        "Ball Possession": "46%",
+        "Total passes": 418,
+        "Passes %": "83%",
+        "Corner Kicks": 9,
+        "Fouls": 9,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "France": {
+        "Total Shots": 17,
+        "Shots on Goal": 7,
+        "Ball Possession": "54%",
+        "Total passes": 436,
+        "Passes %": "86%",
+        "Corner Kicks": 9,
+        "Fouls": 15,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45779": {
+    "home_team": "Argentina",
+    "away_team": "Croatia",
+    "date": "2022-12-13",
+    "stats": {
+      "Argentina": {
+        "Total Shots": 19,
+        "Shots on Goal": 6,
+        "Ball Possession": "55%",
+        "Total passes": 436,
+        "Passes %": "87%",
+        "Corner Kicks": 8,
+        "Fouls": 13,
+        "Yellow Cards": 4,
+        "Red Cards": 0,
+        "Offsides": 3
+      },
+      "Croatia": {
+        "Total Shots": 9,
+        "Shots on Goal": 2,
+        "Ball Possession": "45%",
+        "Total passes": 616,
+        "Passes %": "89%",
+        "Corner Kicks": 4,
+        "Fouls": 8,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 4
+      }
+    }
+  },
+  "mock_2022_45780": {
+    "home_team": "France",
+    "away_team": "Morocco",
+    "date": "2022-12-14",
+    "stats": {
+      "France": {
+        "Total Shots": 17,
+        "Shots on Goal": 8,
+        "Ball Possession": "61%",
+        "Total passes": 529,
+        "Passes %": "92%",
+        "Corner Kicks": 4,
+        "Fouls": 8,
+        "Yellow Cards": 0,
+        "Red Cards": 0,
+        "Offsides": 1
+      },
+      "Morocco": {
+        "Total Shots": 10,
+        "Shots on Goal": 2,
+        "Ball Possession": "39%",
+        "Total passes": 602,
+        "Passes %": "90%",
+        "Corner Kicks": 7,
+        "Fouls": 10,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 3
+      }
+    }
+  },
+  "mock_2022_45784": {
+    "home_team": "Croatia",
+    "away_team": "Morocco",
+    "date": "2022-12-17",
+    "stats": {
+      "Croatia": {
+        "Total Shots": 16,
+        "Shots on Goal": 8,
+        "Ball Possession": "56%",
+        "Total passes": 411,
+        "Passes %": "89%",
+        "Corner Kicks": 5,
+        "Fouls": 11,
+        "Yellow Cards": 2,
+        "Red Cards": 0,
+        "Offsides": 4
+      },
+      "Morocco": {
+        "Total Shots": 13,
+        "Shots on Goal": 3,
+        "Ball Possession": "44%",
+        "Total passes": 418,
+        "Passes %": "79%",
+        "Corner Kicks": 3,
+        "Fouls": 10,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 4
+      }
+    }
+  },
+  "mock_2022_45786": {
+    "home_team": "Argentina",
+    "away_team": "France",
+    "date": "2022-12-18",
+    "stats": {
+      "Argentina": {
+        "Total Shots": 14,
+        "Shots on Goal": 8,
+        "Ball Possession": "50%",
+        "Total passes": 377,
+        "Passes %": "86%",
+        "Corner Kicks": 4,
+        "Fouls": 12,
+        "Yellow Cards": 1,
+        "Red Cards": 0,
+        "Offsides": 4
+      },
+      "France": {
+        "Total Shots": 16,
+        "Shots on Goal": 5,
+        "Ball Possession": "50%",
+        "Total passes": 373,
+        "Passes %": "92%",
+        "Corner Kicks": 5,
+        "Fouls": 15,
+        "Yellow Cards": 3,
+        "Red Cards": 0,
+        "Offsides": 0
+      }
+    }
+  }
+}

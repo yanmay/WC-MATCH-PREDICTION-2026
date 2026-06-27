@@ -34,6 +34,16 @@ NUMERIC_FEATURES = [
     "home_rest_days", "away_rest_days",
     "host_nation", "round_encoded", "is_knockout", "same_confederation",
     "win_rate_diff", "goals_pg_diff", "conceded_pg_diff", "rank_ratio", "ranking_diff_abs",
+    
+    # Performance statistics features
+    "home_avg_possession", "away_avg_possession",
+    "home_avg_shots", "away_avg_shots",
+    "home_avg_shots_on_target", "away_avg_shots_on_target",
+    "home_avg_corners", "away_avg_corners",
+    "home_avg_fouls", "away_avg_fouls",
+    "home_avg_yellow_cards", "away_avg_yellow_cards",
+    "home_avg_pass_accuracy", "away_avg_pass_accuracy",
+    "possession_diff", "shots_diff", "corners_diff",
 ]
 CATEGORICAL_FEATURES = ["confederation_matchup"]
 
