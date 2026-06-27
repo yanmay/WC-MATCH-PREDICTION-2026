@@ -9,11 +9,18 @@
     "home_score": 3,
     "away_score": 0,
     "group": "I",
+    "scorers": {
+      "home": [
+        "Kylian Mbapp\u00e9 14'",
+        "Kylian Mbapp\u00e9 54'",
+        "Ousmane Demb\u00e9l\u00e9 66'"
+      ],
+      "away": []
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 102,
@@ -25,11 +32,21 @@
     "home_score": 3,
     "away_score": 2,
     "group": "I",
+    "scorers": {
+      "home": [
+        "Marcus Holmgren Pedersen 43'",
+        "Erling Haaland 48'",
+        "Erling Haaland 58'"
+      ],
+      "away": [
+        "Isma\u00efla Sarr 53'",
+        "Isma\u00efla Sarr 90+3'"
+      ]
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 103,
@@ -41,11 +58,19 @@
     "home_score": 1,
     "away_score": 2,
     "group": "J",
+    "scorers": {
+      "home": [
+        "Al Rashdan 36'"
+      ],
+      "away": [
+        "Nzir Bnbvali 69'",
+        "Amine Gouiri 82'"
+      ]
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 104,
@@ -57,11 +82,20 @@
     "home_score": 5,
     "away_score": 0,
     "group": "K",
+    "scorers": {
+      "home": [
+        "Cristiano Ronaldo 6'",
+        "Nvnv Mndz 17'",
+        "Cristiano Ronaldo 39'",
+        "Abdalvhid Namtvf 60'",
+        "Rafael Le\u00e3o 87'"
+      ],
+      "away": []
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 105,
@@ -73,11 +107,14 @@
     "home_score": 0,
     "away_score": 0,
     "group": "L",
+    "scorers": {
+      "home": [],
+      "away": []
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 106,
@@ -89,11 +126,16 @@
     "home_score": 0,
     "away_score": 1,
     "group": "L",
+    "scorers": {
+      "home": [],
+      "away": [
+        "Ante Budimir 54'"
+      ]
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 107,
@@ -105,11 +147,11 @@
     "home_score": 1,
     "away_score": 0,
     "group": "K",
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 108,
@@ -121,11 +163,19 @@
     "home_score": 2,
     "away_score": 1,
     "group": "B",
+    "scorers": {
+      "home": [
+        "Rub\u00e9n Vargas 46'",
+        "Jvhan Mnzambi 57'"
+      ],
+      "away": [
+        "Prvmis Divid 76'"
+      ]
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 109,
@@ -137,11 +187,20 @@
     "home_score": 3,
     "away_score": 1,
     "group": "B",
+    "scorers": {
+      "home": [
+        "Karim Alaibgvvich 29'",
+        "Abvnad 34'",
+        "Armin Mhmich 80'"
+      ],
+      "away": [
+        "Hassan Al-Haydos 42'"
+      ]
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 110,
@@ -153,11 +212,22 @@
     "home_score": 4,
     "away_score": 2,
     "group": "C",
+    "scorers": {
+      "home": [
+        "Achraf Hakimi 39'",
+        "Ismael Saibari 45+1'",
+        "Soufiane Rahimi 78'",
+        "Gessime Yassine 89'"
+      ],
+      "away": [
+        "Yassine Bounou 10'",
+        "Wilson Isidor 43'"
+      ]
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 111,
@@ -169,11 +239,18 @@
     "home_score": 0,
     "away_score": 3,
     "group": "C",
+    "scorers": {
+      "home": [],
+      "away": [
+        "Vin\u00edcius J\u00fanior 7'",
+        "Vin\u00edcius J\u00fanior 45+3'",
+        "Matheus Cunha 60'"
+      ]
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 112,
@@ -185,11 +262,16 @@
     "home_score": 1,
     "away_score": 0,
     "group": "A",
+    "scorers": {
+      "home": [
+        "Taplv Maskv 63'"
+      ],
+      "away": []
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 113,
@@ -201,11 +283,18 @@
     "home_score": 0,
     "away_score": 3,
     "group": "A",
+    "scorers": {
+      "home": [],
+      "away": [
+        "Mateo Ch\u00e1vez 55'",
+        "Jvlian Kviinvnz 61'",
+        "\u00c1lvaro Fidalgo 90+4'"
+      ]
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 114,
@@ -217,11 +306,11 @@
     "home_score": 0,
     "away_score": 2,
     "group": "E",
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 115,
@@ -233,11 +322,19 @@
     "home_score": 2,
     "away_score": 1,
     "group": "E",
+    "scorers": {
+      "home": [
+        "Nilsvn Angvlv 9'",
+        "Gvnzalv Plata 77'"
+      ],
+      "away": [
+        "Leroy San\u00e9 2'"
+      ]
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 116,
@@ -249,11 +346,20 @@
     "home_score": 1,
     "away_score": 3,
     "group": "F",
+    "scorers": {
+      "home": [
+        "Hazm Mstvri 54'"
+      ],
+      "away": [
+        "Alis Skhiri 3'",
+        "Brian Brobbey 7'",
+        "Ian Fn Hkh 62'"
+      ]
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 117,
@@ -265,11 +371,18 @@
     "home_score": 1,
     "away_score": 1,
     "group": "F",
+    "scorers": {
+      "home": [
+        "Daizen Maeda 56'"
+      ],
+      "away": [
+        "Anthony Elanga 62'"
+      ]
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 118,
@@ -281,11 +394,21 @@
     "home_score": 3,
     "away_score": 2,
     "group": "D",
+    "scorers": {
+      "home": [
+        "Arda G\u00fcler 10'",
+        "Baris Alpr Ailmaz 31'",
+        "Kan Aihan 90+8'"
+      ],
+      "away": [
+        "Auston Trusty 3'",
+        "Sebastian Berhalter 49'"
+      ]
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 119,
@@ -297,11 +420,14 @@
     "home_score": 0,
     "away_score": 0,
     "group": "D",
+    "scorers": {
+      "home": [],
+      "away": []
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 120,
@@ -313,11 +439,21 @@
     "home_score": 1,
     "away_score": 4,
     "group": "I",
+    "scorers": {
+      "home": [
+        "Thelo Aasgaard 21'"
+      ],
+      "away": [
+        "Ousmane Demb\u00e9l\u00e9 7'",
+        "Ousmane Demb\u00e9l\u00e9 20'",
+        "Ousmane Demb\u00e9l\u00e9 32'",
+        "D\u00e9sir\u00e9 Dou\u00e9 90+4'"
+      ]
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": 678.0,
-    "elapsed_secs": 12.0,
-    "kick_off_utc": "2026-06-26T19:45:30Z"
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 121,
@@ -329,11 +465,20 @@
     "home_score": 5,
     "away_score": 0,
     "group": "I",
+    "scorers": {
+      "home": [
+        "Habib Diarra 4'",
+        "Isma\u00efla Sarr 56'",
+        "Paph Gviih 59'",
+        "Paph Gviih 71'",
+        "Ailman Andiaih 82'"
+      ],
+      "away": []
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 122,
@@ -345,11 +490,14 @@
     "home_score": 0,
     "away_score": 0,
     "group": "H",
+    "scorers": {
+      "home": [],
+      "away": []
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 123,
@@ -361,11 +509,16 @@
     "home_score": 0,
     "away_score": 1,
     "group": "H",
+    "scorers": {
+      "home": [],
+      "away": [
+        "\u00c1lex Baena 42'"
+      ]
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 124,
@@ -377,11 +530,22 @@
     "home_score": 1,
     "away_score": 5,
     "group": "G",
+    "scorers": {
+      "home": [
+        "Ali Jasim 84'"
+      ],
+      "away": [
+        "Leandro Trossard 28'",
+        "Leandro Trossard 50'",
+        "Kevin De Bruyne 66'",
+        "Romelu Lukaku 86'",
+        "Alexis Saelemaekers 90+4'"
+      ]
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 125,
@@ -393,11 +557,18 @@
     "home_score": 1,
     "away_score": 1,
     "group": "G",
+    "scorers": {
+      "home": [
+        "Mahmoud Saber 5'"
+      ],
+      "away": [
+        "Ramin Rezaeian 14'"
+      ]
+    },
     "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 126,
@@ -409,11 +580,11 @@
     "home_score": null,
     "away_score": null,
     "group": "L",
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 127,
@@ -425,11 +596,11 @@
     "home_score": null,
     "away_score": null,
     "group": "L",
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 128,
@@ -441,11 +612,11 @@
     "home_score": null,
     "away_score": null,
     "group": "K",
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 129,
@@ -457,11 +628,11 @@
     "home_score": null,
     "away_score": null,
     "group": "K",
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 130,
@@ -473,11 +644,11 @@
     "home_score": null,
     "away_score": null,
     "group": "J",
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 131,
@@ -489,11 +660,11 @@
     "home_score": null,
     "away_score": null,
     "group": "J",
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 1,
@@ -505,11 +676,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 2,
@@ -521,27 +692,27 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 3,
     "round": "Round of 32",
     "date": "2026-06-30",
     "home_team": "Germany",
-    "away_team": "Norway",
+    "away_team": "Senegal",
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 4,
@@ -553,11 +724,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 5,
@@ -569,27 +740,27 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 6,
     "round": "Round of 32",
     "date": "2026-07-01",
     "home_team": "France",
-    "away_team": "Argentina",
+    "away_team": "Jordan",
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 7,
@@ -601,27 +772,27 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 8,
     "round": "Round of 32",
     "date": "2026-07-01",
-    "home_team": "Belgium",
+    "home_team": "New Zealand",
     "away_team": "Cabo Verde",
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 9,
@@ -633,11 +804,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 10,
@@ -649,27 +820,27 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 11,
     "round": "Round of 32",
     "date": "2026-07-03",
     "home_team": "Spain",
-    "away_team": "Egypt",
+    "away_team": "Iran",
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 12,
@@ -681,27 +852,27 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 13,
     "round": "Round of 32",
     "date": "2026-07-03",
     "home_team": "Switzerland",
-    "away_team": "Iran",
+    "away_team": "Saudi Arabia",
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 14,
@@ -713,43 +884,43 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 15,
     "round": "Round of 32",
     "date": "2026-07-04",
     "home_team": "Argentina",
-    "away_team": "Saudi Arabia",
-    "status": "scheduled",
-    "home_score": null,
-    "away_score": null,
-    "group": NaN,
-    "minute": null,
-    "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
-  },
-  {
-    "match_id": 16,
-    "round": "Round of 32",
-    "date": "2026-07-04",
-    "home_team": "Senegal",
     "away_team": "Ghana",
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
+  },
+  {
+    "match_id": 16,
+    "round": "Round of 32",
+    "date": "2026-07-04",
+    "home_team": "Norway",
+    "away_team": "Germany",
+    "status": "scheduled",
+    "home_score": null,
+    "away_score": null,
+    "group": NaN,
+    "scorers": null,
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 17,
@@ -761,11 +932,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 18,
@@ -777,11 +948,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 19,
@@ -793,11 +964,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 20,
@@ -809,11 +980,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 21,
@@ -825,11 +996,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 22,
@@ -841,11 +1012,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 23,
@@ -857,11 +1028,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 24,
@@ -873,11 +1044,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 25,
@@ -889,11 +1060,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 26,
@@ -905,11 +1076,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 27,
@@ -921,11 +1092,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 28,
@@ -937,11 +1108,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 29,
@@ -953,11 +1124,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 30,
@@ -969,11 +1140,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 31,
@@ -985,11 +1156,11 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   },
   {
     "match_id": 32,
@@ -1001,10 +1172,10 @@
     "home_score": null,
     "away_score": null,
     "group": NaN,
-    "minute": null,
     "scorers": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN
+    "minute": null,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null
   }
 ]

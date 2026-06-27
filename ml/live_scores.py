@@ -52,12 +52,37 @@ def _parse_scorers_string(scorers_str) -> list:
     s = str(scorers_str).strip()
     if s.startswith("{") and s.endswith("}"):
         s = s[1:-1]
+    
+    # Clean up common unicode replacement character artifacts
+    # First apply specific corrections using Unicode escapes
+    s = s.replace("Demb\ufffdl\ufffd", "Dembélé")
+    s = s.replace("D\ufffdsir\ufffd Dou\ufffd", "Désiré Doué")
+    s = s.replace("Mbapp\ufffd", "Mbappé")
+    s = s.replace("Isma\ufffdla", "Ismaïla")
+    s = s.replace("Le\ufffdo", "Leão")
+    s = s.replace("G\ufffdler", "Güler")
+    s = s.replace("\ufffdstig\ufffdrd", "Østigård")
+    s = s.replace("Kessi\ufffd", "Kessié")
+    
+    # Fallback general replacement character cleanups
+    s = s.replace("\ufffd", "")
+    
+    # Transliteration cleanup for known mangled Farsi names if any
+    s = s.replace("Markvs Hlmgrn Pdrsn", "Marcus Holmgren Pedersen")
+    s = s.replace("Kvdi Khakpv", "Cody Gakpo")
+    s = s.replace("Dniz Avndav", "Deniz Undav")
+    s = s.replace("Svfian Rhimi", "Soufiane Rahimi")
+    s = s.replace("Asmaail Saibari", "Ismael Saibari")
+    s = s.replace("Ali Avlvan", "Ali Alwan")
+    s = s.replace("Ali Jast", "Ali Jasim")
+    
     import re
     # Match double quoted names
     parts = re.findall(r'"([^"]*)"', s)
     if not parts:
         parts = [p.strip().strip('"').strip("'") for p in s.split(",") if p.strip()]
-    return [p for p in parts if p]
+    return [p.replace("\\'", "'").strip() for p in parts if p]
+
 
 
 def fetch_live_matches(force_refresh: bool = False) -> Optional[Dict[str, Any]]:
@@ -181,6 +206,19 @@ def get_completed_live_matches() -> list:
                 raw_date = fixture.get("date", "")
                 date_str = str(raw_date)[:10]
 
+                home_scorers = []
+                away_scorers = []
+                events = m.get("events", [])
+                for ev in events:
+                    if ev.get("type") == "Goal":
+                        player = ev.get("player", {}).get("name", "")
+                        time = ev.get("time", {}).get("elapsed", "")
+                        detail = f"{player} {time}'"
+                        if ev.get("team", {}).get("name") == teams.get("home", {}).get("name"):
+                            home_scorers.append(detail)
+                        else:
+                            away_scorers.append(detail)
+
                 results.append({
                     "date": date_str,
                     "home_team": home,
@@ -188,6 +226,10 @@ def get_completed_live_matches() -> list:
                     "home_score": home_score,
                     "away_score": away_score,
                     "status": "completed",
+                    "scorers": {
+                        "home": home_scorers,
+                        "away": away_scorers
+                    }
                 })
             except Exception as e:
                 print(f"[live_scores] Failed to parse completed API-Football match: {e}")
@@ -235,6 +277,9 @@ def get_completed_live_matches() -> list:
                     raw_date = f"{parts[2]}-{parts[0]}-{parts[1]}"
             date_str = raw_date[:10]
             
+            home_scorers = _parse_scorers_string(m.get("home_scorers"))
+            away_scorers = _parse_scorers_string(m.get("away_scorers"))
+            
             results.append({
                 "date": date_str,
                 "home_team": home,
@@ -242,6 +287,10 @@ def get_completed_live_matches() -> list:
                 "home_score": home_score,
                 "away_score": away_score,
                 "status": "completed",
+                "scorers": {
+                    "home": home_scorers,
+                    "away": away_scorers
+                }
             })
         except Exception as e:
             print(f"[live_scores] Failed to parse completed match: {e}")
@@ -415,6 +464,9 @@ def sync_live_results_to_fixtures(fixtures_df, wc_df=None) -> tuple:
     Returns (updated_fixtures_df, changed: bool)
     """
     updated = fixtures_df.copy()
+    for col in ["scorers", "minute", "elapsed_mins", "elapsed_secs", "kick_off_utc"]:
+        if col not in updated.columns:
+            updated[col] = None
     changed = False
 
     # 1. Sync completed live matches
@@ -439,16 +491,37 @@ def sync_live_results_to_fixtures(fixtures_df, wc_df=None) -> tuple:
         idx = updated[mask].index[0]
         existing = updated.at[idx, "status"]
         existing_date = str(updated.at[idx, "date"])
+        existing_h_score = updated.at[idx, "home_score"]
+        existing_a_score = updated.at[idx, "away_score"]
+        existing_scorers = updated.at[idx, "scorers"] if "scorers" in updated.columns else None
+        
+        has_no_scorers = False
+        import pandas as pd
+        if "scorers" in updated.columns:
+            has_no_scorers = (
+                existing_scorers is None 
+                or pd.isna(existing_scorers) 
+                or not existing_scorers 
+                or str(existing_scorers) in ("[]", "{}", '{"home": [], "away": []}')
+            )
 
-        # Update if not completed OR if date differs
-        if existing != "completed" or existing_date != live["date"]:
+        # Update if not completed OR if date differs OR if scores don't match OR if it lacks scorers
+        if (
+            existing != "completed" 
+            or existing_date != live["date"]
+            or existing_h_score != live["home_score"]
+            or existing_a_score != live["away_score"]
+            or has_no_scorers
+        ):
             updated.at[idx, "status"] = "completed"
             updated.at[idx, "home_score"] = live["home_score"]
             updated.at[idx, "away_score"] = live["away_score"]
-            updated.at[idx, "date"] = live["date"]  # Sync date to actual date!
-            for key in ["minute", "scorers"]:
-                if key in updated.columns:
-                    updated.at[idx, key] = None
+            updated.at[idx, "date"] = live["date"]
+            if "minute" in updated.columns:
+                updated.at[idx, "minute"] = None
+            if "scorers" in updated.columns:
+                # Store scorers dict directly (save_2026_fixtures will format/loads it)
+                updated.at[idx, "scorers"] = live.get("scorers")
             changed = True
 
     # 2. Sync ongoing live matches

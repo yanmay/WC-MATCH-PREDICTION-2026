@@ -207,7 +207,7 @@ def get_squad(team_name: str) -> list:
     return squad
 
 
-def get_player_match_stats(name, pos, rating, is_home, hs, as_):
+def get_player_match_stats(name, pos, rating, is_home, hs, as_, scorers=None, home_team=None, away_team=None):
     import hashlib
     h = int(hashlib.md5(f"{name}_{hs}_{as_}".encode()).hexdigest()[:4], 16)
     
@@ -218,6 +218,20 @@ def get_player_match_stats(name, pos, rating, is_home, hs, as_):
         base_rating += 0.5 if as_ > hs else (-0.5 if hs > as_ else 0)
     base_rating = min(10.0, max(5.0, base_rating))
     
+    # Check actual goals from scorers if available
+    goals = 0
+    if scorers and isinstance(scorers, dict):
+        scorer_list = scorers.get("home" if is_home else "away") or scorers.get(home_team if is_home else away_team) or []
+        if isinstance(scorer_list, str):
+            try:
+                import json
+                scorer_list = json.loads(scorer_list)
+            except Exception:
+                scorer_list = [scorer_list]
+        for s in scorer_list:
+            if s and name.lower() in s.lower():
+                goals += 1
+                
     details = ""
     if pos == "GK":
         saves = 1 + (h % 5)
@@ -230,23 +244,81 @@ def get_player_match_stats(name, pos, rating, is_home, hs, as_):
     elif pos == "MF":
         passes = 30 + (h % 50)
         key_passes = h % 4
-        details = f"{passes} Passes, {key_passes} Key Pass"
+        if goals > 0:
+            details = f"{passes} Passes, {goals} Goal" + ("s" if goals > 1 else "")
+        else:
+            details = f"{passes} Passes, {key_passes} Key Pass"
     else:
         shots = 1 + (h % 5)
-        goals = 0
-        if is_home and hs > 0 and (h % 3) == 0:
-            goals = min(hs, 1 + (h % 2))
-        elif not is_home and as_ > 0 and (h % 3) == 0:
-            goals = min(as_, 1 + (h % 2))
-        details = f"{shots} Shots, {goals} Goals" if goals > 0 else f"{shots} Shots"
-        
+        if not scorers:
+            if is_home and hs > 0 and (h % 3) == 0:
+                goals = min(hs, 1 + (h % 2))
+            elif not is_home and as_ > 0 and (h % 3) == 0:
+                goals = min(as_, 1 + (h % 2))
+        if goals > 0:
+            details = f"{shots} Shots, {goals} Goal" + ("s" if goals > 1 else "")
+        else:
+            details = f"{shots} Shots"
+            
     return round(base_rating, 1), details
 
 
-def generate_timeline(home_team, away_team, hs, as_, h_squad, a_squad):
+def generate_timeline(home_team, away_team, hs, as_, h_squad, a_squad, scorers=None):
     import hashlib
     events = []
     
+    # Use real scorers if available
+    if scorers and isinstance(scorers, dict):
+        home_list = scorers.get("home") or scorers.get(home_team) or []
+        away_list = scorers.get("away") or scorers.get(away_team) or []
+        
+        if isinstance(home_list, str):
+            try:
+                import json
+                home_list = json.loads(home_list)
+            except Exception:
+                home_list = [home_list]
+        if isinstance(away_list, str):
+            try:
+                import json
+                away_list = json.loads(away_list)
+            except Exception:
+                away_list = [away_list]
+                
+        import re
+        for s in home_list:
+            if not s:
+                continue
+            minute_match = re.search(r"(\d+)(?:\+\d+)?'", s)
+            minute = int(minute_match.group(1)) if minute_match else 45
+            events.append({"minute": minute, "team": home_team, "type": "Goal", "detail": f"⚽ Goal: {s}"})
+            
+        for s in away_list:
+            if not s:
+                continue
+            minute_match = re.search(r"(\d+)(?:\+\d+)?'", s)
+            minute = int(minute_match.group(1)) if minute_match else 45
+            events.append({"minute": minute, "team": away_team, "type": "Goal", "detail": f"⚽ Goal: {s}"})
+            
+        # Draw some yellow cards for realistic timeline display
+        h_yellow = int(hashlib.md5(f"yellow_h_{home_team}".encode()).hexdigest()[:2], 16) % 3
+        for i in range(h_yellow):
+            h = int(hashlib.md5(f"card_h_{home_team}_{i}".encode()).hexdigest()[:4], 16)
+            df_players = [p for p in h_squad if p[1] in ("DF", "MF")]
+            player = df_players[h % len(df_players)][0] if df_players else "Player"
+            minute = 10 + (h % 75)
+            events.append({"minute": minute, "team": home_team, "type": "Card", "detail": f"🟨 Yellow Card: {player} ({minute}')"})
+            
+        a_yellow = int(hashlib.md5(f"yellow_a_{away_team}".encode()).hexdigest()[:2], 16) % 3
+        for i in range(a_yellow):
+            h = int(hashlib.md5(f"card_a_{away_team}_{i}".encode()).hexdigest()[:4], 16)
+            df_players = [p for p in a_squad if p[1] in ("DF", "MF")]
+            player = df_players[h % len(df_players)][0] if df_players else "Player"
+            minute = 10 + (h % 75)
+            events.append({"minute": minute, "team": away_team, "type": "Card", "detail": f"🟨 Yellow Card: {player} ({minute}')"})
+            
+        return sorted(events, key=lambda x: x["minute"])
+
     for i in range(hs):
         h = int(hashlib.md5(f"goal_h_{home_team}_{i}".encode()).hexdigest()[:4], 16)
         fw_players = [p for p in h_squad if p[1] in ("FW", "MF")]
@@ -280,7 +352,7 @@ def generate_timeline(home_team, away_team, hs, as_, h_squad, a_squad):
     return sorted(events, key=lambda x: x["minute"])
 
 
-def render_evidence_ui(pred, home_team, away_team, hs=None, as_=None):
+def render_evidence_ui(pred, home_team, away_team, hs=None, as_=None, scorers=None):
     """Common UI renderer for both real and simulated matches."""
     col_card, col_radar, col_bar = st.columns([1.1, 1, 1.2], gap="large")
     
@@ -457,7 +529,7 @@ def render_evidence_ui(pred, home_team, away_team, hs=None, as_=None):
     with tab_lineups:
         col_l1, col_l2 = st.columns(2)
         
-        def render_squad_lineup(team, squad, is_home):
+        def render_squad_lineup(team, squad, is_home, scorers=None):
             theme_color = "#34d399" if is_home else "#f87171"
             html = f"""<div style="background:rgba(17,24,39,0.95); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.08);">
 <div style="font-weight:800; font-size:1.0rem; color:{theme_color}; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
@@ -475,7 +547,7 @@ def render_evidence_ui(pred, home_team, away_team, hs=None, as_=None):
 </thead>
 <tbody>"""
             for name, pos, rating in squad:
-                p_rating, p_details = get_player_match_stats(name, pos, rating, is_home, hs, as_)
+                p_rating, p_details = get_player_match_stats(name, pos, rating, is_home, hs, as_, scorers=scorers, home_team=home_team, away_team=away_team)
                 html += f"""<tr style="border-bottom:1px solid rgba(255,255,255,0.04); font-size:0.8rem; color:#f3f4f6;">
 <td style="padding:8px 0; font-weight:700; color:#9ca3af;">{pos}</td>
 <td style="padding:8px 0; font-weight:600;">{name}</td>
@@ -486,12 +558,12 @@ def render_evidence_ui(pred, home_team, away_team, hs=None, as_=None):
             return html
             
         with col_l1:
-            st.markdown(render_squad_lineup(home_team, h_squad, is_home=True), unsafe_allow_html=True)
+            st.markdown(render_squad_lineup(home_team, h_squad, is_home=True, scorers=scorers), unsafe_allow_html=True)
         with col_l2:
-            st.markdown(render_squad_lineup(away_team, a_squad, is_home=False), unsafe_allow_html=True)
+            st.markdown(render_squad_lineup(away_team, a_squad, is_home=False, scorers=scorers), unsafe_allow_html=True)
 
     with tab_events:
-        events = generate_timeline(home_team, away_team, hs, as_, h_squad, a_squad)
+        events = generate_timeline(home_team, away_team, hs, as_, h_squad, a_squad, scorers=scorers)
         if not events:
             st.info("No match events (goals or cards) registered in this simulation.")
         else:
@@ -633,8 +705,8 @@ with tab1:
         hs_val = int(hs_actual) if hs_actual is not None and not pd.isna(hs_actual) else None
         as_val = int(as_actual) if as_actual is not None and not pd.isna(as_actual) else None
         
-        st.markdown("<br>", unsafe_allow_html=True)
-        render_evidence_ui(pred_data, home_t, away_t, hs=hs_val, as_=as_val)
+        scorers_val = selected_row.get("scorers") if "scorers" in selected_row else None
+        render_evidence_ui(pred_data, home_t, away_t, hs=hs_val, as_=as_val, scorers=scorers_val)
 
 # ── Tab 2: Custom Matchup Simulator ───────────────────────────────────────────
 with tab2:
