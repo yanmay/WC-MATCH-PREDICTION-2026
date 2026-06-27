@@ -459,32 +459,29 @@ def render_evidence_ui(pred, home_team, away_team, hs=None, as_=None):
         
         def render_squad_lineup(team, squad, is_home):
             theme_color = "#34d399" if is_home else "#f87171"
-            html = f"""
-            <div style="background:rgba(17,24,39,0.95); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.08);">
-                <div style="font-weight:800; font-size:1.0rem; color:{theme_color}; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
-                    <span>{get_team_flag(team)} {team} Squad</span>
-                    <span style="font-size:0.75rem; color:#6b7280; font-weight:normal;">Formation: 4-3-3</span>
-                </div>
-                <table style="width:100%; border-collapse:collapse; text-align:left;">
-                    <thead>
-                        <tr style="border-bottom:1px solid rgba(255,255,255,0.08); font-size:0.68rem; color:#9ca3af; text-transform:uppercase;">
-                            <th style="padding:6px 0;">Pos</th>
-                            <th style="padding:6px 0;">Player</th>
-                            <th style="padding:6px 0; text-align:center;">Rating</th>
-                            <th style="padding:6px 0; text-align:right;">Performance Stats</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            """
+            html = f"""<div style="background:rgba(17,24,39,0.95); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.08);">
+<div style="font-weight:800; font-size:1.0rem; color:{theme_color}; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+<span>{get_team_flag(team)} {team} Squad</span>
+<span style="font-size:0.75rem; color:#6b7280; font-weight:normal;">Formation: 4-3-3</span>
+</div>
+<table style="width:100%; border-collapse:collapse; text-align:left;">
+<thead>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.08); font-size:0.68rem; color:#9ca3af; text-transform:uppercase;">
+<th style="padding:6px 0;">Pos</th>
+<th style="padding:6px 0;">Player</th>
+<th style="padding:6px 0; text-align:center;">Rating</th>
+<th style="padding:6px 0; text-align:right;">Performance Stats</th>
+</tr>
+</thead>
+<tbody>"""
             for name, pos, rating in squad:
                 p_rating, p_details = get_player_match_stats(name, pos, rating, is_home, hs, as_)
-                html += f"""
-                <tr style="border-bottom:1px solid rgba(255,255,255,0.04); font-size:0.8rem; color:#f3f4f6;">
-                    <td style="padding:8px 0; font-weight:700; color:#9ca3af;">{pos}</td>
-                    <td style="padding:8px 0; font-weight:600;">{name}</td>
-                    <td style="padding:8px 0; text-align:center; font-weight:800; color:{theme_color};">{p_rating}</td>
-                    <td style="padding:8px 0; text-align:right; font-size:0.72rem; color:#9ca3af;">{p_details}</td>
-                </tr>"""
+                html += f"""<tr style="border-bottom:1px solid rgba(255,255,255,0.04); font-size:0.8rem; color:#f3f4f6;">
+<td style="padding:8px 0; font-weight:700; color:#9ca3af;">{pos}</td>
+<td style="padding:8px 0; font-weight:600;">{name}</td>
+<td style="padding:8px 0; text-align:center; font-weight:800; color:{theme_color};">{p_rating}</td>
+<td style="padding:8px 0; text-align:right; font-size:0.72rem; color:#9ca3af;">{p_details}</td>
+</tr>"""
             html += "</tbody></table></div>"
             return html
             
@@ -498,25 +495,18 @@ def render_evidence_ui(pred, home_team, away_team, hs=None, as_=None):
         if not events:
             st.info("No match events (goals or cards) registered in this simulation.")
         else:
-            html = """
-            <div style="background:rgba(17,24,39,0.95); padding:20px; border-radius:12px; border:1px solid rgba(255,255,255,0.08);">
-                <div style="font-weight:800; font-size:0.95rem; color:#f3f4f6; margin-bottom:16px;">Chronological Match Events</div>
-                <div style="position:relative; padding-left:24px; border-left:2px solid rgba(255,255,255,0.08); margin-left:12px;">
-            """
+            html = """<div style="background:rgba(17,24,39,0.95); padding:20px; border-radius:12px; border:1px solid rgba(255,255,255,0.08);">
+<div style="font-weight:800; font-size:0.95rem; color:#f3f4f6; margin-bottom:16px;">Chronological Match Events</div>
+<div style="position:relative; padding-left:24px; border-left:2px solid rgba(255,255,255,0.08); margin-left:12px;">"""
             for ev in events:
                 accent = "#34d399" if ev["team"] == home_team else "#f87171"
                 bullet_style = f"background:{accent}; box-shadow:0 0 8px {accent};"
-                html += f"""
-                <div style="position:relative; margin-bottom:18px;">
-                    <div style="
-                        position:absolute; left:-31px; top:4px;
-                        width:12px; height:12px; border-radius:50%;
-                        border:2px solid #111827; {bullet_style}
-                    "></div>
-                    <div style="font-size:0.7rem; font-weight:700; color:#6b7280;">{ev['minute']}' MINUTE</div>
-                    <div style="font-size:0.85rem; font-weight:600; color:#f3f4f6; margin-top:2px;">{ev['detail']}</div>
-                    <div style="font-size:0.72rem; color:#9ca3af;">{ev['team']}</div>
-                </div>"""
+                html += f"""<div style="position:relative; margin-bottom:18px;">
+<div style="position:absolute; left:-31px; top:4px; width:12px; height:12px; border-radius:50%; border:2px solid #111827; {bullet_style}"></div>
+<div style="font-size:0.7rem; font-weight:700; color:#6b7280;">{ev['minute']}' MINUTE</div>
+<div style="font-size:0.85rem; font-weight:600; color:#f3f4f6; margin-top:2px;">{ev['detail']}</div>
+<div style="font-size:0.72rem; color:#9ca3af;">{ev['team']}</div>
+</div>"""
             html += "</div></div>"
             st.markdown(html, unsafe_allow_html=True)
 
