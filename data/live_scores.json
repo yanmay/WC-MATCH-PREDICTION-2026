@@ -1,15 +1,16 @@
 {
   "matches": [
     {
-      "home_team": "Norway",
-      "away_team": "France",
-      "home_score": 1,
-      "away_score": 3,
+      "home_team": "Panama",
+      "away_team": "England",
+      "home_score": 0,
+      "away_score": 1,
       "status": "live",
-      "kick_off_utc": "2026-06-26T19:45:30Z",
+      "time_elapsed": "14'",
+      "kick_off_utc": "2026-06-28T16:00:00Z",
       "scorers": {
-        "Norway": ["Thelo Aasgaard 21'"],
-        "France": ["Ousmane Dembélé 7'", "Ousmane Dembélé 20'", "Ousmane Dembélé 32'"]
+        "Panama": [],
+        "England": ["Harry Kane 10'"]
       }
     }
   ]

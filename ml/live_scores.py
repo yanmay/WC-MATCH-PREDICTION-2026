@@ -23,9 +23,12 @@ TEAM_NAME_MAP = {
     "Bosnia-Herzegovina": "Bosnia and Herzegovina",
     "DR Congo": "DR Congo",
     "Congo DR": "DR Congo",
+    "Democratic Republic of the Congo": "DR Congo",
     "Ivory Coast": "Ivory Coast",
     "Cote d'Ivoire": "Ivory Coast",
     "Cape Verde": "Cabo Verde",
+    "Curaçao": "Curacao",
+    "Curaao": "Curacao",
 }
 
 _live_cache: Optional[Dict] = None
@@ -34,6 +37,9 @@ CACHE_TTL_SECONDS = 15  # check more frequently for live scores (15s)
 
 
 def _normalize_team(name: str) -> str:
+    if not name:
+        return name
+    name = name.replace("\ufffd", "")
     return TEAM_NAME_MAP.get(name, name)
 
 
@@ -63,6 +69,14 @@ def _parse_scorers_string(scorers_str) -> list:
     s = s.replace("G\ufffdler", "Güler")
     s = s.replace("\ufffdstig\ufffdrd", "Østigård")
     s = s.replace("Kessi\ufffd", "Kessié")
+    s = s.replace("Rub\ufffdn", "Rubén")
+    s = s.replace("Ch\ufffdvez", "Chávez")
+    s = s.replace("J\ufffdnior", "Júnior")
+    s = s.replace("Vin\ufffdcius", "Vinícius")
+    s = s.replace("San\ufffd", "Sané")
+    s = s.replace("D\ufffdsir\ufffd", "Désiré")
+    s = s.replace("Dou\ufffd", "Doué")
+    s = s.replace("\ufffdlex", "Álex")
     
     # Fallback general replacement character cleanups
     s = s.replace("\ufffd", "")
@@ -75,6 +89,26 @@ def _parse_scorers_string(scorers_str) -> list:
     s = s.replace("Asmaail Saibari", "Ismael Saibari")
     s = s.replace("Ali Avlvan", "Ali Alwan")
     s = s.replace("Ali Jast", "Ali Jasim")
+    s = s.replace("Dnil Mvnvz", "Daniel Muñoz")
+    s = s.replace("Lviiz Diaz", "Luis Díaz")
+    s = s.replace("Khamintvn Kampaz", "Jaminton Campaz")
+    s = s.replace("Abas Bk Fiz Allh Af", "Abbosbek Fayzullaev")
+    s = s.replace("Jvhan Mnzambi", "Jovan Mnzambi")
+    s = s.replace("Prvmis Divid", "Promise David")
+    s = s.replace("Karim Alaibgvvich", "Karim Alai")
+    s = s.replace("Taplv Maskv", "Thapelo Maseko")
+    s = s.replace("Jvlian Kviinvnz", "Julián Quiñones")
+    s = s.replace("lvaro Fidalgo", "Álvaro Fidalgo")
+    s = s.replace("Alvaro Fidalgo", "Álvaro Fidalgo")
+    s = s.replace("Nilsvn Angvlv", "Nilson Angulo")
+    s = s.replace("Gvnzalv Plata", "Gonzalo Plata")
+    s = s.replace("Hazm Mstvri", "Hazem Mastouri")
+    s = s.replace("Alis Skhiri", "Ellyes Skhiri")
+    s = s.replace("Ian Fn Hkh", "Jan Paul van Hecke")
+    s = s.replace("Baris Alpr Ailmaz", "Barış Alper Yılmaz")
+    s = s.replace("Kan Aihan", "Kaan Ayhan")
+    s = s.replace("Paph Gviih", "Pape Gueye")
+    s = s.replace("Ailman Andiaih", "Iliman Ndiaye")
     
     import re
     # Match double quoted names
@@ -256,8 +290,13 @@ def get_completed_live_matches() -> list:
             if not is_completed:
                 continue
 
-            home = _normalize_team(m.get("home_team_name_en") or m.get("home_team", {}).get("name" if isinstance(m.get("home_team"), dict) else "") or m.get("home_team", ""))
-            away = _normalize_team(m.get("away_team_name_en") or m.get("away_team", {}).get("name" if isinstance(m.get("away_team"), dict) else "") or m.get("away_team", ""))
+            h_raw = m.get("home_team")
+            home_name = h_raw.get("name") if isinstance(h_raw, dict) else h_raw
+            home = _normalize_team(m.get("home_team_name_en") or home_name or "")
+
+            a_raw = m.get("away_team")
+            away_name = a_raw.get("name") if isinstance(a_raw, dict) else a_raw
+            away = _normalize_team(m.get("away_team_name_en") or away_name or "")
             
             if not home or not away:
                 continue
@@ -392,8 +431,13 @@ def get_live_matches_data() -> list:
             if not is_live:
                 continue
             
-            home = _normalize_team(m.get("home_team_name_en") or m.get("home_team", {}).get("name" if isinstance(m.get("home_team"), dict) else "") or m.get("home_team", ""))
-            away = _normalize_team(m.get("away_team_name_en") or m.get("away_team", {}).get("name" if isinstance(m.get("away_team"), dict) else "") or m.get("away_team", ""))
+            h_raw = m.get("home_team")
+            home_name = h_raw.get("name") if isinstance(h_raw, dict) else h_raw
+            home = _normalize_team(m.get("home_team_name_en") or home_name or "")
+
+            a_raw = m.get("away_team")
+            away_name = a_raw.get("name") if isinstance(a_raw, dict) else a_raw
+            away = _normalize_team(m.get("away_team_name_en") or away_name or "")
             
             if not home or not away:
                 continue
@@ -582,5 +626,13 @@ def sync_live_results_to_fixtures(fixtures_df, wc_df=None) -> tuple:
             retrain_active_model()
         except Exception as e:
             print(f"[live_scores] [ERROR] Failed to auto-retrain model: {e}")
+        # Clear Streamlit cache if running in streamlit context
+        try:
+            import sys
+            if "streamlit" in sys.modules:
+                import streamlit as st
+                st.cache_data.clear()
+        except Exception as ce:
+            print(f"[live_scores] Failed to clear streamlit cache: {ce}")
 
     return updated, changed

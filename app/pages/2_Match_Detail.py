@@ -228,9 +228,19 @@ def get_player_match_stats(name, pos, rating, is_home, hs, as_, scorers=None, ho
                 scorer_list = json.loads(scorer_list)
             except Exception:
                 scorer_list = [scorer_list]
+        
+        import unicodedata
+        def norm(text):
+            t = unicodedata.normalize('NFD', str(text))
+            return "".join([c for c in t if not unicodedata.combining(c)]).lower().replace("-", " ").strip()
+            
+        norm_name = norm(name)
         for s in scorer_list:
-            if s and name.lower() in s.lower():
-                goals += 1
+            if s:
+                norm_scorer = norm(s)
+                # Check if full name matches, or if last name matches
+                if norm_name in norm_scorer or (len(norm_name.split()) > 1 and norm_name.split()[-1] in norm_scorer):
+                    goals += 1
                 
     details = ""
     if pos == "GK":

@@ -140,14 +140,19 @@
   {
     "match_id": 107,
     "round": "Group Stage",
-    "date": "2026-06-24",
+    "date": "2026-06-23",
     "home_team": "Colombia",
     "away_team": "DR Congo",
     "status": "completed",
     "home_score": 1,
     "away_score": 0,
     "group": "K",
-    "scorers": null,
+    "scorers": {
+      "home": [
+        "Daniel Mu\u00f1oz 76'"
+      ],
+      "away": []
+    },
     "minute": null,
     "elapsed_mins": null,
     "elapsed_secs": null,
@@ -166,10 +171,10 @@
     "scorers": {
       "home": [
         "Rub\u00e9n Vargas 46'",
-        "Jvhan Mnzambi 57'"
+        "Jovan Mnzambi 57'"
       ],
       "away": [
-        "Prvmis Divid 76'"
+        "Promise David 76'"
       ]
     },
     "minute": null,
@@ -189,7 +194,7 @@
     "group": "B",
     "scorers": {
       "home": [
-        "Karim Alaibgvvich 29'",
+        "Karim Alai 29'",
         "Abvnad 34'",
         "Armin Mhmich 80'"
       ],
@@ -264,7 +269,7 @@
     "group": "A",
     "scorers": {
       "home": [
-        "Taplv Maskv 63'"
+        "Thapelo Maseko 63'"
       ],
       "away": []
     },
@@ -287,8 +292,8 @@
       "home": [],
       "away": [
         "Mateo Ch\u00e1vez 55'",
-        "Jvlian Kviinvnz 61'",
-        "\u00c1lvaro Fidalgo 90+4'"
+        "Juli\u00e1n Qui\u00f1ones 61'",
+        "\u00c1\u00c1lvaro Fidalgo 90+4'"
       ]
     },
     "minute": null,
@@ -299,14 +304,20 @@
   {
     "match_id": 114,
     "round": "Group Stage",
-    "date": "2026-06-26",
+    "date": "2026-06-25",
     "home_team": "Curacao",
     "away_team": "Ivory Coast",
     "status": "completed",
     "home_score": 0,
     "away_score": 2,
     "group": "E",
-    "scorers": null,
+    "scorers": {
+      "home": [],
+      "away": [
+        "Nikvlas Ph Ph 7'",
+        "Nikvlas Ph Ph 64'"
+      ]
+    },
     "minute": null,
     "elapsed_mins": null,
     "elapsed_secs": null,
@@ -324,8 +335,8 @@
     "group": "E",
     "scorers": {
       "home": [
-        "Nilsvn Angvlv 9'",
-        "Gvnzalv Plata 77'"
+        "Nilson Angulo 9'",
+        "Gonzalo Plata 77'"
       ],
       "away": [
         "Leroy San\u00e9 2'"
@@ -348,12 +359,12 @@
     "group": "F",
     "scorers": {
       "home": [
-        "Hazm Mstvri 54'"
+        "Hazem Mastouri 54'"
       ],
       "away": [
-        "Alis Skhiri 3'",
+        "Ellyes Skhiri 3'",
         "Brian Brobbey 7'",
-        "Ian Fn Hkh 62'"
+        "Jan Paul van Hecke 62'"
       ]
     },
     "minute": null,
@@ -397,8 +408,8 @@
     "scorers": {
       "home": [
         "Arda G\u00fcler 10'",
-        "Baris Alpr Ailmaz 31'",
-        "Kan Aihan 90+8'"
+        "Bar\u0131\u015f Alper Y\u0131lmaz 31'",
+        "Kaan Ayhan 90+8'"
       ],
       "away": [
         "Auston Trusty 3'",
@@ -469,9 +480,9 @@
       "home": [
         "Habib Diarra 4'",
         "Isma\u00efla Sarr 56'",
-        "Paph Gviih 59'",
-        "Paph Gviih 71'",
-        "Ailman Andiaih 82'"
+        "Pape Gueye 59'",
+        "Pape Gueye 71'",
+        "Iliman Ndiaye 82'"
       ],
       "away": []
     },
