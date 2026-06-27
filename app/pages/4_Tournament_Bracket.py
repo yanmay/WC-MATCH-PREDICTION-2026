@@ -12,7 +12,7 @@ ROOT = Path(__file__).parent.parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from app.utils import load_data, get_model_and_metrics, get_team_flag, CSS
+from app.utils import load_data, get_model_and_metrics, get_team_flag, CSS, format_team_html, format_team_emoji, render_sidebar
 from ml.data_loader import get_2026_fixtures
 from ml.predict import predict_match, get_winner_label
 
@@ -22,6 +22,7 @@ st.set_page_config(
     layout="wide",
 )
 st.markdown(CSS, unsafe_allow_html=True)
+render_sidebar()
 
 # Custom CSS extension for 21st.dev styling on the Bracket Visual Flow
 st.markdown("""
@@ -33,14 +34,14 @@ st.markdown("""
     height: 950px;
 }
 .bracket-match {
-    background: rgba(17, 24, 39, 0.7);
+    background: var(--bg-card);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid var(--border-subtle);
     border-radius: 12px;
     padding: 10px 14px;
     margin: 6px 0;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
     font-size: 0.78rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
@@ -50,13 +51,13 @@ st.markdown("""
     position: absolute;
     top: 0; left: 0; bottom: 0;
     width: 3px;
-    background: linear-gradient(180deg, #00D4FF, #7B2FFF);
+    background: linear-gradient(180deg, var(--accent-green), var(--accent-purple));
     border-radius: 12px 0 0 12px;
     opacity: 0.7;
 }
 .bracket-match:hover {
-    border-color: rgba(0, 212, 255, 0.25);
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.15), 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+    border-color: var(--border-accent);
+    box-shadow: 0 0 15px rgba(52, 211, 153, 0.15), 0 8px 32px 0 rgba(0, 0, 0, 0.4);
     transform: translateY(-1px);
 }
 .bracket-team {
@@ -66,22 +67,22 @@ st.markdown("""
     padding: 3px 0;
 }
 .bracket-winner {
-    color: #00D4FF !important;
+    color: var(--accent-green) !important;
     font-weight: 800;
 }
 .bracket-loser {
-    color: #475569 !important;
+    color: var(--text-muted) !important;
     font-weight: 400;
 }
 .bracket-prob {
     font-size: 0.68rem;
-    color: #64748b;
+    color: var(--text-muted);
     font-weight: 700;
 }
 .champion-spotlight-21 {
-    background: linear-gradient(135deg, rgba(250, 204, 21, 0.1) 0%, rgba(123, 47, 255, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(250, 204, 21, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
     border: 1px solid rgba(250, 204, 21, 0.3);
-    box-shadow: 0 0 35px rgba(250, 204, 21, 0.15), inset 0 0 20px rgba(250, 204, 21, 0.05);
+    box-shadow: 0 0 35px rgba(250, 204, 21, 0.08), inset 0 0 20px rgba(250, 204, 21, 0.02);
     border-radius: 20px;
     padding: 24px;
     text-align: center;
@@ -115,7 +116,7 @@ with st.spinner("Preparing tournament simulator..."):
 def run_bracket_simulation(wc_df_local):
     """Propagate predictions stage-by-stage to simulate the full tournament."""
     # Round of 32
-    r32_fixtures = get_2026_fixtures()
+    r32_fixtures = get_2026_fixtures(wc_df_local)
     r32_matches = r32_fixtures[r32_fixtures["round"] == "Round of 32"].copy()
     
     r32_results = []
@@ -226,6 +227,7 @@ sim_data = run_bracket_simulation(wc_df)
 champion = sim_data["Final"]["winner"]
 final_pred = sim_data["Final"]["pred"]
 champ_prob = final_pred["home_win_prob"] if champion == sim_data["Final"]["home"] else final_pred["away_win_prob"]
+champ_prob_str = f"{champ_prob:.1%}" if champ_prob is not None else "N/A"
 
 st.markdown(f"""
 <div class="champion-spotlight-21">
@@ -233,11 +235,11 @@ st.markdown(f"""
     <div style="color:#FACC15; font-size:0.75rem; font-weight:800; letter-spacing:2px; text-transform:uppercase; margin-bottom:4px;">
         AI WORLD CUP CHAMPION FORECAST
     </div>
-    <div style="font-size:2.5rem; font-weight:900; color:#f1f5f9; margin:4px 0;">
-        {get_team_flag(champion)} {champion}
+    <div style="font-size:2.5rem; font-weight:900; color:#f3f4f6; margin:4px 0;">
+        {format_team_html(champion)}
     </div>
-    <div style="color:#94A3B8; font-size:0.88rem; max-width:600px; margin:0 auto; line-height:1.5;">
-        Predicted to defeat {sim_data['Final']['loser']} in the Final match with a simulated probability of <b>{champ_prob:.1%}</b>.
+    <div style="color:#9ca3af; font-size:0.88rem; max-width:600px; margin:0 auto; line-height:1.5;">
+        Predicted to defeat {format_team_html(sim_data['Final']['loser'])} in the Final match with a simulated probability of <b>{champ_prob_str}</b>.
     </div>
 </div>""", unsafe_allow_html=True)
 
@@ -259,88 +261,100 @@ def render_match_html(match):
     h_class = "bracket-winner" if home_win else "bracket-loser"
     a_class = "bracket-winner" if away_win else "bracket-loser"
     
-    return f"""
-    <div class="bracket-match">
-        <div class="bracket-team {h_class}">
-            <span>{get_team_flag(match['home'])} {match['home']}</span>
-            <span class="bracket-prob">{hp:.0%}</span>
-        </div>
-        <div style="height:1px; background:rgba(255,255,255,0.03); margin:4px 0;"></div>
-        <div class="bracket-team {a_class}">
-            <span>{get_team_flag(match['away'])} {match['away']}</span>
-            <span class="bracket-prob">{ap:.0%}</span>
-        </div>
-    </div>
-    """
+    hp_str = f"{hp:.0%}" if hp is not None else "N/A"
+    ap_str = f"{ap:.0%}" if ap is not None else "N/A"
+    
+    return (
+        f'<div class="bracket-match">'
+        f'<div class="bracket-team {h_class}">'
+        f'<span>{format_team_html(match["home"])}</span>'
+        f'<span class="bracket-prob">{hp_str}</span>'
+        f'</div>'
+        f'<div style="height:1px; background:var(--border-subtle); margin:4px 0;"></div>'
+        f'<div class="bracket-team {a_class}">'
+        f'<span>{format_team_html(match["away"])}</span>'
+        f'<span class="bracket-prob">{ap_str}</span>'
+        f'</div>'
+        f'</div>'
+    )
 
 # LEFT HALF
 with col_r32_l:
-    st.markdown('<div class="bracket-column">', unsafe_allow_html=True)
-    st.markdown('<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#475569; letter-spacing:1px; margin-bottom:4px;">ROUND OF 32</div>', unsafe_allow_html=True)
+    html = '<div class="bracket-column">'
+    html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">ROUND OF 32</div>'
     for i in range(8):
         match = sim_data["Round of 32"][i]
-        st.markdown(render_match_html(match), unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+        html += render_match_html(match)
+    html += '</div>'
+    st.markdown(html, unsafe_allow_html=True)
 
 with col_r16_l:
-    st.markdown('<div class="bracket-column">', unsafe_allow_html=True)
-    st.markdown('<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#475569; letter-spacing:1px; margin-bottom:4px;">ROUND OF 16</div>', unsafe_allow_html=True)
+    html = '<div class="bracket-column">'
+    html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">ROUND OF 16</div>'
     for i in range(4):
         match = sim_data["Round of 16"][i]
-        st.markdown(render_match_html(match), unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+        html += render_match_html(match)
+    html += '</div>'
+    st.markdown(html, unsafe_allow_html=True)
 
 with col_qf_l:
-    st.markdown('<div class="bracket-column">', unsafe_allow_html=True)
-    st.markdown('<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#475569; letter-spacing:1px; margin-bottom:4px;">QUARTERFINAL</div>', unsafe_allow_html=True)
+    html = '<div class="bracket-column">'
+    html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">QUARTERFINAL</div>'
     for i in range(2):
         match = sim_data["Quarterfinal"][i]
-        st.markdown(render_match_html(match), unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+        html += render_match_html(match)
+    html += '</div>'
+    st.markdown(html, unsafe_allow_html=True)
 
 with col_sf_l:
-    st.markdown('<div class="bracket-column">', unsafe_allow_html=True)
-    st.markdown('<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#475569; letter-spacing:1px; margin-bottom:4px;">SEMIFINAL</div>', unsafe_allow_html=True)
+    html = '<div class="bracket-column">'
+    html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">SEMIFINAL</div>'
     match = sim_data["Semifinal"][0]
-    st.markdown(render_match_html(match), unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+    html += render_match_html(match)
+    html += '</div>'
+    st.markdown(html, unsafe_allow_html=True)
 
 # CENTER (FINAL)
 with col_fn:
-    st.markdown('<div class="bracket-column">', unsafe_allow_html=True)
-    st.markdown('<div style="text-align:center; font-size:0.6rem; font-weight:800; color:#FACC15; letter-spacing:1.5px; margin-bottom:4px;">FINAL</div>', unsafe_allow_html=True)
+    html = '<div class="bracket-column">'
+    html += '<div style="text-align:center; font-size:0.6rem; font-weight:800; color:#FACC15; letter-spacing:1.5px; margin-bottom:4px;">FINAL</div>'
     match = sim_data["Final"]
-    st.markdown(render_match_html(match), unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+    html += render_match_html(match)
+    html += '</div>'
+    st.markdown(html, unsafe_allow_html=True)
 
 # RIGHT HALF
 with col_sf_r:
-    st.markdown('<div class="bracket-column">', unsafe_allow_html=True)
-    st.markdown('<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#475569; letter-spacing:1px; margin-bottom:4px;">SEMIFINAL</div>', unsafe_allow_html=True)
+    html = '<div class="bracket-column">'
+    html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">SEMIFINAL</div>'
     match = sim_data["Semifinal"][1]
-    st.markdown(render_match_html(match), unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+    html += render_match_html(match)
+    html += '</div>'
+    st.markdown(html, unsafe_allow_html=True)
 
 with col_qf_r:
-    st.markdown('<div class="bracket-column">', unsafe_allow_html=True)
-    st.markdown('<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#475569; letter-spacing:1px; margin-bottom:4px;">QUARTERFINAL</div>', unsafe_allow_html=True)
+    html = '<div class="bracket-column">'
+    html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">QUARTERFINAL</div>'
     for i in range(2, 4):
         match = sim_data["Quarterfinal"][i]
-        st.markdown(render_match_html(match), unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+        html += render_match_html(match)
+    html += '</div>'
+    st.markdown(html, unsafe_allow_html=True)
 
 with col_r16_r:
-    st.markdown('<div class="bracket-column">', unsafe_allow_html=True)
-    st.markdown('<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#475569; letter-spacing:1px; margin-bottom:4px;">ROUND OF 16</div>', unsafe_allow_html=True)
+    html = '<div class="bracket-column">'
+    html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">ROUND OF 16</div>'
     for i in range(4, 8):
         match = sim_data["Round of 16"][i]
-        st.markdown(render_match_html(match), unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+        html += render_match_html(match)
+    html += '</div>'
+    st.markdown(html, unsafe_allow_html=True)
 
 with col_r32_r:
-    st.markdown('<div class="bracket-column">', unsafe_allow_html=True)
-    st.markdown('<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#475569; letter-spacing:1px; margin-bottom:4px;">ROUND OF 32</div>', unsafe_allow_html=True)
+    html = '<div class="bracket-column">'
+    html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">ROUND OF 32</div>'
     for i in range(8, 16):
         match = sim_data["Round of 32"][i]
-        st.markdown(render_match_html(match), unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+        html += render_match_html(match)
+    html += '</div>'
+    st.markdown(html, unsafe_allow_html=True)

@@ -42,3 +42,15 @@ MANIFEST
 # OS files
 .DS_Store
 Thumbs.db
+
+# Antigravity/Agent customization
+.agents/
+skills-lock.json
+
+# Temporary search cache and logs
+*_snippet.html
+last_google.html
+*.log
+scratch/
+.venv/
+

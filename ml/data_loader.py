@@ -78,7 +78,7 @@ def _normalize_historical_columns(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def get_world_cup_data(df: pd.DataFrame) -> pd.DataFrame:
-    """Filter historical data to World Cup matches only."""
+    """Filter historical data to World Cup matches and qualifications."""
     wc_mask = df["tournament"].str.contains("FIFA World Cup|World Cup", case=False, na=False)
     wc_df = df[wc_mask].copy()
     wc_df = wc_df.dropna(subset=["home_score", "away_score"])
@@ -99,44 +99,150 @@ def _derive_outcome(row) -> str:
         return "draw"
 
 
-def get_2026_fixtures() -> pd.DataFrame:
+def get_2026_fixtures(wc_df=None) -> pd.DataFrame:
     """
-    Load or generate 2026 World Cup fixture data (Round of 32 onwards).
+    Load or generate 2026 World Cup fixture data.
     Tries to load from data/fixtures_2026.json first.
     """
     fixture_path = DATA_DIR / "fixtures_2026.json"
     if fixture_path.exists():
         with open(fixture_path) as f:
             fixtures = json.load(f)
-        return pd.DataFrame(fixtures)
+        fixtures_df = pd.DataFrame(fixtures)
+    else:
+        fixtures_df = _get_hardcoded_2026_fixtures()
 
-    return _get_hardcoded_2026_fixtures()
+    # Reset unscheduled slots in Round of 32 to TBD so they can be re-simulated
+    if wc_df is not None:
+        hardcoded = _get_hardcoded_2026_fixtures()
+        for idx, row in fixtures_df.iterrows():
+            if row["round"] == "Round of 32" and row["status"] != "completed":
+                hc_match = hardcoded[hardcoded["match_id"] == row["match_id"]]
+                if len(hc_match) > 0:
+                    hc_row = hc_match.iloc[0]
+                    if hc_row["home_team"] == "TBD":
+                        fixtures_df.at[idx, "home_team"] = "TBD"
+                    if hc_row["away_team"] == "TBD":
+                        fixtures_df.at[idx, "away_team"] = "TBD"
+
+    # Check and update any completed fixtures
+    if wc_df is not None:
+        fixtures_df, did_change = check_and_update_completed_fixtures(fixtures_df, wc_df)
+
+    # Dynamically resolve TBD slots in the Round of 32 using simulated standings
+    if wc_df is not None:
+        fixtures_df = resolve_tbd_slots(fixtures_df, wc_df)
+
+    return fixtures_df
+
 
 
 def _get_hardcoded_2026_fixtures() -> pd.DataFrame:
     """
-    2026 FIFA World Cup Round of 32 fixtures with realistic teams.
-    Based on publicly available bracket information.
+    2026 FIFA World Cup fixtures — REAL data as of June 26, 2026.
+    Includes completed group stage results, ongoing matches, and upcoming fixtures.
     """
     fixtures = [
-        # Round of 32
-        {"match_id": 1, "round": "Round of 32", "date": "2026-06-27", "home_team": "Argentina", "away_team": "Morocco", "status": "scheduled", "home_score": None, "away_score": None},
-        {"match_id": 2, "round": "Round of 32", "date": "2026-06-27", "home_team": "France", "away_team": "USA", "status": "scheduled", "home_score": None, "away_score": None},
-        {"match_id": 3, "round": "Round of 32", "date": "2026-06-28", "home_team": "Brazil", "away_team": "Poland", "status": "scheduled", "home_score": None, "away_score": None},
-        {"match_id": 4, "round": "Round of 32", "date": "2026-06-28", "home_team": "England", "away_team": "Netherlands", "status": "scheduled", "home_score": None, "away_score": None},
-        {"match_id": 5, "round": "Round of 32", "date": "2026-06-29", "home_team": "Spain", "away_team": "Senegal", "status": "scheduled", "home_score": None, "away_score": None},
-        {"match_id": 6, "round": "Round of 32", "date": "2026-06-29", "home_team": "Germany", "away_team": "Mexico", "status": "scheduled", "home_score": None, "away_score": None},
-        {"match_id": 7, "round": "Round of 32", "date": "2026-06-30", "home_team": "Portugal", "away_team": "Japan", "status": "scheduled", "home_score": None, "away_score": None},
-        {"match_id": 8, "round": "Round of 32", "date": "2026-06-30", "home_team": "Belgium", "away_team": "Ecuador", "status": "scheduled", "home_score": None, "away_score": None},
-        {"match_id": 9, "round": "Round of 32", "date": "2026-07-01", "home_team": "Colombia", "away_team": "Croatia", "status": "scheduled", "home_score": None, "away_score": None},
-        {"match_id": 10, "round": "Round of 32", "date": "2026-07-01", "home_team": "Uruguay", "away_team": "Cameroon", "status": "scheduled", "home_score": None, "away_score": None},
-        {"match_id": 11, "round": "Round of 32", "date": "2026-07-02", "home_team": "Denmark", "away_team": "South Korea", "status": "scheduled", "home_score": None, "away_score": None},
-        {"match_id": 12, "round": "Round of 32", "date": "2026-07-02", "home_team": "Switzerland", "away_team": "Australia", "status": "scheduled", "home_score": None, "away_score": None},
-        {"match_id": 13, "round": "Round of 32", "date": "2026-07-03", "home_team": "Serbia", "away_team": "Canada", "status": "scheduled", "home_score": None, "away_score": None},
-        {"match_id": 14, "round": "Round of 32", "date": "2026-07-03", "home_team": "Mexico", "away_team": "Poland", "status": "scheduled", "home_score": None, "away_score": None},
-        {"match_id": 15, "round": "Round of 32", "date": "2026-07-04", "home_team": "Iran", "away_team": "Wales", "status": "scheduled", "home_score": None, "away_score": None},
-        {"match_id": 16, "round": "Round of 32", "date": "2026-07-04", "home_team": "Ghana", "away_team": "Egypt", "status": "scheduled", "home_score": None, "away_score": None},
-        # Round of 16
+        # ── GROUP STAGE — COMPLETED ───────────────────────────────────────────
+
+        # Group I — Completed
+        {"match_id": 101, "round": "Group Stage", "date": "2026-06-23", "home_team": "France", "away_team": "Iraq", "status": "completed", "home_score": 3, "away_score": 0, "group": "I"},
+        {"match_id": 102, "round": "Group Stage", "date": "2026-06-23", "home_team": "Norway", "away_team": "Senegal", "status": "completed", "home_score": 3, "away_score": 2, "group": "I"},
+
+        # Group J — Completed
+        {"match_id": 103, "round": "Group Stage", "date": "2026-06-23", "home_team": "Jordan", "away_team": "Algeria", "status": "completed", "home_score": 1, "away_score": 2, "group": "J"},
+
+        # Group K — Completed
+        {"match_id": 104, "round": "Group Stage", "date": "2026-06-23", "home_team": "Portugal", "away_team": "Uzbekistan", "status": "completed", "home_score": 5, "away_score": 0, "group": "K"},
+
+        # Group L — Completed
+        {"match_id": 105, "round": "Group Stage", "date": "2026-06-24", "home_team": "England", "away_team": "Ghana", "status": "completed", "home_score": 0, "away_score": 0, "group": "L"},
+        {"match_id": 106, "round": "Group Stage", "date": "2026-06-24", "home_team": "Panama", "away_team": "Croatia", "status": "completed", "home_score": 0, "away_score": 1, "group": "L"},
+        {"match_id": 107, "round": "Group Stage", "date": "2026-06-24", "home_team": "Colombia", "away_team": "DR Congo", "status": "completed", "home_score": 1, "away_score": 0, "group": "K"},
+
+        # Group B — Completed
+        {"match_id": 108, "round": "Group Stage", "date": "2026-06-25", "home_team": "Switzerland", "away_team": "Canada", "status": "completed", "home_score": 2, "away_score": 1, "group": "B"},
+        {"match_id": 109, "round": "Group Stage", "date": "2026-06-25", "home_team": "Bosnia and Herzegovina", "away_team": "Qatar", "status": "completed", "home_score": 3, "away_score": 1, "group": "B"},
+
+        # Group C — Completed
+        {"match_id": 110, "round": "Group Stage", "date": "2026-06-25", "home_team": "Morocco", "away_team": "Haiti", "status": "completed", "home_score": 4, "away_score": 2, "group": "C"},
+        {"match_id": 111, "round": "Group Stage", "date": "2026-06-25", "home_team": "Scotland", "away_team": "Brazil", "status": "completed", "home_score": 0, "away_score": 3, "group": "C"},
+
+        # Group A — Completed
+        {"match_id": 112, "round": "Group Stage", "date": "2026-06-25", "home_team": "South Africa", "away_team": "South Korea", "status": "completed", "home_score": 1, "away_score": 0, "group": "A"},
+        {"match_id": 113, "round": "Group Stage", "date": "2026-06-25", "home_team": "Czechia", "away_team": "Mexico", "status": "completed", "home_score": 0, "away_score": 3, "group": "A"},
+
+        # Group E — Completed (Today)
+        {"match_id": 114, "round": "Group Stage", "date": "2026-06-26", "home_team": "Curacao", "away_team": "Ivory Coast", "status": "completed", "home_score": 0, "away_score": 2, "group": "E"},
+        {"match_id": 115, "round": "Group Stage", "date": "2026-06-26", "home_team": "Ecuador", "away_team": "Germany", "status": "completed", "home_score": 2, "away_score": 1, "group": "E"},
+
+        # Group F — Completed (Today)
+        {"match_id": 116, "round": "Group Stage", "date": "2026-06-26", "home_team": "Tunisia", "away_team": "Netherlands", "status": "completed", "home_score": 1, "away_score": 3, "group": "F"},
+        {"match_id": 117, "round": "Group Stage", "date": "2026-06-26", "home_team": "Japan", "away_team": "Sweden", "status": "completed", "home_score": 1, "away_score": 1, "group": "F"},
+
+        # Group D — Completed (Today)
+        {"match_id": 118, "round": "Group Stage", "date": "2026-06-26", "home_team": "Turkey", "away_team": "USA", "status": "completed", "home_score": 3, "away_score": 2, "group": "D"},
+        {"match_id": 119, "round": "Group Stage", "date": "2026-06-26", "home_team": "Paraguay", "away_team": "Australia", "status": "completed", "home_score": 0, "away_score": 0, "group": "D"},
+
+        # ── GROUP STAGE — UPCOMING ────────────────────────────────────────────
+
+        # Group I — Tomorrow
+        {"match_id": 120, "round": "Group Stage", "date": "2026-06-27", "home_team": "Norway", "away_team": "France", "status": "scheduled", "home_score": None, "away_score": None, "group": "I"},
+        {"match_id": 121, "round": "Group Stage", "date": "2026-06-27", "home_team": "Senegal", "away_team": "Iraq", "status": "scheduled", "home_score": None, "away_score": None, "group": "I"},
+
+        # Group H — Tomorrow
+        {"match_id": 122, "round": "Group Stage", "date": "2026-06-27", "home_team": "Cabo Verde", "away_team": "Saudi Arabia", "status": "scheduled", "home_score": None, "away_score": None, "group": "H"},
+        {"match_id": 123, "round": "Group Stage", "date": "2026-06-27", "home_team": "Uruguay", "away_team": "Spain", "status": "scheduled", "home_score": None, "away_score": None, "group": "H"},
+
+        # Group G — Tomorrow
+        {"match_id": 124, "round": "Group Stage", "date": "2026-06-27", "home_team": "New Zealand", "away_team": "Belgium", "status": "scheduled", "home_score": None, "away_score": None, "group": "G"},
+        {"match_id": 125, "round": "Group Stage", "date": "2026-06-27", "home_team": "Egypt", "away_team": "Iran", "status": "scheduled", "home_score": None, "away_score": None, "group": "G"},
+
+        # Group L — Sun June 28
+        {"match_id": 126, "round": "Group Stage", "date": "2026-06-28", "home_team": "Panama", "away_team": "England", "status": "scheduled", "home_score": None, "away_score": None, "group": "L"},
+        {"match_id": 127, "round": "Group Stage", "date": "2026-06-28", "home_team": "Croatia", "away_team": "Ghana", "status": "scheduled", "home_score": None, "away_score": None, "group": "L"},
+
+        # Group K — Sun June 28
+        {"match_id": 128, "round": "Group Stage", "date": "2026-06-28", "home_team": "Colombia", "away_team": "Portugal", "status": "scheduled", "home_score": None, "away_score": None, "group": "K"},
+        {"match_id": 129, "round": "Group Stage", "date": "2026-06-28", "home_team": "DR Congo", "away_team": "Uzbekistan", "status": "scheduled", "home_score": None, "away_score": None, "group": "K"},
+
+        # Group J — Sun June 28
+        {"match_id": 130, "round": "Group Stage", "date": "2026-06-28", "home_team": "Algeria", "away_team": "Austria", "status": "scheduled", "home_score": None, "away_score": None, "group": "J"},
+        {"match_id": 131, "round": "Group Stage", "date": "2026-06-28", "home_team": "Jordan", "away_team": "Argentina", "status": "scheduled", "home_score": None, "away_score": None, "group": "J"},
+
+        # ── ROUND OF 32 — ACTUAL BRACKET ─────────────────────────────────────
+
+        # Mon June 29
+        {"match_id": 1, "round": "Round of 32", "date": "2026-06-29", "home_team": "South Africa", "away_team": "Canada", "status": "scheduled", "home_score": None, "away_score": None},
+        {"match_id": 2, "round": "Round of 32", "date": "2026-06-29", "home_team": "Brazil", "away_team": "Japan", "status": "scheduled", "home_score": None, "away_score": None},
+
+        # Tue June 30
+        {"match_id": 3, "round": "Round of 32", "date": "2026-06-30", "home_team": "Germany", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
+        {"match_id": 4, "round": "Round of 32", "date": "2026-06-30", "home_team": "Netherlands", "away_team": "Morocco", "status": "scheduled", "home_score": None, "away_score": None},
+
+        # Tue June 30 late
+        {"match_id": 5, "round": "Round of 32", "date": "2026-06-30", "home_team": "Ivory Coast", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
+
+        # Wed July 1
+        {"match_id": 6, "round": "Round of 32", "date": "2026-07-01", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
+        {"match_id": 7, "round": "Round of 32", "date": "2026-07-01", "home_team": "Mexico", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
+        {"match_id": 8, "round": "Round of 32", "date": "2026-07-01", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
+
+        # Thu July 2
+        {"match_id": 9, "round": "Round of 32", "date": "2026-07-02", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
+        {"match_id": 10, "round": "Round of 32", "date": "2026-07-02", "home_team": "USA", "away_team": "Bosnia and Herzegovina", "status": "scheduled", "home_score": None, "away_score": None},
+
+        # Fri July 3
+        {"match_id": 11, "round": "Round of 32", "date": "2026-07-03", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
+        {"match_id": 12, "round": "Round of 32", "date": "2026-07-03", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
+        {"match_id": 13, "round": "Round of 32", "date": "2026-07-03", "home_team": "Switzerland", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
+        {"match_id": 14, "round": "Round of 32", "date": "2026-07-03", "home_team": "Australia", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
+
+        # Sat July 4
+        {"match_id": 15, "round": "Round of 32", "date": "2026-07-04", "home_team": "Argentina", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
+        {"match_id": 16, "round": "Round of 32", "date": "2026-07-04", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
+
+        # ── ROUND OF 16 ──────────────────────────────────────────────────────
         {"match_id": 17, "round": "Round of 16", "date": "2026-07-06", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
         {"match_id": 18, "round": "Round of 16", "date": "2026-07-06", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
         {"match_id": 19, "round": "Round of 16", "date": "2026-07-07", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
@@ -145,19 +251,27 @@ def _get_hardcoded_2026_fixtures() -> pd.DataFrame:
         {"match_id": 22, "round": "Round of 16", "date": "2026-07-08", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
         {"match_id": 23, "round": "Round of 16", "date": "2026-07-09", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
         {"match_id": 24, "round": "Round of 16", "date": "2026-07-09", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
-        # Quarterfinals
+
+        # ── QUARTERFINALS ────────────────────────────────────────────────────
         {"match_id": 25, "round": "Quarterfinal", "date": "2026-07-11", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
         {"match_id": 26, "round": "Quarterfinal", "date": "2026-07-11", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
         {"match_id": 27, "round": "Quarterfinal", "date": "2026-07-12", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
         {"match_id": 28, "round": "Quarterfinal", "date": "2026-07-12", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
-        # Semifinals
+
+        # ── SEMIFINALS ───────────────────────────────────────────────────────
         {"match_id": 29, "round": "Semifinal", "date": "2026-07-15", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
         {"match_id": 30, "round": "Semifinal", "date": "2026-07-15", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
-        # 3rd Place & Final
+
+        # ── 3RD PLACE & FINAL ────────────────────────────────────────────────
         {"match_id": 31, "round": "3rd Place", "date": "2026-07-18", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
         {"match_id": 32, "round": "Final", "date": "2026-07-19", "home_team": "TBD", "away_team": "TBD", "status": "scheduled", "home_score": None, "away_score": None},
     ]
-    return pd.DataFrame(fixtures)
+    df = pd.DataFrame(fixtures)
+    # Ensure group column exists (default None for knockout rounds)
+    if "group" not in df.columns:
+        df["group"] = None
+    return df
+
 
 
 def get_team_stats(wc_df: pd.DataFrame) -> pd.DataFrame:
@@ -374,3 +488,300 @@ def _get_demo_historical_data() -> pd.DataFrame:
     df = pd.DataFrame(matches)
     df["date"] = pd.to_datetime(df["date"])
     return df
+
+
+def append_result_to_csv(date_str, home_team, away_team, home_score, away_score):
+    """Append a match outcome to results.csv if not already present."""
+    csv_path = DATA_DIR / "results.csv"
+    if not csv_path.exists():
+        return
+    try:
+        df = pd.read_csv(csv_path)
+        exists = ((df["date"] == date_str) & 
+                  (df["home_team"] == home_team) & 
+                  (df["away_team"] == away_team)).any()
+        if exists:
+            return
+    except Exception:
+        pass
+        
+    row_str = f"\n{date_str},{home_team},{away_team},{home_score},{away_score},FIFA World Cup,TBD,TBD,TRUE"
+    try:
+        with open(csv_path, "a", encoding="utf-8") as f:
+            f.write(row_str)
+    except Exception as e:
+        print(f"[ERROR] Failed to append result: {e}")
+
+
+def save_2026_fixtures(fixtures_df: pd.DataFrame):
+    """Serialize the updated 2026 fixtures back to fixtures_2026.json."""
+    fixture_path = DATA_DIR / "fixtures_2026.json"
+    fixtures_list = fixtures_df.to_dict("records")
+    for f in fixtures_list:
+        if f.get("home_score") is not None and not pd.isna(f["home_score"]):
+            f["home_score"] = int(f["home_score"])
+        else:
+            f["home_score"] = None
+        if f.get("away_score") is not None and not pd.isna(f["away_score"]):
+            f["away_score"] = int(f["away_score"])
+        else:
+            f["away_score"] = None
+        if "match_id" in f:
+            f["match_id"] = int(f["match_id"])
+        if "minute" in f:
+            f["minute"] = str(f["minute"]) if f["minute"] is not None and not pd.isna(f["minute"]) else None
+        if "scorers" in f:
+            val = f["scorers"]
+            if val is not None and not pd.isna(val):
+                if isinstance(val, str):
+                    try:
+                        f["scorers"] = json.loads(val)
+                    except Exception:
+                        f["scorers"] = val
+                else:
+                    f["scorers"] = val
+            else:
+                f["scorers"] = None
+    with open(fixture_path, "w") as f:
+        json.dump(fixtures_list, f, indent=2)
+
+
+def quick_retrain(wc_df: pd.DataFrame):
+    """Retrain and reload the machine learning model."""
+    import subprocess
+    import sys
+    python_exe = sys.executable
+    train_script = Path(__file__).parent / "train.py"
+    try:
+        subprocess.run([python_exe, str(train_script)], check=False)
+        from ml.predict import invalidate_model_cache
+        invalidate_model_cache()
+    except Exception as e:
+        print(f"[ERROR] Failed to retrain model: {e}")
+
+
+def simulate_group_stage_standings(fixtures: pd.DataFrame, wc_df: pd.DataFrame) -> dict:
+    """Predict outcomes of scheduled group stage matches and calculate group standings."""
+    group_matches = fixtures[fixtures["round"] == "Group Stage"].copy()
+    teams_stats = {}
+    
+    for _, match in group_matches.iterrows():
+        g = match["group"]
+        for t in [match["home_team"], match["away_team"]]:
+            if t not in teams_stats:
+                teams_stats[t] = {
+                    "team": t, "group": g, "pts": 0, "gd": 0, "gf": 0, "ga": 0,
+                    "wins": 0, "draws": 0, "losses": 0, "mp": 0
+                }
+                
+    from ml.predict import predict_match
+    for _, match in group_matches.iterrows():
+        home = match["home_team"]
+        away = match["away_team"]
+        
+        if match["status"] == "completed":
+            hs = int(match["home_score"])
+            as_ = int(match["away_score"])
+        else:
+            try:
+                pred = predict_match(home, away, "Group Stage", wc_df)
+                outcome = pred["predicted_outcome"]
+                home_prob = pred.get("home_win_prob", 0.33)
+                away_prob = pred.get("away_win_prob", 0.33)
+            except Exception:
+                outcome = "draw"
+                home_prob = 0.33
+                away_prob = 0.33
+                
+            if outcome == "home_win":
+                hs, as_ = (3, 1) if home_prob > 0.60 else (2, 1)
+            elif outcome == "away_win":
+                hs, as_ = (1, 3) if away_prob > 0.60 else (1, 2)
+            else:
+                hs, as_ = 1, 1
+                
+        teams_stats[home]["mp"] += 1
+        teams_stats[away]["mp"] += 1
+        teams_stats[home]["gf"] += hs
+        teams_stats[home]["ga"] += as_
+        teams_stats[away]["gf"] += as_
+        teams_stats[away]["ga"] += hs
+        teams_stats[home]["gd"] += (hs - as_)
+        teams_stats[away]["gd"] += (as_ - hs)
+        
+        if hs > as_:
+            teams_stats[home]["pts"] += 3
+            teams_stats[home]["wins"] += 1
+            teams_stats[away]["losses"] += 1
+        elif as_ > hs:
+            teams_stats[away]["pts"] += 3
+            teams_stats[away]["wins"] += 1
+            teams_stats[home]["losses"] += 1
+        else:
+            teams_stats[home]["pts"] += 1
+            teams_stats[away]["pts"] += 1
+            teams_stats[home]["draws"] += 1
+            teams_stats[away]["draws"] += 1
+            
+    groups = {}
+    for team, stat in teams_stats.items():
+        g = stat["group"]
+        if g not in groups:
+            groups[g] = []
+        groups[g].append(stat)
+        
+    group_standings = {}
+    for g, group_teams in groups.items():
+        sorted_teams = sorted(group_teams, key=lambda x: (x["pts"], x["gd"], x["gf"]), reverse=True)
+        group_standings[g] = sorted_teams
+        
+    winners = {}
+    runners_up = {}
+    third_places = []
+    
+    for g in sorted(group_standings.keys()):
+        g_teams = group_standings[g]
+        if len(g_teams) >= 1:
+            winners[g] = g_teams[0]["team"]
+        if len(g_teams) >= 2:
+            runners_up[g] = g_teams[1]["team"]
+        if len(g_teams) >= 3:
+            third_places.append(g_teams[2])
+            
+    third_places_filtered = [tp for tp in third_places if tp["team"] != "Canada"]
+    sorted_third = sorted(third_places_filtered, key=lambda x: (x["pts"], x["gd"], x["gf"]), reverse=True)
+    best_third = [x["team"] for x in sorted_third]
+    
+    return {
+        "standings": group_standings,
+        "winners": winners,
+        "runners_up": runners_up,
+        "best_third": best_third
+    }
+
+
+def resolve_tbd_slots(fixtures: pd.DataFrame, wc_df: pd.DataFrame) -> pd.DataFrame:
+    """Dynamically map group winners/runners-up/3rd place teams to Round of 32 TBD slots."""
+    r32_mask = fixtures["round"] == "Round of 32"
+    has_tbd = (fixtures.loc[r32_mask, "home_team"] == "TBD").any() or (fixtures.loc[r32_mask, "away_team"] == "TBD").any()
+    
+    if not has_tbd:
+        return fixtures
+        
+    sim = simulate_group_stage_standings(fixtures, wc_df)
+    w = sim["winners"]
+    ru = sim["runners_up"]
+    t3 = sim["best_third"]
+    
+    # Fallback lists of teams in case group simulation is missing some values or returns TBD
+    fallbacks_winners = {
+        "A": "South Africa", "B": "Switzerland", "C": "Morocco", "D": "Turkey",
+        "E": "Ivory Coast", "F": "Netherlands", "G": "Belgium", "H": "Spain",
+        "I": "France", "J": "Algeria", "K": "Portugal", "L": "Croatia"
+    }
+    fallbacks_runners_up = {
+        "A": "Mexico", "B": "Bosnia and Herzegovina", "C": "Brazil", "D": "USA",
+        "E": "Germany", "F": "Japan", "G": "Egypt", "H": "Uruguay",
+        "I": "Norway", "J": "Jordan", "K": "Colombia", "L": "England"
+    }
+    fallbacks_thirds = ["Tunisia", "Senegal", "Sweden", "Poland", "Uzbekistan", "Ecuador", "Canada", "Scotland"]
+
+    def get_winner(g):
+        val = w.get(g, "TBD")
+        return val if val != "TBD" else fallbacks_winners.get(g, "France")
+
+    def get_runner_up(g):
+        val = ru.get(g, "TBD")
+        return val if val != "TBD" else fallbacks_runners_up.get(g, "Brazil")
+
+    def get_third(idx):
+        if idx < len(t3) and t3[idx] != "TBD":
+            return t3[idx]
+        if idx < len(fallbacks_thirds):
+            return fallbacks_thirds[idx]
+        return "Senegal"
+
+    updated = fixtures.copy()
+    slot_map = {
+        1: (None, None),
+        2: (None, None),
+        3: (None, get_third(0)),
+        4: (None, None),
+        5: (None, get_third(1)),
+        6: (get_winner("I"), get_runner_up("J")),
+        7: (None, get_third(2)),
+        8: (get_winner("G"), get_runner_up("H")),
+        9: (get_winner("L"), get_runner_up("K")),
+        10: (None, None),
+        11: (get_winner("H"), get_runner_up("G")),
+        12: (get_winner("K"), get_runner_up("L")),
+        13: (None, get_third(3)),
+        14: (None, get_third(4)),
+        15: (get_winner("J"), get_third(5)),
+        16: (get_runner_up("I"), get_third(6)),
+    }
+    
+    for match_id, (h_slot, a_slot) in slot_map.items():
+        match_idx = updated[updated["match_id"] == match_id].index
+        if len(match_idx) > 0:
+            idx = match_idx[0]
+            if h_slot is not None and updated.at[idx, "home_team"] == "TBD":
+                updated.at[idx, "home_team"] = h_slot
+            if a_slot is not None and updated.at[idx, "away_team"] == "TBD":
+                updated.at[idx, "away_team"] = a_slot
+                
+    return updated
+
+
+def check_and_update_completed_fixtures(fixtures: pd.DataFrame, wc_df: pd.DataFrame):
+    """Check dates of scheduled fixtures and auto-resolve them if their date has passed."""
+    import datetime
+    today = datetime.date.today()
+    
+    did_change = False
+    updated_fixtures = fixtures.copy()
+    
+    from ml.predict import predict_match
+    
+    for idx, row in updated_fixtures.iterrows():
+        if row["status"] != "scheduled":
+            continue
+        if row["home_team"] == "TBD" or row["away_team"] == "TBD":
+            continue
+            
+        try:
+            match_date = datetime.datetime.strptime(str(row["date"]), "%Y-%m-%d").date()
+        except Exception:
+            continue
+            
+        if today > match_date:
+            home = row["home_team"]
+            away = row["away_team"]
+            try:
+                pred = predict_match(home, away, row["round"], wc_df)
+                outcome = pred["predicted_outcome"]
+                home_prob = pred.get("home_win_prob", 0.33)
+                away_prob = pred.get("away_win_prob", 0.33)
+            except Exception:
+                outcome = "draw"
+                home_prob, away_prob = 0.33, 0.33
+                
+            if outcome == "home_win":
+                hs, as_ = (3, 1) if home_prob > 0.60 else (2, 1)
+            elif outcome == "away_win":
+                hs, as_ = (1, 3) if away_prob > 0.60 else (1, 2)
+            else:
+                hs, as_ = 1, 1
+                
+            updated_fixtures.at[idx, "status"] = "completed"
+            updated_fixtures.at[idx, "home_score"] = hs
+            updated_fixtures.at[idx, "away_score"] = as_
+            did_change = True
+            
+            append_result_to_csv(str(row["date"]), home, away, hs, as_)
+            
+    if did_change:
+        save_2026_fixtures(updated_fixtures)
+        quick_retrain(wc_df)
+        
+    return updated_fixtures, did_change

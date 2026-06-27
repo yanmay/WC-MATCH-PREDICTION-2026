@@ -22,6 +22,7 @@ from ml.train import load_model
 
 _model_cache = None
 _metrics_cache = None
+_prediction_cache = {}
 
 
 def get_active_model():
@@ -32,9 +33,10 @@ def get_active_model():
 
 
 def invalidate_model_cache():
-    global _model_cache, _metrics_cache
+    global _model_cache, _metrics_cache, _prediction_cache
     _model_cache = None
     _metrics_cache = None
+    _prediction_cache = {}
 
 
 def predict_match(
@@ -125,6 +127,11 @@ def predict_match_with_evidence(
     Returns base prediction + evidence chain, risk factors, feature contributions,
     H2H history, and team form trajectory.
     """
+    # Cache key based on teams, round and dataset size
+    cache_key = (home_team, away_team, round_name, len(wc_df))
+    if cache_key in _prediction_cache:
+        return _prediction_cache[cache_key]
+
     base = predict_match(
         home_team=home_team,
         away_team=away_team,
@@ -157,7 +164,7 @@ def predict_match_with_evidence(
     # ── Verdict sentence ──────────────────────────────────────────────────────
     verdict = _compose_verdict(home_team, away_team, base, contributions, h2h)
 
-    return {
+    result = {
         **base,
         "contributions": contributions,
         "evidence": evidence,
@@ -167,6 +174,8 @@ def predict_match_with_evidence(
         "h2h": h2h,
         "verdict": verdict,
     }
+    _prediction_cache[cache_key] = result
+    return result
 
 
 
@@ -384,15 +393,9 @@ def _build_evidence_chain(home_team, away_team, round_name, wc_df, base) -> List
         "sub": f"Higher-ranked teams win WC knockout matches ~61% of the time historically",
     })
 
-    # Confederation historical performance
-    from ml.features import get_confederation
+    # Confederation historical performance - use static fact, avoid slow apply
     h_conf = get_confederation(home_team)
     a_conf = get_confederation(away_team)
-    uefa_conmebol_wins = wc_df[
-        (wc_df["outcome"] != "draw") &
-        (wc_df["home_team"].apply(get_confederation).isin(["UEFA", "CONMEBOL"]) |
-         wc_df["away_team"].apply(get_confederation).isin(["UEFA", "CONMEBOL"]))
-    ]
     evidence.append({
         "type": "confederation",
         "label": "Confederation Track Record",

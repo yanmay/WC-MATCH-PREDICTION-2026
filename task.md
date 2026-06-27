@@ -9,6 +9,8 @@
 ## Phase 1 — Data Layer
 - [x] Process historical football data CSV
 - [x] Filter to World Cup matches only
+- [x] Fix public API URL and update parsing logic in `ml/live_scores.py`
+- [x] Connect completed match sync to retraining pipeline in `ml/live_scores.py`
 - [x] Feature engineering pipeline
 - [x] 2026 fixture data setup
 

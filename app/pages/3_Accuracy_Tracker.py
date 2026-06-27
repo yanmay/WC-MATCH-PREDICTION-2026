@@ -14,7 +14,7 @@ ROOT = Path(__file__).parent.parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from app.utils import load_data, get_model_and_metrics, get_team_flag, CSS, ROUND_COLORS
+from app.utils import load_data, get_model_and_metrics, get_team_flag, format_team_emoji, CSS, ROUND_COLORS, render_sidebar, infer_wc_round
 from ml.predict import predict_match, get_winner_label, get_confidence_label
 from ml.evaluate import compute_accuracy_stats, baseline_accuracy, compute_brier_score
 
@@ -24,6 +24,7 @@ st.set_page_config(
     layout="wide",
 )
 st.markdown(CSS, unsafe_allow_html=True)
+render_sidebar()
 
 # ── Header ────────────────────────────────────────────────────────────────────
 st.markdown('<div class="hero-badge">📊 MODEL CALIBRATION & ACCURACY</div>', unsafe_allow_html=True)
@@ -36,83 +37,165 @@ with st.spinner("Loading performance metrics and historical archives..."):
     wc_df, fixtures = load_data()
     pipeline, model_metrics = get_model_and_metrics()
 
-# ── 2026 Completed Matches Section ────────────────────────────────────────────
+# -- 2026 Live Prediction Accuracy Section ----------------------------------------
 completed_2026 = fixtures[fixtures["status"] == "completed"].copy()
 
-st.markdown("### 🏟️ 2026 World Cup Match Results")
-if completed_2026.empty:
-    st.markdown("""
-    <div class="glass-card" style="border-left: 3px solid #f59e0b; background: rgba(245,158,11,0.02);">
-        <div style="font-weight: 700; color: #f59e0b; font-size: 0.95rem; margin-bottom: 4px;">No Live Matches Finished Yet</div>
-        <div style="font-size: 0.8rem; color: #94a3b8;">The 2026 World Cup has not started yet. Below we present validation analytics and backtesting logs run against the 2022 World Cup in Qatar.</div>
-    </div>""", unsafe_allow_html=True)
-else:
-    # Build evaluation for completed 2026 fixtures
-    eval_records = []
+st.markdown("### \U0001f3df\ufe0f 2026 World Cup -- AI Prediction Accuracy")
+
+try:
+    from ml.prediction_log import get_live_accuracy_stats, log_prediction, get_outcome_badge_html
+
+    # Ensure all completed matches are logged
     for _, match in completed_2026.iterrows():
-        pred = predict_match(
+        pred_c = predict_match(
             home_team=match["home_team"],
             away_team=match["away_team"],
-            round_name=match["round"],
+            round_name=match.get("round", "Group Stage"),
             wc_df=wc_df,
         )
-        
-        # Determine actual outcome
-        hs = match["home_score"]
-        as_ = match["away_score"]
-        if hs > as_:
-            actual = "home_win"
-        elif as_ > hs:
-            actual = "away_win"
-        else:
-            actual = "draw"
-            
-        brier = compute_brier_score(actual, pred["home_win_prob"], pred["draw_prob"], pred["away_win_prob"])
-        
-        eval_records.append({
-            "Date": match["date"],
-            "Round": match["round"],
-            "Home Team": f"{get_team_flag(match['home_team'])} {match['home_team']}",
-            "Away Team": f"{get_team_flag(match['away_team'])} {match['away_team']}",
-            "Score": f"{int(hs)} - {int(as_)}",
-            "Predicted": get_winner_label(pred["predicted_outcome"], match["home_team"], match["away_team"]),
-            "Actual": get_winner_label(actual, match["home_team"], match["away_team"]),
-            "Confidence": f"{pred['confidence']:.1%}",
-            "Brier Score": round(brier, 4),
-            "Correct": pred["predicted_outcome"] == actual
-        })
-        
-    df_eval = pd.DataFrame(eval_records)
-    
-    # 2026 Metrics
-    c_e1, c_e2, c_e3 = st.columns(3)
-    total_e = len(df_eval)
-    correct_e = df_eval["Correct"].sum()
-    acc_e = correct_e / total_e if total_e > 0 else 0
-    avg_brier = df_eval["Brier Score"].mean()
-    
-    with c_e1:
-        st.markdown(f"""
-        <div class="kpi-card">
-            <div class="kpi-value">{total_e}</div>
-            <div class="kpi-label">Completed Matches</div>
+        log_prediction(
+            match_id=int(match["match_id"]),
+            home_team=match["home_team"],
+            away_team=match["away_team"],
+            round_name=match.get("round", "Group Stage"),
+            predicted_outcome=pred_c["predicted_outcome"],
+            confidence=pred_c["confidence"] or 0,
+            home_win_prob=pred_c["home_win_prob"] or 0,
+            draw_prob=pred_c["draw_prob"] or 0,
+            away_win_prob=pred_c["away_win_prob"] or 0,
+            match_date=str(match.get("date", "")),
+        )
+
+    plog_stats = get_live_accuracy_stats()
+    resolved  = plog_stats["resolved"]
+    correct   = plog_stats["correct"]
+    wrong     = plog_stats["wrong"]
+    pending   = plog_stats["pending"]
+    accuracy  = plog_stats["accuracy"]
+
+    if resolved == 0 and pending == 0:
+        st.markdown("""
+        <div class="glass-card" style="border-left: 3px solid #f59e0b; background: rgba(245,158,11,0.02);">
+            <div style="font-weight: 700; color: #f59e0b; font-size: 0.95rem; margin-bottom: 4px;">No Predictions Logged Yet</div>
+            <div style="font-size: 0.8rem; color: #94a3b8;">Visit the <b>Upcoming Matches</b> page to generate predictions -- they are automatically logged here.</div>
         </div>""", unsafe_allow_html=True)
-    with c_e2:
-        st.markdown(f"""
-        <div class="kpi-card">
-            <div class="kpi-value">{acc_e:.1%}</div>
-            <div class="kpi-label">Prediction Accuracy</div>
+    else:
+        c_e1, c_e2, c_e3, c_e4 = st.columns(4)
+        with c_e1:
+            st.markdown(f"""
+            <div class="kpi-card">
+                <div class="kpi-value">{resolved}</div>
+                <div class="kpi-label">Results Tracked</div>
+            </div>""", unsafe_allow_html=True)
+        with c_e2:
+            acc_display = f"{accuracy:.1%}" if accuracy is not None else "--"
+            st.markdown(f"""
+            <div class="kpi-card kpi-accuracy-2026">
+                <div class="kpi-value">{acc_display}</div>
+                <div class="kpi-label">\U0001f3af 2026 AI Accuracy</div>
+            </div>""", unsafe_allow_html=True)
+        with c_e3:
+            st.markdown(f"""
+            <div class="kpi-card">
+                <div class="kpi-value" style="color:#34d399;">{correct}</div>
+                <div class="kpi-label">Correct Predictions</div>
+            </div>""", unsafe_allow_html=True)
+        with c_e4:
+            st.markdown(f"""
+            <div class="kpi-card">
+                <div class="kpi-value" style="color:#f87171;">{wrong}</div>
+                <div class="kpi-label">Wrong Predictions</div>
+            </div>""", unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        # Cumulative accuracy trend chart
+        timeline = plog_stats["timeline"]
+        if len(timeline) >= 2:
+            import plotly.graph_objects as pgo
+            tl_df = pd.DataFrame(timeline)
+            fig_trend = pgo.Figure()
+            fig_trend.add_trace(pgo.Scatter(
+                x=tl_df["match_num"],
+                y=tl_df["cumulative_accuracy"],
+                mode="lines+markers",
+                name="Cumulative Accuracy",
+                line=dict(color="#34d399", width=2.5),
+                marker=dict(
+                    size=9,
+                    color=["#34d399" if c else "#f87171" for c in tl_df["is_correct"]],
+                    symbol="circle",
+                    line=dict(width=1.5, color="#111827"),
+                ),
+                hovertemplate="Match %{x}: %{customdata}<br>Accuracy: %{y:.1%}<extra></extra>",
+                customdata=tl_df["match"],
+            ))
+            fig_trend.add_hline(
+                y=0.5, line_dash="dot", line_color="#6b7280", line_width=1,
+                annotation_text="50% baseline", annotation_position="bottom right",
+                annotation_font_color="#6b7280",
+            )
+            fig_trend.update_layout(
+                title="\U0001f4c8 Cumulative Prediction Accuracy -- 2026 WC Matches",
+                title_font=dict(color="#f3f4f6", size=14, weight="bold"),
+                xaxis=dict(
+                    title="Match Number",
+                    showgrid=True, gridcolor="rgba(255,255,255,0.06)",
+                    tickfont=dict(color="#9ca3af"), zeroline=False,
+                ),
+                yaxis=dict(
+                    title="Cumulative Accuracy", tickformat=".0%", range=[0, 1],
+                    showgrid=True, gridcolor="rgba(255,255,255,0.06)",
+                    tickfont=dict(color="#9ca3af"), zeroline=False,
+                ),
+                paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+                font=dict(color="#f3f4f6", family="Inter, sans-serif"),
+                height=300, margin=dict(l=20, r=20, t=50, b=30), showlegend=False,
+            )
+            st.plotly_chart(fig_trend, use_container_width=True)
+
+        # Detailed prediction log table
+        st.markdown("##### \U0001f4dd 2026 AI Prediction Log")
+        log_entries = plog_stats["entries"]
+        table_rows = []
+        for e in sorted(log_entries, key=lambda x: x.get("date", ""), reverse=True):
+            is_correct = e.get("is_correct")
+            actual = e.get("actual_outcome")
+            predicted = e.get("predicted_outcome", "")
+
+            def _label(outcome, home, away):
+                if outcome == "home_win": return home
+                if outcome == "away_win": return away
+                if outcome == "draw": return "Draw"
+                return str(outcome)
+
+            home = e["home_team"]
+            away = e["away_team"]
+
+            result_icon = "\u2705 Correct" if is_correct is True else ("\u274c Wrong" if is_correct is False else "\u23f3 Pending")
+            table_rows.append({
+                "Date": e.get("date", ""),
+                "Round": e.get("round", ""),
+                "Match": f"{format_team_emoji(home)} vs {format_team_emoji(away)}",
+                "AI Predicted": format_team_emoji(_label(predicted, home, away)),
+                "Actual Result": format_team_emoji(_label(actual, home, away)) if actual else "\u23f3",
+                "Confidence": f"{e.get('confidence', 0):.1%}",
+                "Outcome": result_icon,
+            })
+
+        if table_rows:
+            df_plog = pd.DataFrame(table_rows)
+            st.dataframe(df_plog, use_container_width=True, hide_index=True)
+
+except Exception as _err:
+    st.warning(f"Prediction log unavailable: {_err}")
+    if completed_2026.empty:
+        st.markdown("""
+        <div class="glass-card" style="border-left: 3px solid #f59e0b; background: rgba(245,158,11,0.02);">
+            <div style="font-weight: 700; color: #f59e0b;">No Live Matches Finished Yet</div>
+            <div style="font-size: 0.8rem; color: #94a3b8;">The 2026 World Cup has not started yet. Backtesting results are shown below.</div>
         </div>""", unsafe_allow_html=True)
-    with c_e3:
-        st.markdown(f"""
-        <div class="kpi-card">
-            <div class="kpi-value">{avg_brier:.4f}</div>
-            <div class="kpi-label">Avg Brier Score (Loss)</div>
-        </div>""", unsafe_allow_html=True)
-        
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("##### Completed 2026 Matches Log")
-    st.dataframe(df_eval, use_container_width=True, hide_index=True)
+
 
 # ── Backtesting Section (Qatar 2022) ──────────────────────────────────────────
 st.markdown("<br>", unsafe_allow_html=True)
@@ -120,18 +203,20 @@ st.markdown("### 🏆 Backtesting Case Study: Qatar 2022 World Cup")
 st.markdown('<p style="font-size:0.85rem; color:#94a3b8; margin-top:-10px;">To validate model reliability without data leakage, we backtested the entire 64 matches of Qatar 2022. For each match, the model only trained on data strictly preceding the match date.</p>', unsafe_allow_html=True)
 
 with st.spinner("Executing historical simulation for Qatar 2022 matches..."):
-    # Filter historical matches to year 2022
-    qatar_matches = wc_df[wc_df["year"] == 2022].copy()
+    # Filter historical matches to year 2022 and sort chronologically
+    qatar_matches = wc_df[(wc_df["year"] == 2022) & (wc_df["tournament"] == "FIFA World Cup")].copy().sort_values("date").reset_index(drop=True)
     
     backtest_log = []
-    for _, match in qatar_matches.iterrows():
+    for idx, match in qatar_matches.iterrows():
         # Predict using prior data
         prior_data = wc_df[wc_df["date"] < match["date"]]
+        
+        round_name = infer_wc_round(idx, len(qatar_matches))
         
         pred = predict_match(
             home_team=match["home_team"],
             away_team=match["away_team"],
-            round_name=match.get("round", "Group Stage"),
+            round_name=round_name,
             wc_df=prior_data,
         )
         
@@ -140,16 +225,16 @@ with st.spinner("Executing historical simulation for Qatar 2022 matches..."):
         
         backtest_log.append({
             "Date": match["date"].strftime("%Y-%m-%d"),
-            "Round": match.get("round", "Group Stage"),
+            "Round": round_name,
             "Home Team": match["home_team"],
             "Away Team": match["away_team"],
             "Score": f"{int(match['home_score'])} - {int(match['away_score'])}",
-            "Predicted": get_winner_label(pred["predicted_outcome"], match["home_team"], match["away_team"]),
-            "Actual": get_winner_label(actual, match["home_team"], match["away_team"]),
+            "Predicted": format_team_emoji(get_winner_label(pred['predicted_outcome'], match['home_team'], match['away_team'])),
+            "Actual": format_team_emoji(get_winner_label(actual, match['home_team'], match['away_team'])),
             "confidence": pred["confidence"],
             "predicted_outcome": pred["predicted_outcome"],
             "actual_outcome": actual,
-            "round": match.get("round", "Group Stage"),
+            "round": round_name,
             "Brier Score": brier,
             "Correct": pred["predicted_outcome"] == actual
         })
@@ -200,21 +285,29 @@ with col_chart1:
             "Matches": r_stats["total"]
         })
     df_r_acc = pd.DataFrame(round_acc_data)
+    round_order = ["Group Stage", "Round of 16", "Quarterfinal", "Semifinal", "3rd Place", "Final"]
+    df_r_acc["Round"] = pd.Categorical(df_r_acc["Round"], categories=round_order, ordered=True)
+    df_r_acc = df_r_acc.sort_values("Round")
     
     fig_round = px.bar(
         df_r_acc, x="Round", y="Accuracy",
         color="Accuracy", text="Matches",
-        color_continuous_scale=[[0, "#7B2FFF"], [1, "#00D4FF"]],
-        title="Accuracy by Tournament Stage (Labels = Match Count)"
+        color_continuous_scale=[[0, "#a7f3d0"], [1, "#10b981"]],
+        title="Accuracy by Tournament Stage (Labels = Match Count)",
+        hover_data={"Accuracy": ":.1%", "Matches": True}
+    )
+    fig_round.update_traces(
+        textposition="outside",
+        hovertemplate="<b>%{x}</b><br>Accuracy: %{y:.1%}<br>Matches Played: %{text}<extra></extra>"
     )
     fig_round.update_layout(
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(color="#94a3b8", family="Space Grotesk"),
-        title_font=dict(color="#00D4FF", size=14),
+        font=dict(color="#f3f4f6", family="Inter, sans-serif"),
+        title_font=dict(color="#f3f4f6", size=14, weight="bold"),
         coloraxis_showscale=False,
-        yaxis=dict(tickformat=".0%", showgrid=True, gridcolor="rgba(255,255,255,0.03)", tickfont=dict(color="#475569")),
-        xaxis=dict(showgrid=False, tickfont=dict(color="#94a3b8")),
+        yaxis=dict(tickformat=".0%", showgrid=True, gridcolor="rgba(255,255,255,0.06)", tickfont=dict(color="#9ca3af"), zeroline=False),
+        xaxis=dict(showgrid=False, tickfont=dict(color="#f3f4f6")),
         height=320,
         margin=dict(l=10, r=10, t=50, b=10)
     )
@@ -230,7 +323,7 @@ with col_chart2:
         fig_cal.add_trace(go.Scatter(
             x=[0, 1], y=[0, 1],
             mode='lines',
-            line=dict(dash='dash', color='#475569', width=1.5),
+            line=dict(dash='dash', color='#6b7280', width=1.5),
             name='Ideal Calibration'
         ))
         
@@ -239,24 +332,26 @@ with col_chart2:
             x=cal_df["predicted_confidence"],
             y=cal_df["actual_accuracy"],
             mode='markers+lines',
-            marker=dict(size=8, color='#00D4FF', symbol="circle"),
-            line=dict(color='#00D4FF', width=2),
+            marker=dict(size=8, color='#34d399', symbol="circle"),
+            line=dict(color='#34d399', width=2),
             text=cal_df["confidence_bin"],
-            name='Calibrated Estimator'
+            name='Calibrated Estimator',
+            hovertemplate="Confidence Bin: %{text}<br>Predicted Confidence: %{x:.1%}<br>Observed Accuracy: %{y:.1%}<extra></extra>"
         ))
         
         fig_cal.update_layout(
             title="Model Calibration Curve (Confidence vs Reality)",
             xaxis_title="Predicted Probability / Confidence",
             yaxis_title="Observed Accuracy",
-            xaxis=dict(range=[0.3, 1.0], showgrid=True, gridcolor="rgba(255,255,255,0.03)", tickfont=dict(color="#475569")),
-            yaxis=dict(range=[0.0, 1.0], showgrid=True, gridcolor="rgba(255,255,255,0.03)", tickfont=dict(color="#475569")),
+            xaxis=dict(range=[0.3, 1.0], showgrid=True, gridcolor="rgba(255,255,255,0.06)", tickfont=dict(color="#9ca3af"), tickformat=".0%"),
+            yaxis=dict(range=[0.0, 1.0], showgrid=True, gridcolor="rgba(255,255,255,0.06)", tickfont=dict(color="#9ca3af"), tickformat=".0%"),
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
-            font=dict(color="#94a3b8", family="Space Grotesk"),
-            title_font=dict(color="#00D4FF", size=14),
+            font=dict(color="#f3f4f6", family="Inter, sans-serif"),
+            title_font=dict(color="#f3f4f6", size=14, weight="bold"),
             height=320,
-            showlegend=False,
+            showlegend=True,
+            legend=dict(yanchor="bottom", y=0.01, xanchor="right", x=0.99, bgcolor="rgba(17,24,39,0.9)", font=dict(color="#f3f4f6")),
             margin=dict(l=40, r=20, t=50, b=40)
         )
         st.plotly_chart(fig_cal, use_container_width=True)
@@ -281,10 +376,11 @@ df_table_show = df_table[[
     "Date", "Round", "Home Team", "Away Team", "Score", "Predicted", "Actual", "confidence", "Brier Score", "Correct"
 ]].copy()
 
-df_table_show["Home Team"] = df_table_show["Home Team"].apply(lambda t: f"{get_team_flag(t)} {t}")
-df_table_show["Away Team"] = df_table_show["Away Team"].apply(lambda t: f"{get_team_flag(t)} {t}")
+df_table_show["Home Team"] = df_table_show["Home Team"].apply(format_team_emoji)
+df_table_show["Away Team"] = df_table_show["Away Team"].apply(format_team_emoji)
 df_table_show["confidence"] = df_table_show["confidence"].apply(lambda c: f"{c:.1%}")
 df_table_show["Brier Score"] = df_table_show["Brier Score"].apply(lambda b: f"{b:.4f}")
+
 
 df_table_show = df_table_show.rename(columns={
     "confidence": "AI Confidence",
