@@ -429,7 +429,6 @@ CSS = """
 section[data-testid="stSidebar"] { background: #0b0f19 !important; border-right: 1px solid var(--border-subtle) !important; }
 section[data-testid="stSidebar"] * { color: #e5e7eb !important; }
 .stButton > button { background: linear-gradient(135deg, var(--accent-green), var(--accent-purple)); border: none; color: white; font-weight: 600; border-radius: 10px; transition: all 0.2s; }
-.stButton > button:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(52,211,153,0.3); }
 
 /* ── Glass Card — 21st.dev glassmorphism panel ── */
 .glass-card {
@@ -449,11 +448,6 @@ section[data-testid="stSidebar"] * { color: #e5e7eb !important; }
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
   opacity: 0.8;
-}
-.glass-card:hover {
-  border-color: var(--border-accent);
-  box-shadow: 0 0 0 1px rgba(52,211,153,0.1), 0 20px 40px rgba(0,0,0,0.3);
-  transform: translateY(-2px);
 }
 
 /* ── KPI Stat Card ── */
@@ -475,7 +469,6 @@ section[data-testid="stSidebar"] * { color: #e5e7eb !important; }
   background: linear-gradient(90deg, var(--accent-green), var(--accent-purple));
   opacity: 0.6;
 }
-.kpi-card:hover { transform: translateY(-3px); border-color: var(--border-accent); box-shadow: 0 0 30px rgba(52,211,153,0.08); }
 .kpi-value { font-size: 2.4rem; font-weight: 800; background: linear-gradient(135deg, var(--accent-green), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
 .kpi-label { font-size: 0.72rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 8px; }
 .kpi-delta { font-size: 0.8rem; margin-top: 6px; }
@@ -506,7 +499,6 @@ section[data-testid="stSidebar"] * { color: #e5e7eb !important; }
   transition: all 0.3s;
   position: relative; overflow: hidden;
 }
-.match-card:hover { border-color: var(--border-accent); box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0 1px rgba(52,211,153,0.08); }
 .match-card.featured { border-color: rgba(52,211,153,0.3); box-shadow: 0 0 40px rgba(52,211,153,0.08); }
 
 /* ── Team VS Block ── */
@@ -562,7 +554,6 @@ section[data-testid="stSidebar"] * { color: #e5e7eb !important; }
   padding: 12px 16px; margin: 6px 0;
   transition: all 0.2s;
 }
-.evidence-card:hover { background: rgba(52,211,153,0.07); }
 .evidence-label { font-size: 0.65rem; font-weight: 700; color: var(--accent-green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
 .evidence-text { font-size: 0.82rem; color: var(--text-primary); line-height: 1.5; }
 .evidence-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 3px; }
@@ -627,7 +618,6 @@ section[data-testid="stSidebar"] * { color: #e5e7eb !important; }
   font-size: 0.82rem; color: #f3f4f6 !important;
   text-decoration: none; transition: all 0.2s;
 }
-.sidebar-nav-item:hover { background: rgba(52,211,153,0.08) !important; color: var(--accent-green) !important; }
 
 /* ── Bracket node ── */
 .bracket-node {
@@ -636,7 +626,6 @@ section[data-testid="stSidebar"] * { color: #e5e7eb !important; }
   border-radius: 8px; padding: 8px 10px; margin: 4px 0;
   font-size: 0.72rem; transition: all 0.2s;
 }
-.bracket-node:hover { border-color: var(--border-accent); }
 .bracket-winner-name { color: var(--accent-green) !important; font-weight: 700; }
 .bracket-loser-name { color: var(--text-muted) !important; }
 .bracket-prob-tag { font-size: 0.62rem; color: var(--text-muted); }
@@ -815,6 +804,29 @@ section[data-testid="stSidebar"] * { color: #e5e7eb !important; }
   background: linear-gradient(135deg, rgba(17,24,39,0.95) 0%, rgba(52,211,153,0.08) 100%);
   border: 1px solid rgba(52,211,153,0.3);
   box-shadow: 0 0 20px rgba(52,211,153,0.06);
+}
+
+/* ── Hover animations — active ONLY on hover-supporting desktop devices ── */
+@media (hover: hover) {
+  .stButton > button:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(52,211,153,0.3); }
+  .glass-card:hover { border-color: var(--border-accent); box-shadow: 0 0 0 1px rgba(52,211,153,0.1), 0 20px 40px rgba(0,0,0,0.3); transform: translateY(-2px); }
+  .kpi-card:hover { transform: translateY(-3px); border-color: var(--border-accent); box-shadow: 0 0 30px rgba(52,211,153,0.08); }
+  .match-card:hover { border-color: var(--border-accent); box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0 1px rgba(52,211,153,0.08); }
+  .evidence-card:hover { background: rgba(52,211,153,0.07); }
+  .sidebar-nav-item:hover { background: rgba(52,211,153,0.08) !important; color: var(--accent-green) !important; }
+  .bracket-node:hover { border-color: var(--border-accent); }
+}
+
+/* ── Touch UI & Mobile Responsive Layouts (iOS / Android) ── */
+@media (max-width: 768px) {
+  .hero-title { font-size: 2.2rem !important; }
+  .hero-subtitle { font-size: 0.95rem !important; }
+  .glass-card, .match-card, .kpi-card { padding: 16px !important; margin: 6px 0 !important; }
+  .stButton > button { min-height: 48px !important; font-size: 1.0rem !important; }
+  .sidebar-nav-item { min-height: 44px !important; display: flex; align-items: center; padding: 10px 14px !important; }
+  .vs-separator { font-size: 0.8rem !important; }
+  .winner-tag { font-size: 1.1rem !important; }
+  table th, table td { padding: 10px 8px !important; } /* comfortable touch spacing for lineups */
 }
 </style>
 
