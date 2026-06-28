@@ -68,58 +68,115 @@ def load_data():
 
 
 def render_sidebar():
-    with st.sidebar:
-        st.markdown('<div class="sidebar-logo">⚽ WC 2026</div>', unsafe_allow_html=True)
-        st.markdown('<div class="sidebar-tagline">AI MATCH PREDICTION ENGINE</div>', unsafe_allow_html=True)
-        st.divider()
-        
-        st.markdown("**Navigation**")
-        st.page_link("Home.py", label="Home", icon="🏠")
-        st.page_link("pages/1_Upcoming_Matches.py", label="Upcoming Matches", icon="📅")
-        st.page_link("pages/2_Match_Detail.py", label="Match Detail", icon="🔍")
-        st.page_link("pages/3_Accuracy_Tracker.py", label="Accuracy Tracker", icon="📊")
-        st.page_link("pages/4_Tournament_Bracket.py", label="Tournament Bracket", icon="🏆")
-        st.divider()
+    # Identify calling script to highlight active top navigation tab
+    try:
+        import inspect
+        import os
+        stack = inspect.stack()
+        caller_filename = stack[1].filename
+        page_name = os.path.basename(caller_filename)
+    except Exception:
+        page_name = ""
 
-        # ── Live 2026 Prediction Accuracy Counter ─────────────────────────
-        try:
-            from ml.prediction_log import get_live_accuracy_stats
-            stats = get_live_accuracy_stats()
-            if stats["resolved"] > 0:
-                acc_2026 = stats["accuracy"]
-                correct = stats["correct"]
-                total = stats["resolved"]
-                pct = acc_2026 * 100
-                bar_color = "#34d399" if pct >= 60 else ("#fbbf24" if pct >= 45 else "#f87171")
-                st.markdown(f"""
-<div class="accuracy-counter">
-  <div style="font-size:0.65rem;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">🎯 2026 Live AI Accuracy</div>
-  <div style="font-size:1.6rem;font-weight:900;color:{bar_color};line-height:1;">{pct:.0f}%</div>
-  <div style="font-size:0.7rem;color:#6b7280;margin-top:3px;">{correct}/{total} predictions correct</div>
-  <div style="background:rgba(255,255,255,0.06);border-radius:100px;height:5px;margin-top:8px;overflow:hidden;">
-    <div style="background:{bar_color};height:100%;width:{pct:.0f}%;border-radius:100px;transition:width 0.6s;"></div>
+    active_home = "active" if page_name == "Home.py" else ""
+    active_upcoming = "active" if page_name == "1_Upcoming_Matches.py" else ""
+    active_detail = "active" if page_name == "2_Match_Detail.py" else ""
+    active_accuracy = "active" if page_name == "3_Accuracy_Tracker.py" else ""
+    active_bracket = "active" if page_name == "4_Tournament_Bracket.py" else ""
+
+    # Live accuracy stats indicator badge
+    accuracy_badge = ""
+    try:
+        from ml.prediction_log import get_live_accuracy_stats
+        stats = get_live_accuracy_stats()
+        if stats["resolved"] > 0:
+            acc_2026 = stats["accuracy"]
+            correct = stats["correct"]
+            total = stats["resolved"]
+            pct = acc_2026 * 100
+            bar_color = "#34d399" if pct >= 60 else ("#fbbf24" if pct >= 45 else "#f87171")
+            accuracy_badge = f'<div class="nav-accuracy-badge" style="border-color:{bar_color}; color:{bar_color};"><span class="pulse-dot" style="background-color:{bar_color}"></span>Live Accuracy: {pct:.0f}% ({correct}/{total})</div>'
+    except Exception:
+        pass
+
+    # Model and training stats meta indicators
+    try:
+        wc_df, _ = load_data()
+        _, metrics = get_model_and_metrics()
+        acc = metrics.get("accuracy", 0.7182)
+        cv_acc = metrics.get("cv_mean_accuracy", 0.7056)
+        algo = metrics.get("selected_algorithm", metrics.get("algorithm", "logistic_regression")).replace("_", " ").title()
+        train_count = len(wc_df)
+    except Exception:
+        train_count = 9856
+        acc = 0.7182
+        cv_acc = 0.7056
+        algo = "Logistic Regression"
+
+    st.markdown(f"""
+<div class="top-nav-bar">
+  <div class="top-nav-main">
+    <div class="mobile-nav-header">
+      <div class="nav-brand">
+        <span class="nav-logo">⚽ WC 2026</span>
+        <span class="nav-tagline">AI MATCH PREDICTION ENGINE</span>
+      </div>
+      <div class="nav-accuracy-badge-container">
+        {accuracy_badge}
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="/" class="nav-item {active_home}">🏠 Home</a>
+      <a href="/Upcoming_Matches" class="nav-item {active_upcoming}">📅 Matches</a>
+      <a href="/Match_Detail" class="nav-item {active_detail}">🔍 Detail</a>
+      <a href="/Accuracy_Tracker" class="nav-item {active_accuracy}">📊 Accuracy</a>
+      <a href="/Tournament_Bracket" class="nav-item {active_bracket}">🏆 Bracket</a>
+    </div>
   </div>
-</div>""", unsafe_allow_html=True)
-                st.markdown("")
-        except Exception:
-            pass
+  <div class="top-nav-meta">
+    <span>🤖 Model: {algo} + CalibratedCV</span>
+    <span>🎯 Test Accuracy: {acc:.2%}</span>
+    <span>📈 CV Accuracy: {cv_acc:.2%}</span>
+    <span>📊 Data: {train_count:,} WC matches</span>
+  </div>
+</div>
+""", unsafe_allow_html=True)
 
-        try:
-            wc_df, _ = load_data()
-            _, metrics = get_model_and_metrics()
-            acc = metrics.get("accuracy", 0.7182)
-            cv_acc = metrics.get("cv_mean_accuracy", 0.7056)
-            algo = metrics.get("selected_algorithm", metrics.get("algorithm", "logistic_regression")).replace("_", " ").title()
-            
-            st.caption(f"📊 Training data: {len(wc_df):,} WC matches")
-            st.caption(f"🤖 Model: {algo} + CalibratedCV")
-            st.caption(f"🎯 Test Accuracy: {acc:.2%}")
-            st.caption(f"📈 Cross-val accuracy: {cv_acc:.2%}")
-        except Exception:
-            st.caption("📊 Training data: 9,856 WC matches")
-            st.caption("🤖 Model: Logistic Regression + CalibratedCV")
-            st.caption("🎯 Test Accuracy: 71.82%")
-            st.caption("📈 Cross-val accuracy: 70.56%")
+    # Centralized Live/Static auto-refresh controller
+    is_live_active = False
+    try:
+        _, fixtures = load_data()
+        is_live_active = (fixtures["status"] == "live").any()
+    except Exception:
+        pass
+
+    refresh_seconds = 0
+    if page_name == "Home.py":
+        refresh_seconds = 30 if is_live_active else 60
+    elif page_name == "1_Upcoming_Matches.py":
+        refresh_seconds = 30 if is_live_active else 60
+    elif page_name == "3_Accuracy_Tracker.py":
+        refresh_seconds = 30 if is_live_active else 60
+    elif page_name == "4_Tournament_Bracket.py":
+        refresh_seconds = 30 if is_live_active else 120
+    elif page_name == "2_Match_Detail.py":
+        if is_live_active:
+            refresh_seconds = 30
+
+    if refresh_seconds > 0:
+        import streamlit.components.v1 as components
+        components.html(
+            f"""
+            <script>
+                setTimeout(function() {{
+                    window.parent.location.reload();
+                }}, {refresh_seconds * 1000});
+            </script>
+            """,
+            height=0,
+            width=0
+        )
+
 
 
 def make_live_timer_html(elapsed_mins: int, elapsed_secs: int, timer_id: str = "live-timer-1") -> str:
@@ -640,42 +697,8 @@ section[data-testid="stSidebar"] * { color: #e5e7eb !important; }
   margin: 8px 0;
 }
 
-/* ── Sidebar ── */
-section[data-testid="stSidebar"] .sidebar-logo, section[data-testid="stSidebar"] .sidebar-logo * {
-  font-size: 1.6rem; font-weight: 900; color: var(--accent-green) !important; margin-bottom: 4px;
-}
-section[data-testid="stSidebar"] .sidebar-tagline, section[data-testid="stSidebar"] .sidebar-tagline * {
-  font-size: 0.72rem; color: var(--text-muted) !important; letter-spacing: 0.5px;
-}
-.sidebar-nav-item {
-  display: flex; align-items: center; gap: 8px;
-  padding: 8px 12px; border-radius: 8px; margin: 2px 0;
-  font-size: 0.82rem; color: #f3f4f6 !important;
-  text-decoration: none; transition: all 0.2s;
-}
-
-/* Style Streamlit's native page links */
-section[data-testid="stSidebar"] [data-testid="stPageLink-NavLink"] {
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  padding: 8px 12px !important;
-  border-radius: 8px !important;
-  margin: 2px 0 !important;
-  font-size: 0.85rem !important;
-  background: transparent !important;
-  transition: all 0.2s !important;
-  text-decoration: none !important;
-}
-section[data-testid="stSidebar"] [data-testid="stPageLink-NavLink"] * {
-  color: #f3f4f6 !important;
-}
-section[data-testid="stSidebar"] [data-testid="stPageLink-NavLink"]:hover {
-  background: rgba(52, 211, 153, 0.08) !important;
-}
-section[data-testid="stSidebar"] [data-testid="stPageLink-NavLink"]:hover * {
-  color: var(--accent-green) !important;
-}
+section[data-testid="stSidebar"] { display: none !important; }
+button[data-testid="collapsedControl"] { display: none !important; }
 
 /* ── Bracket node ── */
 .bracket-node {
@@ -907,6 +930,190 @@ section[data-testid="stSidebar"] [data-testid="stPageLink-NavLink"]:hover * {
   section[data-testid="stSidebar"] [data-testid="stPageLink-NavLink"] {
     min-height: 44px !important;
     padding: 10px 14px !important;
+  }
+}
+
+/* ── Premium Top Navigation Bar ── */
+.top-nav-bar {
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(6, 78, 59, 0.15) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px 24px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.top-nav-bar::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-purple));
+  opacity: 0.6;
+}
+
+.top-nav-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.mobile-nav-header {
+  display: contents; /* flat layout on desktop */
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  order: 1;
+}
+
+.nav-logo {
+  font-size: 1.3rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--accent-green), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-tagline {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  order: 2;
+}
+
+.nav-accuracy-badge-container {
+  order: 3;
+}
+
+.nav-item {
+  color: var(--text-secondary) !important;
+  text-decoration: none !important;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.nav-item:hover {
+  background: rgba(52, 211, 153, 0.08);
+  color: var(--accent-green) !important;
+}
+
+.nav-item.active {
+  background: rgba(52, 211, 153, 0.12);
+  color: var(--accent-green) !important;
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  font-weight: 700;
+}
+
+.nav-accuracy-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  background: rgba(52, 211, 153, 0.04);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent-green) !important;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse-animation 1.5s infinite;
+}
+
+@keyframes pulse-animation {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+
+.top-nav-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 8px;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+/* Ensure Streamlit page content stretches nicely since there is no sidebar */
+[data-testid="stAppViewBlockContainer"] {
+  max-width: 100% !important;
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}
+
+/* ── Mobile styles for Top Nav ── */
+@media (max-width: 768px) {
+  .top-nav-bar {
+    padding: 12px 16px;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .top-nav-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .mobile-nav-header {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .nav-links {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: flex-start;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Hide scrollbar for Chrome/Safari/Opera */
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .nav-links {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .nav-item {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    flex-shrink: 0;
+  }
+  .top-nav-meta {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 }
 </style>

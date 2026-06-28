@@ -230,20 +230,7 @@ with col_match:
                 timer_html = make_live_timer_html(elapsed_mins, elapsed_secs, "home-live-timer")
                 badge_html = f'<span class="round-badge" style="background:rgba(239,113,113,0.1);color:#f87171;border:1px solid rgba(239,113,113,0.25);"><span class="live-dot"></span> LIVE &middot; {timer_html}</span>'
                 vs_html = f'<div style="text-align:center;min-width:90px;"><span class="score-badge completed" style="background:rgba(239,113,113,0.08);border-color:rgba(239,113,113,0.2);color:#f87171 !important;">{int(next_m["home_score"])} — {int(next_m["away_score"])}</span></div>'
-                
-                # Client-side auto-refresh every 30 seconds when live match is active
-                import streamlit.components.v1 as components
-                components.html(
-                    """
-                    <script>
-                        setTimeout(function() {
-                            window.parent.location.reload();
-                        }, 30000);
-                    </script>
-                    """,
-                    height=0,
-                    width=0
-                )
+                pass
             else:
                 badge_html = f'<span class="round-badge" style="background:rgba(52,211,153,0.1);color:#34d399;border:1px solid rgba(52,211,153,0.25);">&#128281; {next_m["round"].upper()}</span>'
                 vs_html = '<div class="vs-separator">VS</div>'

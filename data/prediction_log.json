@@ -395,9 +395,9 @@
     "draw_prob": 0.2698,
     "away_win_prob": 0.5728,
     "logged_at": "2026-06-27T07:00:25.001029",
-    "actual_outcome": null,
-    "is_correct": null,
-    "result_recorded_at": null
+    "actual_outcome": "draw",
+    "is_correct": false,
+    "result_recorded_at": "2026-06-28T10:51:45.321541"
   },
   "127": {
     "match_id": 127,
@@ -411,9 +411,9 @@
     "draw_prob": 0.2477,
     "away_win_prob": 0.1546,
     "logged_at": "2026-06-27T07:00:25.078450",
-    "actual_outcome": null,
-    "is_correct": null,
-    "result_recorded_at": null
+    "actual_outcome": "home_win",
+    "is_correct": true,
+    "result_recorded_at": "2026-06-28T10:56:41.066408"
   },
   "128": {
     "match_id": 128,
@@ -427,9 +427,9 @@
     "draw_prob": 0.2682,
     "away_win_prob": 0.5336,
     "logged_at": "2026-06-27T07:00:25.161624",
-    "actual_outcome": null,
-    "is_correct": null,
-    "result_recorded_at": null
+    "actual_outcome": "draw",
+    "is_correct": false,
+    "result_recorded_at": "2026-06-28T10:56:41.078234"
   },
   "129": {
     "match_id": 129,
@@ -443,9 +443,9 @@
     "draw_prob": 0.1752,
     "away_win_prob": 0.4145,
     "logged_at": "2026-06-27T07:00:25.241966",
-    "actual_outcome": null,
-    "is_correct": null,
-    "result_recorded_at": null
+    "actual_outcome": "home_win",
+    "is_correct": false,
+    "result_recorded_at": "2026-06-28T10:56:41.088144"
   },
   "130": {
     "match_id": 130,
@@ -459,9 +459,9 @@
     "draw_prob": 0.219,
     "away_win_prob": 0.2793,
     "logged_at": "2026-06-27T07:00:25.318485",
-    "actual_outcome": null,
-    "is_correct": null,
-    "result_recorded_at": null
+    "actual_outcome": "draw",
+    "is_correct": false,
+    "result_recorded_at": "2026-06-28T10:56:41.098400"
   },
   "131": {
     "match_id": 131,
@@ -475,9 +475,9 @@
     "draw_prob": 0.1067,
     "away_win_prob": 0.436,
     "logged_at": "2026-06-27T07:00:25.388645",
-    "actual_outcome": null,
-    "is_correct": null,
-    "result_recorded_at": null
+    "actual_outcome": "away_win",
+    "is_correct": false,
+    "result_recorded_at": "2026-06-28T10:56:41.109738"
   },
   "1": {
     "match_id": 1,

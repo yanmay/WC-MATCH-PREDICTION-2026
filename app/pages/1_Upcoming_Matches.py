@@ -123,11 +123,6 @@ st.set_page_config(
 )
 st.markdown(CSS, unsafe_allow_html=True)
 
-# Auto-refresh every 30 seconds for live scores
-st.markdown("""
-<meta http-equiv="refresh" content="30">
-""", unsafe_allow_html=True)
-
 render_sidebar()
 
 # ── Header ────────────────────────────────────────────────────────────────────

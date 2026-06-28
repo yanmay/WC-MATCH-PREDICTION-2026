@@ -584,18 +584,21 @@
   {
     "match_id": 126,
     "round": "Group Stage",
-    "date": "2026-06-28",
+    "date": "2026-06-27",
     "home_team": "Panama",
     "away_team": "England",
-    "status": "live",
+    "status": "completed",
     "home_score": 0,
-    "away_score": 0,
+    "away_score": 2,
     "group": "L",
     "scorers": {
-      "Panama": [],
-      "England": []
+      "home": [],
+      "away": [
+        "Jvd Blingham 62'",
+        "Hri Kin 67'"
+      ]
     },
-    "minute": "90+15'",
+    "minute": null,
     "elapsed_mins": 105.0,
     "elapsed_secs": 10.0,
     "kick_off_utc": "2026-06-27T21:19:00Z"
@@ -603,14 +606,22 @@
   {
     "match_id": 127,
     "round": "Group Stage",
-    "date": "2026-06-28",
+    "date": "2026-06-27",
     "home_team": "Croatia",
     "away_team": "Ghana",
-    "status": "scheduled",
-    "home_score": null,
-    "away_score": null,
+    "status": "completed",
+    "home_score": 2,
+    "away_score": 1,
     "group": "L",
-    "scorers": null,
+    "scorers": {
+      "home": [
+        "Petar Su\u010di\u0107 31'",
+        "Nikola Vla\u0161i\u0107 83'"
+      ],
+      "away": [
+        "Drik Lvkasn 73'"
+      ]
+    },
     "minute": null,
     "elapsed_mins": NaN,
     "elapsed_secs": NaN,
@@ -619,14 +630,17 @@
   {
     "match_id": 128,
     "round": "Group Stage",
-    "date": "2026-06-28",
+    "date": "2026-06-27",
     "home_team": "Colombia",
     "away_team": "Portugal",
-    "status": "scheduled",
-    "home_score": null,
-    "away_score": null,
+    "status": "completed",
+    "home_score": 0,
+    "away_score": 0,
     "group": "K",
-    "scorers": null,
+    "scorers": {
+      "home": [],
+      "away": []
+    },
     "minute": null,
     "elapsed_mins": NaN,
     "elapsed_secs": NaN,
@@ -635,14 +649,22 @@
   {
     "match_id": 129,
     "round": "Group Stage",
-    "date": "2026-06-28",
+    "date": "2026-06-27",
     "home_team": "DR Congo",
     "away_team": "Uzbekistan",
-    "status": "scheduled",
-    "home_score": null,
-    "away_score": null,
+    "status": "completed",
+    "home_score": 3,
+    "away_score": 1,
     "group": "K",
-    "scorers": null,
+    "scorers": {
+      "home": [
+        "Fistvn Mail 78'",
+        "Yoane Wissa 90+1'"
+      ],
+      "away": [
+        "Aldvr Shvmvrvdvf 10'"
+      ]
+    },
     "minute": null,
     "elapsed_mins": NaN,
     "elapsed_secs": NaN,
@@ -651,14 +673,25 @@
   {
     "match_id": 130,
     "round": "Group Stage",
-    "date": "2026-06-28",
+    "date": "2026-06-27",
     "home_team": "Algeria",
     "away_team": "Austria",
-    "status": "scheduled",
-    "home_score": null,
-    "away_score": null,
+    "status": "completed",
+    "home_score": 3,
+    "away_score": 3,
     "group": "J",
-    "scorers": null,
+    "scorers": {
+      "home": [
+        "Rafik Blghali 45'",
+        "Riyad Mahrez 60'",
+        "Riyad Mahrez 90+3'"
+      ],
+      "away": [
+        "Marko Arnautovi\u0107 28'",
+        "Marcel Sabitzer 55'",
+        "Sa\u0161a Kalajd\u017ei\u0107 90+6'"
+      ]
+    },
     "minute": null,
     "elapsed_mins": NaN,
     "elapsed_secs": NaN,
@@ -667,14 +700,23 @@
   {
     "match_id": 131,
     "round": "Group Stage",
-    "date": "2026-06-28",
+    "date": "2026-06-27",
     "home_team": "Jordan",
     "away_team": "Argentina",
-    "status": "scheduled",
-    "home_score": null,
-    "away_score": null,
+    "status": "completed",
+    "home_score": 1,
+    "away_score": 3,
     "group": "J",
-    "scorers": null,
+    "scorers": {
+      "home": [
+        "Mvsi Altmari 55'"
+      ],
+      "away": [
+        "Jivani Lv Slsv 19'",
+        "Lautaro Mart\u00ednez 31'(P)",
+        "Lionel Messi 80'"
+      ]
+    },
     "minute": null,
     "elapsed_mins": NaN,
     "elapsed_secs": NaN,
@@ -765,7 +807,7 @@
     "round": "Round of 32",
     "date": "2026-07-01",
     "home_team": "France",
-    "away_team": "Argentina",
+    "away_team": "Jordan",
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
