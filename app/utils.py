@@ -641,13 +641,40 @@ section[data-testid="stSidebar"] * { color: #e5e7eb !important; }
 }
 
 /* ── Sidebar ── */
-.sidebar-logo { font-size: 1.6rem; font-weight: 900; color: var(--accent-green) !important; margin-bottom: 4px; }
-.sidebar-tagline { font-size: 0.72rem; color: var(--text-muted) !important; letter-spacing: 0.5px; }
+section[data-testid="stSidebar"] .sidebar-logo, section[data-testid="stSidebar"] .sidebar-logo * {
+  font-size: 1.6rem; font-weight: 900; color: var(--accent-green) !important; margin-bottom: 4px;
+}
+section[data-testid="stSidebar"] .sidebar-tagline, section[data-testid="stSidebar"] .sidebar-tagline * {
+  font-size: 0.72rem; color: var(--text-muted) !important; letter-spacing: 0.5px;
+}
 .sidebar-nav-item {
   display: flex; align-items: center; gap: 8px;
   padding: 8px 12px; border-radius: 8px; margin: 2px 0;
   font-size: 0.82rem; color: #f3f4f6 !important;
   text-decoration: none; transition: all 0.2s;
+}
+
+/* Style Streamlit's native page links */
+section[data-testid="stSidebar"] [data-testid="stPageLink-NavLink"] {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  margin: 2px 0 !important;
+  font-size: 0.85rem !important;
+  background: transparent !important;
+  transition: all 0.2s !important;
+  text-decoration: none !important;
+}
+section[data-testid="stSidebar"] [data-testid="stPageLink-NavLink"] * {
+  color: #f3f4f6 !important;
+}
+section[data-testid="stSidebar"] [data-testid="stPageLink-NavLink"]:hover {
+  background: rgba(52, 211, 153, 0.08) !important;
+}
+section[data-testid="stSidebar"] [data-testid="stPageLink-NavLink"]:hover * {
+  color: var(--accent-green) !important;
 }
 
 /* ── Bracket node ── */
@@ -875,6 +902,12 @@ section[data-testid="stSidebar"] * { color: #e5e7eb !important; }
   table th, table td { padding: 10px 8px !important; } /* comfortable touch spacing for lineups */
   .team-flag-img { height: 38px !important; }
   .team-name { font-size: 0.8rem !important; }
+  
+  /* Touch target size optimization for mobile page links */
+  section[data-testid="stSidebar"] [data-testid="stPageLink-NavLink"] {
+    min-height: 44px !important;
+    padding: 10px 14px !important;
+  }
 }
 </style>
 
