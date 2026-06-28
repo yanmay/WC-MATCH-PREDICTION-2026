@@ -894,7 +894,6 @@ button[data-testid="collapsedControl"] { display: none !important; }
   .kpi-card:hover { transform: translateY(-3px); border-color: var(--border-accent); box-shadow: 0 0 30px rgba(52,211,153,0.08); }
   .match-card:hover { border-color: var(--border-accent); box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0 1px rgba(52,211,153,0.08); }
   .evidence-card:hover { background: rgba(52,211,153,0.07); }
-  .sidebar-nav-item:hover { background: rgba(52,211,153,0.08) !important; color: var(--accent-green) !important; }
   .bracket-node:hover { border-color: var(--border-accent); }
 }
 
@@ -911,26 +910,6 @@ button[data-testid="collapsedControl"] { display: none !important; }
 .team-flag-img {
   height: 48px;
   border-radius: 4px;
-}
-
-/* ── Touch UI & Mobile Responsive Layouts (iOS / Android) ── */
-@media (max-width: 768px) {
-  .hero-title { font-size: 2.2rem !important; }
-  .hero-subtitle { font-size: 0.95rem !important; }
-  .glass-card, .match-card, .kpi-card { padding: 16px !important; margin: 6px 0 !important; }
-  .stButton > button { min-height: 48px !important; font-size: 1.0rem !important; }
-  .sidebar-nav-item { min-height: 44px !important; display: flex; align-items: center; padding: 10px 14px !important; }
-  .vs-separator { font-size: 0.8rem !important; }
-  .winner-tag { font-size: 1.1rem !important; }
-  table th, table td { padding: 10px 8px !important; } /* comfortable touch spacing for lineups */
-  .team-flag-img { height: 38px !important; }
-  .team-name { font-size: 0.8rem !important; }
-  
-  /* Touch target size optimization for mobile page links */
-  section[data-testid="stSidebar"] [data-testid="stPageLink-NavLink"] {
-    min-height: 44px !important;
-    padding: 10px 14px !important;
-  }
 }
 
 /* ── Premium Top Navigation Bar ── */
@@ -1073,14 +1052,16 @@ button[data-testid="collapsedControl"] { display: none !important; }
 /* ── Mobile styles for Top Nav ── */
 @media (max-width: 768px) {
   .top-nav-bar {
-    padding: 12px 16px;
-    gap: 12px;
+    padding: 12px 14px;
+    gap: 10px;
     align-items: flex-start;
+    border-radius: 12px;
   }
   .top-nav-main {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: 10px;
+    width: 100%;
   }
   .mobile-nav-header {
     display: flex !important;
@@ -1094,27 +1075,163 @@ button[data-testid="collapsedControl"] { display: none !important; }
     white-space: nowrap;
     justify-content: flex-start;
     padding-bottom: 4px;
+    gap: 4px;
     -webkit-overflow-scrolling: touch;
   }
   /* Hide scrollbar for Chrome/Safari/Opera */
-  .nav-links::-webkit-scrollbar {
-    display: none;
-  }
+  .nav-links::-webkit-scrollbar { display: none; }
   /* Hide scrollbar for IE, Edge and Firefox */
-  .nav-links {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+  .nav-links { -ms-overflow-style: none; scrollbar-width: none; }
   .nav-item {
-    padding: 6px 10px;
-    font-size: 0.78rem;
+    padding: 7px 11px;
+    font-size: 0.75rem;
     flex-shrink: 0;
+    white-space: nowrap;
   }
+  .nav-logo { font-size: 1.05rem; }
+  .nav-tagline { display: none; }
   .top-nav-meta {
     justify-content: flex-start;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
+    font-size: 0.6rem;
   }
+  .nav-accuracy-badge { font-size: 0.65rem; padding: 3px 8px; }
+}
+
+/* ─── Comprehensive Mobile Phone Layout ─── */
+@media (max-width: 768px) {
+
+  /* Prevent horizontal overflow on the whole app */
+  .stApp, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+
+  /* Tighten main content padding */
+  [data-testid="stAppViewBlockContainer"] {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+  [data-testid="stVerticalBlock"] {
+    gap: 0.5rem !important;
+  }
+
+  /* Force Streamlit columns to stack vertically on phone */
+  [data-testid="stHorizontalBlock"] {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+    width: 100% !important;
+    flex: none !important;
+    min-width: 0 !important;
+  }
+
+  /* Hero section */
+  .hero-title { font-size: 1.8rem !important; line-height: 1.15 !important; }
+  .hero-subtitle { font-size: 0.88rem !important; max-width: 100% !important; }
+  .hero-badge { font-size: 0.68rem !important; }
+
+  /* Cards */
+  .glass-card, .match-card, .kpi-card {
+    padding: 14px !important;
+    margin: 5px 0 !important;
+    border-radius: 12px !important;
+  }
+
+  /* KPI grid: 2 cols on phone */
+  .kpi-grid-container {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  .kpi-value { font-size: 1.7rem !important; }
+  .kpi-label { font-size: 0.65rem !important; }
+
+  /* Team VS block: make it wrap nicely */
+  .team-vs-block {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center !important;
+  }
+  .team-block {
+    flex: 0 0 38% !important;
+    min-width: 100px;
+  }
+  .team-flag { font-size: 2rem !important; }
+  .team-name { font-size: 0.78rem !important; }
+  .team-rank { font-size: 0.62rem !important; }
+  .team-flag-img { height: 32px !important; }
+  .vs-separator {
+    font-size: 0.85rem !important;
+    padding: 0 6px !important;
+    flex-shrink: 0;
+  }
+
+  /* Winner tag */
+  .winner-tag { font-size: 0.95rem !important; }
+
+  /* Probability meters */
+  .prob-meter-label { font-size: 0.68rem !important; }
+  .prob-meter-value { font-size: 0.72rem !important; }
+
+  /* Evidence / risk cards */
+  .evidence-card, .risk-card { padding: 10px 12px !important; margin: 4px 0 !important; }
+  .evidence-label, .risk-label { font-size: 0.6rem !important; }
+  .evidence-text { font-size: 0.78rem !important; }
+
+  /* Section headers */
+  .section-header { font-size: 1.1rem !important; margin: 16px 0 10px !important; }
+
+  /* Confidence badge */
+  .conf-badge { font-size: 0.65rem !important; padding: 3px 8px !important; }
+
+  /* Score badge */
+  .score-badge { font-size: 0.9rem !important; padding: 3px 10px !important; }
+
+  /* Round badge */
+  .round-badge { font-size: 0.6rem !important; padding: 2px 8px !important; }
+
+  /* Factor chips */
+  .factor-chip { font-size: 0.65rem !important; padding: 3px 8px !important; }
+
+  /* Buttons */
+  .stButton > button {
+    min-height: 44px !important;
+    font-size: 0.9rem !important;
+    width: 100% !important;
+  }
+
+  /* Tabs */
+  [data-testid="stTabs"] [data-baseweb="tab"] {
+    font-size: 0.78rem !important;
+    padding: 8px 10px !important;
+  }
+
+  /* Dataframe / tables */
+  table th, table td { padding: 8px 6px !important; font-size: 0.75rem !important; }
+  .stDataFrame { font-size: 0.75rem !important; }
+
+  /* Bracket horizontal scroll */
+  .bracket-scroll-container {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .bracket-flow-wrapper {
+    min-width: 900px;
+  }
+
+  /* Dropdown / selectbox */
+  [data-testid="stSelectbox"] > div {
+    font-size: 0.82rem !important;
+  }
+
+  /* Sliders */
+  [data-testid="stSlider"] { margin: 4px 0 !important; }
+
+  /* Remove chart overflow */
+  .js-plotly-plot, .plotly { max-width: 100% !important; }
+  .svg-container { max-width: 100% !important; overflow: hidden !important; }
 }
 </style>
 
