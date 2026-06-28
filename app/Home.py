@@ -141,60 +141,55 @@ with col_hero:
         cv_acc = model_metrics.get("cv_mean_accuracy", 0)
         algo = model_metrics.get("algorithm", "random_forest").replace("_", " ").title()
 
-        k1, k2, k3, k4, k5 = st.columns(5)
-        with k1:
-            st.markdown(f"""
-            <div class="kpi-card">
+        # Live 2026 prediction accuracy calculations
+        try:
+            from ml.prediction_log import get_live_accuracy_stats
+            pstats = get_live_accuracy_stats()
+            if pstats["resolved"] > 0:
+                pct = pstats["accuracy"] * 100
+                kpi_val = f"{pct:.0f}%"
+                kpi_sub = f"{pstats['correct']}/{pstats['resolved']} correct"
+                delta_col = "positive" if pct >= 60 else "negative"
+                delta_txt = "↑ Live WC 2026" if pct >= 60 else "↓ Live WC 2026"
+            else:
+                kpi_val = "—"
+                kpi_sub = "No results yet"
+                delta_col = ""
+                delta_txt = ""
+        except Exception:
+            kpi_val = "—"
+            kpi_sub = "Tracking..."
+            delta_col = ""
+            delta_txt = ""
+
+        kpi_html = f"""
+        <div class="kpi-grid-container">
+            <div class="kpi-card" style="margin: 0 !important;">
                 <div class="kpi-value">{total_wc:,}</div>
                 <div class="kpi-label">WC Matches Trained</div>
-            </div>""", unsafe_allow_html=True)
-        with k2:
-            st.markdown(f"""
-            <div class="kpi-card">
+            </div>
+            <div class="kpi-card" style="margin: 0 !important;">
                 <div class="kpi-value">{upcoming_count}</div>
                 <div class="kpi-label">Games to Predict</div>
-            </div>""", unsafe_allow_html=True)
-        with k3:
-            st.markdown(f"""
-            <div class="kpi-card">
+            </div>
+            <div class="kpi-card" style="margin: 0 !important;">
                 <div class="kpi-value">{cv_acc:.1%}</div>
                 <div class="kpi-label">CV Accuracy</div>
                 <div class="kpi-delta positive">↑ vs 50.6% baseline</div>
-            </div>""", unsafe_allow_html=True)
-        with k4:
-            st.markdown(f"""
-            <div class="kpi-card">
+            </div>
+            <div class="kpi-card" style="margin: 0 !important;">
                 <div class="kpi-value">48</div>
                 <div class="kpi-label">Teams · 2026</div>
-            </div>""", unsafe_allow_html=True)
-        with k5:
-            # Live 2026 prediction accuracy
-            try:
-                from ml.prediction_log import get_live_accuracy_stats
-                pstats = get_live_accuracy_stats()
-                if pstats["resolved"] > 0:
-                    pct = pstats["accuracy"] * 100
-                    kpi_val = f"{pct:.0f}%"
-                    kpi_sub = f"{pstats['correct']}/{pstats['resolved']} correct"
-                    delta_col = "positive" if pct >= 60 else "negative"
-                    delta_txt = "↑ Live WC 2026" if pct >= 60 else "↓ Live WC 2026"
-                else:
-                    kpi_val = "—"
-                    kpi_sub = "No results yet"
-                    delta_col = ""
-                    delta_txt = ""
-            except Exception:
-                kpi_val = "—"
-                kpi_sub = "Tracking..."
-                delta_col = ""
-                delta_txt = ""
-            st.markdown(f"""
-            <div class="kpi-card kpi-accuracy-2026">
+            </div>
+            <div class="kpi-card kpi-accuracy-2026" style="margin: 0 !important;">
                 <div class="kpi-value">{kpi_val}</div>
                 <div class="kpi-label">🎯 2026 AI Accuracy</div>
                 {f'<div class="kpi-delta {delta_col}">{delta_txt}</div>' if delta_txt else ''}
                 <div style="font-size:0.65rem;color:#6b7280;margin-top:2px;">{kpi_sub}</div>
-            </div>""", unsafe_allow_html=True)
+            </div>
+        </div>
+        """
+        st.markdown(kpi_html, unsafe_allow_html=True)
 
 # ── Next Match Preview ─────────────────────────────────────────────────────────
 with col_match:

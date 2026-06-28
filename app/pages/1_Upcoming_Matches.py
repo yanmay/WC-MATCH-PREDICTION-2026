@@ -399,19 +399,22 @@ for round_name in ROUND_ORDER:
         # Team vs block
         home_code = _get_flag_code(match['home_team'])
         away_code = _get_flag_code(match['away_team'])
-        col_home, col_vs, col_away = st.columns([3, 1, 3])
-        with col_home:
-            if home_code:
-                st.markdown(f'<div style="text-align:center;padding:8px 0;"><img src="https://flagcdn.com/w80/{home_code}.png" style="height:48px;border-radius:4px;margin-bottom:6px;"><br><b style="font-size:1.1rem;color:#f3f4f6;">{match["home_team"]}</b></div>', unsafe_allow_html=True)
-            else:
-                st.markdown(f'<div style="text-align:center;padding:8px 0;font-size:2.5rem;">🏳️<br><b style="font-size:1.1rem;color:#f3f4f6;">{match["home_team"]}</b></div>', unsafe_allow_html=True)
-        with col_vs:
-            st.markdown('<div style="text-align:center;padding:20px 0;font-size:1rem;font-weight:700;color:#6b7280;">VS</div>', unsafe_allow_html=True)
-        with col_away:
-            if away_code:
-                st.markdown(f'<div style="text-align:center;padding:8px 0;"><img src="https://flagcdn.com/w80/{away_code}.png" style="height:48px;border-radius:4px;margin-bottom:6px;"><br><b style="font-size:1.1rem;color:#f3f4f6;">{match["away_team"]}</b></div>', unsafe_allow_html=True)
-            else:
-                st.markdown(f'<div style="text-align:center;padding:8px 0;font-size:2.5rem;">🏳️<br><b style="font-size:1.1rem;color:#f3f4f6;">{match["away_team"]}</b></div>', unsafe_allow_html=True)
+        home_img_html = f'<img src="https://flagcdn.com/w80/{home_code}.png" class="team-flag-img">' if home_code else '<span style="font-size:2rem;">🏳️</span>'
+        away_img_html = f'<img src="https://flagcdn.com/w80/{away_code}.png" class="team-flag-img">' if away_code else '<span style="font-size:2rem;">🏳️</span>'
+        
+        st.markdown(f"""
+        <div class="team-vs-block">
+            <div class="team-block">
+                <div style="margin-bottom: 6px;">{home_img_html}</div>
+                <div class="team-name" style="font-size:1.0rem;color:#f3f4f6;">{match["home_team"]}</div>
+            </div>
+            <div class="vs-separator" style="color:#6b7280; font-size:1.1rem;">VS</div>
+            <div class="team-block">
+                <div style="margin-bottom: 6px;">{away_img_html}</div>
+                <div class="team-name" style="font-size:1.0rem;color:#f3f4f6;">{match["away_team"]}</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 
         if not is_tbd:

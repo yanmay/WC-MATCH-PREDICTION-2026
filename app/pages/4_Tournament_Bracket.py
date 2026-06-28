@@ -27,11 +27,27 @@ render_sidebar()
 # Custom CSS extension for 21st.dev styling on the Bracket Visual Flow
 st.markdown("""
 <style>
+.bracket-scroll-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 16px;
+    margin-top: 10px;
+}
+.bracket-flow-wrapper {
+    display: flex;
+    gap: 16px;
+    min-width: 1400px;
+    justify-content: space-between;
+    align-items: stretch;
+}
 .bracket-column {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     height: 950px;
+    flex: 1;
+    min-width: 130px;
 }
 .bracket-match {
     background: var(--bg-card);
@@ -247,9 +263,6 @@ st.markdown(f"""
 st.markdown("### 📊 Symmetrical Knockout Bracket Flow")
 st.markdown('<p style="font-size:0.8rem; color:#94a3b8; margin-top:-10px; margin-bottom:20px;">Follow the tournament progression step-by-step from the Round of 32 up to the Final match.</p>', unsafe_allow_html=True)
 
-# Define layout columns
-col_r32_l, col_r16_l, col_qf_l, col_sf_l, col_fn, col_sf_r, col_qf_r, col_r16_r, col_r32_r = st.columns(9)
-
 def render_match_html(match):
     """Generate HTML block for a bracket match."""
     home_win = match["winner"] == match["home"]
@@ -278,83 +291,79 @@ def render_match_html(match):
         f'</div>'
     )
 
-# LEFT HALF
-with col_r32_l:
-    html = '<div class="bracket-column">'
-    html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">ROUND OF 32</div>'
-    for i in range(8):
-        match = sim_data["Round of 32"][i]
-        html += render_match_html(match)
-    html += '</div>'
-    st.markdown(html, unsafe_allow_html=True)
+# Symmetrical bracket inside a single horizontally scrollable HTML container
+html = '<div class="bracket-scroll-container">'
+html += '<div class="bracket-flow-wrapper">'
 
-with col_r16_l:
-    html = '<div class="bracket-column">'
-    html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">ROUND OF 16</div>'
-    for i in range(4):
-        match = sim_data["Round of 16"][i]
-        html += render_match_html(match)
-    html += '</div>'
-    st.markdown(html, unsafe_allow_html=True)
-
-with col_qf_l:
-    html = '<div class="bracket-column">'
-    html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">QUARTERFINAL</div>'
-    for i in range(2):
-        match = sim_data["Quarterfinal"][i]
-        html += render_match_html(match)
-    html += '</div>'
-    st.markdown(html, unsafe_allow_html=True)
-
-with col_sf_l:
-    html = '<div class="bracket-column">'
-    html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">SEMIFINAL</div>'
-    match = sim_data["Semifinal"][0]
+# Column 1: Round of 32 Left
+html += '<div class="bracket-column">'
+html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">ROUND OF 32</div>'
+for i in range(8):
+    match = sim_data["Round of 32"][i]
     html += render_match_html(match)
-    html += '</div>'
-    st.markdown(html, unsafe_allow_html=True)
+html += '</div>'
 
-# CENTER (FINAL)
-with col_fn:
-    html = '<div class="bracket-column">'
-    html += '<div style="text-align:center; font-size:0.6rem; font-weight:800; color:#FACC15; letter-spacing:1.5px; margin-bottom:4px;">FINAL</div>'
-    match = sim_data["Final"]
+# Column 2: Round of 16 Left
+html += '<div class="bracket-column">'
+html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">ROUND OF 16</div>'
+for i in range(4):
+    match = sim_data["Round of 16"][i]
     html += render_match_html(match)
-    html += '</div>'
-    st.markdown(html, unsafe_allow_html=True)
+html += '</div>'
 
-# RIGHT HALF
-with col_sf_r:
-    html = '<div class="bracket-column">'
-    html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">SEMIFINAL</div>'
-    match = sim_data["Semifinal"][1]
+# Column 3: Quarterfinal Left
+html += '<div class="bracket-column">'
+html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">QUARTERFINAL</div>'
+for i in range(2):
+    match = sim_data["Quarterfinal"][i]
     html += render_match_html(match)
-    html += '</div>'
-    st.markdown(html, unsafe_allow_html=True)
+html += '</div>'
 
-with col_qf_r:
-    html = '<div class="bracket-column">'
-    html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">QUARTERFINAL</div>'
-    for i in range(2, 4):
-        match = sim_data["Quarterfinal"][i]
-        html += render_match_html(match)
-    html += '</div>'
-    st.markdown(html, unsafe_allow_html=True)
+# Column 4: Semifinal Left
+html += '<div class="bracket-column">'
+html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">SEMIFINAL</div>'
+match = sim_data["Semifinal"][0]
+html += render_match_html(match)
+html += '</div>'
 
-with col_r16_r:
-    html = '<div class="bracket-column">'
-    html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">ROUND OF 16</div>'
-    for i in range(4, 8):
-        match = sim_data["Round of 16"][i]
-        html += render_match_html(match)
-    html += '</div>'
-    st.markdown(html, unsafe_allow_html=True)
+# Column 5: Center (Final)
+html += '<div class="bracket-column">'
+html += '<div style="text-align:center; font-size:0.6rem; font-weight:800; color:#FACC15; letter-spacing:1.5px; margin-bottom:4px;">FINAL</div>'
+match = sim_data["Final"]
+html += render_match_html(match)
+html += '</div>'
 
-with col_r32_r:
-    html = '<div class="bracket-column">'
-    html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">ROUND OF 32</div>'
-    for i in range(8, 16):
-        match = sim_data["Round of 32"][i]
-        html += render_match_html(match)
-    html += '</div>'
-    st.markdown(html, unsafe_allow_html=True)
+# Column 6: Semifinal Right
+html += '<div class="bracket-column">'
+html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">SEMIFINAL</div>'
+match = sim_data["Semifinal"][1]
+html += render_match_html(match)
+html += '</div>'
+
+# Column 7: Quarterfinal Right
+html += '<div class="bracket-column">'
+html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">QUARTERFINAL</div>'
+for i in range(2, 4):
+    match = sim_data["Quarterfinal"][i]
+    html += render_match_html(match)
+html += '</div>'
+
+# Column 8: Round of 16 Right
+html += '<div class="bracket-column">'
+html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">ROUND OF 16</div>'
+for i in range(4, 8):
+    match = sim_data["Round of 16"][i]
+    html += render_match_html(match)
+html += '</div>'
+
+# Column 9: Round of 32 Right
+html += '<div class="bracket-column">'
+html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">ROUND OF 32</div>'
+for i in range(8, 16):
+    match = sim_data["Round of 32"][i]
+    html += render_match_html(match)
+html += '</div>'
+
+html += '</div></div>'
+
+st.markdown(html, unsafe_allow_html=True)

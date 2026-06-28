@@ -23,6 +23,7 @@ from ml.train import load_model
 _model_cache = None
 _metrics_cache = None
 _prediction_cache = {}
+_base_prediction_cache = {}
 
 
 def get_active_model():
@@ -33,10 +34,11 @@ def get_active_model():
 
 
 def invalidate_model_cache():
-    global _model_cache, _metrics_cache, _prediction_cache
+    global _model_cache, _metrics_cache, _prediction_cache, _base_prediction_cache
     _model_cache = None
     _metrics_cache = None
     _prediction_cache = {}
+    _base_prediction_cache = {}
 
 
 def predict_match(
@@ -60,6 +62,22 @@ def predict_match(
             "confidence_note": "Teams not yet confirmed for this fixture.",
             "is_knockout": "group" not in round_name.lower(),
         }
+
+    global _base_prediction_cache
+    cache_key = (
+        home_team,
+        away_team,
+        round_name,
+        len(wc_df) if wc_df is not None else 0,
+        home_goals_pg,
+        away_goals_pg,
+        home_conceded_pg,
+        away_conceded_pg,
+        home_rest_days,
+        away_rest_days,
+    )
+    if cache_key in _base_prediction_cache:
+        return _base_prediction_cache[cache_key]
 
     pipeline, metrics = get_active_model()
     X = build_prediction_features(
@@ -97,7 +115,7 @@ def predict_match(
         is_low_confidence = True
         confidence_note = "Limited World Cup history for one or both teams."
 
-    return {
+    result = {
         "home_team": home_team, "away_team": away_team,
         "home_win_prob": round(home_win_prob, 4),
         "draw_prob": round(draw_prob, 4),
@@ -108,6 +126,8 @@ def predict_match(
         "confidence_note": confidence_note,
         "is_knockout": is_knockout,
     }
+    _base_prediction_cache[cache_key] = result
+    return result
 
 
 def predict_match_with_evidence(

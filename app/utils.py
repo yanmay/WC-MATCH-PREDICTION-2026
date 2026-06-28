@@ -848,6 +848,21 @@ section[data-testid="stSidebar"] * { color: #e5e7eb !important; }
   .bracket-node:hover { border-color: var(--border-accent); }
 }
 
+/* ── KPI responsive CSS grid ── */
+.kpi-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* ── Flag image styling in team vs blocks ── */
+.team-flag-img {
+  height: 48px;
+  border-radius: 4px;
+}
+
 /* ── Touch UI & Mobile Responsive Layouts (iOS / Android) ── */
 @media (max-width: 768px) {
   .hero-title { font-size: 2.2rem !important; }
@@ -858,6 +873,8 @@ section[data-testid="stSidebar"] * { color: #e5e7eb !important; }
   .vs-separator { font-size: 0.8rem !important; }
   .winner-tag { font-size: 1.1rem !important; }
   table th, table td { padding: 10px 8px !important; } /* comfortable touch spacing for lineups */
+  .team-flag-img { height: 38px !important; }
+  .team-name { font-size: 0.8rem !important; }
 }
 </style>
 

@@ -80,32 +80,28 @@ try:
             <div style="font-size: 0.8rem; color: #94a3b8;">Visit the <b>Upcoming Matches</b> page to generate predictions -- they are automatically logged here.</div>
         </div>""", unsafe_allow_html=True)
     else:
-        c_e1, c_e2, c_e3, c_e4 = st.columns(4)
-        with c_e1:
-            st.markdown(f"""
-            <div class="kpi-card">
+        acc_display = f"{accuracy:.1%}" if accuracy is not None else "--"
+        kpi_html = f"""
+        <div class="kpi-grid-container">
+            <div class="kpi-card" style="margin: 0 !important;">
                 <div class="kpi-value">{resolved}</div>
                 <div class="kpi-label">Results Tracked</div>
-            </div>""", unsafe_allow_html=True)
-        with c_e2:
-            acc_display = f"{accuracy:.1%}" if accuracy is not None else "--"
-            st.markdown(f"""
-            <div class="kpi-card kpi-accuracy-2026">
+            </div>
+            <div class="kpi-card kpi-accuracy-2026" style="margin: 0 !important;">
                 <div class="kpi-value">{acc_display}</div>
-                <div class="kpi-label">\U0001f3af 2026 AI Accuracy</div>
-            </div>""", unsafe_allow_html=True)
-        with c_e3:
-            st.markdown(f"""
-            <div class="kpi-card">
+                <div class="kpi-label">🎯 2026 AI Accuracy</div>
+            </div>
+            <div class="kpi-card" style="margin: 0 !important;">
                 <div class="kpi-value" style="color:#34d399;">{correct}</div>
                 <div class="kpi-label">Correct Predictions</div>
-            </div>""", unsafe_allow_html=True)
-        with c_e4:
-            st.markdown(f"""
-            <div class="kpi-card">
+            </div>
+            <div class="kpi-card" style="margin: 0 !important;">
                 <div class="kpi-value" style="color:#f87171;">{wrong}</div>
                 <div class="kpi-label">Wrong Predictions</div>
-            </div>""", unsafe_allow_html=True)
+            </div>
+        </div>
+        """
+        st.markdown(kpi_html, unsafe_allow_html=True)
 
         st.markdown("<br>", unsafe_allow_html=True)
 
@@ -243,33 +239,30 @@ with st.spinner("Executing historical simulation for Qatar 2022 matches..."):
     stats = compute_accuracy_stats(backtest_log)
 
 # Backtest Metrics row using 21st.dev style cards
-c_b1, c_b2, c_b3, c_b4 = st.columns(4)
-with c_b1:
-    st.markdown(f"""
-    <div class="kpi-card">
+# Backtest Metrics row using responsive CSS grid layout
+base_acc = baseline_accuracy(qatar_matches)
+backtest_kpi_html = f"""
+<div class="kpi-grid-container">
+    <div class="kpi-card" style="margin: 0 !important;">
         <div class="kpi-value">{stats['total']}</div>
         <div class="kpi-label">Backtested Matches</div>
-    </div>""", unsafe_allow_html=True)
-with c_b2:
-    st.markdown(f"""
-    <div class="kpi-card">
+    </div>
+    <div class="kpi-card" style="margin: 0 !important;">
         <div class="kpi-value">{stats['accuracy']:.1%}</div>
         <div class="kpi-label">Backtest Accuracy</div>
         <div class="kpi-delta positive">↑ vs Baseline</div>
-    </div>""", unsafe_allow_html=True)
-with c_b3:
-    st.markdown(f"""
-    <div class="kpi-card">
+    </div>
+    <div class="kpi-card" style="margin: 0 !important;">
         <div class="kpi-value">{df_backtest['Brier Score'].mean():.4f}</div>
         <div class="kpi-label">Average Brier Score</div>
-    </div>""", unsafe_allow_html=True)
-with c_b4:
-    base_acc = baseline_accuracy(qatar_matches)
-    st.markdown(f"""
-    <div class="kpi-card">
+    </div>
+    <div class="kpi-card" style="margin: 0 !important;">
         <div class="kpi-value">{base_acc:.1%}</div>
         <div class="kpi-label">Baseline (Always Home Win)</div>
-    </div>""", unsafe_allow_html=True)
+    </div>
+</div>
+"""
+st.markdown(backtest_kpi_html, unsafe_allow_html=True)
 
 # Layout for charts
 st.markdown("<br>", unsafe_allow_html=True)

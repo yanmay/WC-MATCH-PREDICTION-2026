@@ -585,6 +585,7 @@ def sync_live_results_to_fixtures(fixtures_df, wc_df=None) -> tuple:
         if col not in updated.columns:
             updated[col] = None
     changed = False
+    newly_completed = []
 
     # 1. Sync completed live matches
     live_completed = get_completed_live_matches()
@@ -640,6 +641,8 @@ def sync_live_results_to_fixtures(fixtures_df, wc_df=None) -> tuple:
                 # Store scorers dict directly (save_2026_fixtures will format/loads it)
                 updated.at[idx, "scorers"] = live.get("scorers")
             changed = True
+            if existing != "completed":
+                newly_completed.append(live)
 
     # 2. Sync ongoing live matches
     live_ongoing = get_live_matches_data()
@@ -672,8 +675,7 @@ def sync_live_results_to_fixtures(fixtures_df, wc_df=None) -> tuple:
             if (
                 updated.at[idx, "status"] != "live" or
                 updated.at[idx, "home_score"] != live["home_score"] or
-                updated.at[idx, "away_score"] != live["away_score"] or
-                updated.at[idx, "minute"] != live["minute"]
+                updated.at[idx, "away_score"] != live["away_score"]
             ):
                 updated.at[idx, "status"] = "live"
                 updated.at[idx, "home_score"] = live["home_score"]
@@ -684,22 +686,32 @@ def sync_live_results_to_fixtures(fixtures_df, wc_df=None) -> tuple:
                 updated.at[idx, "kick_off_utc"] = live.get("kick_off_utc", "")
                 updated.at[idx, "scorers"] = json.dumps(live["scorers"])
                 changed = True
+            else:
+                # Update ticking minute/elapsed time in-memory, but DO NOT trigger changed=True
+                updated.at[idx, "minute"] = live["minute"]
+                updated.at[idx, "elapsed_mins"] = live.get("elapsed_mins", 0)
+                updated.at[idx, "elapsed_secs"] = live.get("elapsed_secs", 0)
+                updated.at[idx, "kick_off_utc"] = live.get("kick_off_utc", "")
+                updated.at[idx, "scorers"] = json.dumps(live["scorers"])
 
     if changed:
         from ml.data_loader import save_2026_fixtures, append_result_to_csv
         save_2026_fixtures(updated)
-        for live in live_completed:
-            append_result_to_csv(
-                live["date"], live["home_team"], live["away_team"],
-                live["home_score"], live["away_score"]
-            )
-        # Trigger automated model retraining
-        try:
-            from ml.train import retrain_active_model
-            retrain_active_model()
-        except Exception as e:
-            print(f"[live_scores] [ERROR] Failed to auto-retrain model: {e}")
-        # Clear Streamlit cache if running in streamlit context
+        
+        # Only append to CSV and trigger model retraining if there are newly completed matches
+        if newly_completed:
+            for live in newly_completed:
+                append_result_to_csv(
+                    live["date"], live["home_team"], live["away_team"],
+                    live["home_score"], live["away_score"]
+                )
+            try:
+                from ml.train import retrain_active_model
+                retrain_active_model()
+            except Exception as e:
+                print(f"[live_scores] [ERROR] Failed to auto-retrain model: {e}")
+                
+        # Clear Streamlit cache if running in streamlit context to refresh the UI
         try:
             import sys
             if "streamlit" in sys.modules:
