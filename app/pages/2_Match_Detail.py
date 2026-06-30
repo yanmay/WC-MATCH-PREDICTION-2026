@@ -681,23 +681,63 @@ def render_evidence_ui(pred, home_team, away_team, hs=None, as_=None, scorers=No
 
 # ── Tab 1: Real 2026 Fixtures ─────────────────────────────────────────────────
 with tab1:
-    scheduled_fixtures = fixtures[
+    fixture_options = fixtures[
         (fixtures["home_team"] != "TBD") & (fixtures["away_team"] != "TBD")
     ].copy()
     
-    if scheduled_fixtures.empty:
+    if fixture_options.empty:
         st.warning("No scheduled matches available with confirmed teams. Try the Custom Matchup Simulator!")
     else:
-        scheduled_fixtures["display_name"] = scheduled_fixtures.apply(
+        today = pd.Timestamp.now(tz=None).normalize()
+        fixture_options["date_sort"] = pd.to_datetime(fixture_options["date"], errors="coerce")
+        status_priority = {"live": 0, "scheduled": 1, "completed": 2}
+        fixture_options["status_priority"] = fixture_options["status"].map(status_priority).fillna(9)
+        fixture_options["round_priority"] = fixture_options["round"].apply(lambda r: 0 if r == "Round of 32" else 1)
+        fixture_options["future_priority"] = fixture_options["date_sort"].apply(
+            lambda d: 0 if pd.notna(d) and d >= today else 1
+        )
+        fixture_options["completed_sort"] = fixture_options["date_sort"].fillna(pd.Timestamp("1900-01-01"))
+        fixture_options = fixture_options.sort_values(
+            ["status_priority", "round_priority", "future_priority", "date_sort", "match_id"],
+            ascending=[True, True, True, True, True],
+        )
+
+        has_active_r32 = (
+            fixture_options["status"].isin(["live", "scheduled"]) &
+            (fixture_options["round"] == "Round of 32")
+        ).any()
+        completed_r32_mask = (
+            (fixture_options["round"] == "Round of 32") &
+            (fixture_options["status"] == "completed")
+        )
+        if not has_active_r32 and completed_r32_mask.any():
+            completed_r32 = fixture_options[completed_r32_mask].sort_values(
+                ["completed_sort", "match_id"], ascending=[False, False]
+            )
+            fixture_options = pd.concat([
+                completed_r32,
+                fixture_options.drop(index=completed_r32.index)
+            ])
+
+        def _fixture_label(r):
+            status = str(r.get("status", "scheduled")).upper()
+            score = ""
+            if pd.notna(r.get("home_score")) and pd.notna(r.get("away_score")):
+                score = f" - {int(r['home_score'])}-{int(r['away_score'])}"
+                if pd.notna(r.get("home_penalty_score")) and pd.notna(r.get("away_penalty_score")):
+                    score += f" pens {int(r['home_penalty_score'])}-{int(r['away_penalty_score'])}"
+            return f"{status} - {r['round']} - {r['home_team']} vs {r['away_team']}{score} - {r['date']}"
+
+        fixture_options["display_name"] = fixture_options.apply(
             lambda r: f"{r['round']} — {r['home_team']} vs {r['away_team']} ({r['date']})", axis=1
         )
         
         selected_match_name = st.selectbox(
             "Select a 2026 World Cup Fixture to Analyze",
-            options=scheduled_fixtures["display_name"].tolist()
+            options=fixture_options["display_name"].tolist()
         )
         
-        selected_row = scheduled_fixtures[scheduled_fixtures["display_name"] == selected_match_name].iloc[0]
+        selected_row = fixture_options[fixture_options["display_name"] == selected_match_name].iloc[0]
         home_t = selected_row["home_team"]
         away_t = selected_row["away_team"]
         round_t = selected_row["round"]

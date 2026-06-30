@@ -80,6 +80,21 @@ def make_live_timer_html(elapsed_mins: int, elapsed_secs: int, timer_id: str = "
     )
 
 
+def render_live_clock(row, timer_id: str) -> str:
+    minute = row.get("minute")
+    minute_text = "" if minute is None or pd.isna(minute) else str(minute).strip()
+    if not minute_text or minute_text.lower() in {"nan", "none", "null"}:
+        minute_text = "LIVE"
+
+    is_ticking = str(row.get("clock_is_ticking", "")).lower() == "true"
+    elapsed_mins = int(row.get("elapsed_mins", 0) or 0)
+    elapsed_secs = int(row.get("elapsed_secs", 0) or 0)
+    if is_ticking and elapsed_mins > 0:
+        return make_live_timer_html(elapsed_mins, elapsed_secs, timer_id)
+
+    return f'<span style="font-weight:800;letter-spacing:1px;">{minute_text}</span>'
+
+
 @st.cache_data(show_spinner=False, ttl=3600)
 def _cached_predict(home_team, away_team, round_name, _wc_df_hash):
     """Cached wrapper — predictions are expensive, cache for 1 hour."""
@@ -126,38 +141,47 @@ st.markdown(CSS, unsafe_allow_html=True)
 render_sidebar()
 
 # ── Header ────────────────────────────────────────────────────────────────────
-st.markdown('<div class="hero-badge">📅 FIXTURES &amp; LIVE PREDICTIONS</div>', unsafe_allow_html=True)
-st.markdown('<div class="hero-title" style="font-size:2.5rem; line-height:1.2;">Upcoming Matches</div>', unsafe_allow_html=True)
-st.markdown('<div class="hero-subtitle">Explore upcoming matches with deep AI evidence, historical facts, and probability calibrations. Data refreshes every 30 seconds from live sources.</div>', unsafe_allow_html=True)
-st.markdown("<br>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class="compact-page-head">
+      <div>
+        <div class="hero-badge">📅 MATCH HUB</div>
+        <div class="compact-page-title">Matches</div>
+      </div>
+      <div class="compact-page-sub">Live state first. Filters and completed results stay below the scoreboard.</div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 # ── Load ──────────────────────────────────────────────────────────────────────
 with st.spinner("Analyzing match statistics and generating predictions..."):
     wc_df, fixtures = load_data()
     pipeline, model_metrics = get_model_and_metrics()
 
-# ── Filters ───────────────────────────────────────────────────────────────────
-col_f1, col_f2 = st.columns([2, 3])
-with col_f1:
-    available_rounds = sorted(
-        fixtures["round"].unique().tolist(),
-        key=lambda r: ["Group Stage", "Round of 32", "Round of 16", "Quarterfinal", "Semifinal", "3rd Place", "Final"].index(r)
-        if r in ["Group Stage", "Round of 32", "Round of 16", "Quarterfinal", "Semifinal", "3rd Place", "Final"] else 99
-    )
-    default_rounds = [r for r in ["Group Stage", "Round of 32"] if r in available_rounds]
-    selected_rounds = st.multiselect(
-        "Filter by Round",
-        options=available_rounds,
-        default=default_rounds,
-        help="Select which tournament rounds to show"
-    )
-with col_f2:
-    all_teams = sorted(set(
-        fixtures["home_team"].tolist() + fixtures["away_team"].tolist()
-    ) - {"TBD"})
-    selected_team = st.selectbox("Filter by Team (optional)", ["All Teams"] + all_teams)
+live_count = int((fixtures["status"] == "live").sum())
+scheduled_count = int((fixtures["status"] == "scheduled").sum())
+visible_team_count = len(set(fixtures["home_team"].tolist() + fixtures["away_team"].tolist()) - {"TBD"})
 
-st.markdown("<br>", unsafe_allow_html=True)
+st.markdown(
+    f"""
+    <div class="compact-state-row">
+      <span><strong>{live_count}</strong> live</span>
+      <span><strong>{scheduled_count}</strong> scheduled</span>
+      <span><strong>{visible_team_count}</strong> teams</span>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+available_rounds = sorted(
+    fixtures["round"].unique().tolist(),
+    key=lambda r: ["Group Stage", "Round of 32", "Round of 16", "Quarterfinal", "Semifinal", "3rd Place", "Final"].index(r)
+    if r in ["Group Stage", "Round of 32", "Round of 16", "Quarterfinal", "Semifinal", "3rd Place", "Final"] else 99
+)
+all_teams = sorted(set(
+    fixtures["home_team"].tolist() + fixtures["away_team"].tolist()
+) - {"TBD"})
 
 # ── LIVE Matches Section ──────────────────────────────────────────────────────
 live_matches = fixtures[fixtures["status"] == "live"].copy()
@@ -173,11 +197,15 @@ if not live_matches.empty:
         acode = _get_flag_code(lm["away_team"])
         hflag = f'<img src="https://flagcdn.com/w40/{hcode}.png" class="flag-icon">' if hcode else "&#127987;"
         aflag = f'<img src="https://flagcdn.com/w40/{acode}.png" class="flag-icon">' if acode else "&#127987;"
-        elapsed_mins = int(lm.get("elapsed_mins", 0) or 0)
-        elapsed_secs = int(lm.get("elapsed_secs", 0) or 0)
         # Create unique ID per match (use home+away team names)
         timer_id = f"timer-{lm['home_team'].replace(' ','-')}-{lm['away_team'].replace(' ','-')}"
-        timer_html = make_live_timer_html(elapsed_mins, elapsed_secs, timer_id)
+        timer_html = render_live_clock(lm, timer_id)
+        phase_label = "Group Stage"
+        group_label = lm.get("group")
+        if group_label is not None and not pd.isna(group_label):
+            group_text = str(group_label).strip()
+            if group_text and group_text.upper() not in {"R32", "NAN", "NONE", "NULL"}:
+                phase_label = f"Group {group_text}"
         
         # Scorers — built as a compact single-line string to avoid Markdown code-block interpretation
         scorers_html = ""
@@ -187,36 +215,82 @@ if not live_matches.empty:
             if scorers_dict and isinstance(scorers_dict, dict):
                 h_s = ", ".join(scorers_dict.get(lm["home_team"], []))
                 a_s = ", ".join(scorers_dict.get(lm["away_team"], []))
-                if h_s or a_s:
-                    scorers_html = (
-                        f'<div style="display:flex;justify-content:space-between;font-size:0.75rem;'
-                        f'color:#9ca3af;margin-top:10px;border-top:1px dashed rgba(255,255,255,0.1);'
-                        f'padding-top:8px;gap:8px;">'
-                        f'<div style="text-align:left;max-width:40%;font-weight:600;color:#d1fae5;">{h_s}</div>'
-                        f'<div style="text-align:center;color:#34d399;font-weight:800;">&#9917;</div>'
-                        f'<div style="text-align:right;max-width:40%;font-weight:600;color:#fca5a5;">{a_s}</div>'
-                        f'</div>'
-                    )
+                scorer_total = len(scorers_dict.get(lm["home_team"], [])) + len(scorers_dict.get(lm["away_team"], []))
+                if (h_s or a_s) and hs + as_ > 0 and scorer_total <= hs + as_:
+                    scorers_html = f'<div class="live-scorers"><div style="text-align:left;font-weight:700;color:#d1fae5;">{h_s}</div><div style="text-align:center;color:#34d399;font-weight:900;">&#9917;</div><div style="text-align:right;font-weight:700;color:#fca5a5;">{a_s}</div></div>'
         except Exception:
             pass
 
         # Card — all on one line to prevent Markdown treating indented HTML as code blocks
         st.markdown(
-            f'<div class="glass-card" style="padding:16px 20px;margin:4px 0;border-color:rgba(239,113,113,0.35);box-shadow:0 0 24px rgba(239,113,113,0.12);">'
-            f'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">'
-            f'<span class="live-badge"><span class="live-dot"></span>LIVE &middot; {timer_html}</span>'
-            f'<span style="color:#9ca3af;font-size:0.72rem;">&#127942; {lm.get("round","")}</span>'
+            f'<div class="glass-card live-arena">'
+            f'<div class="live-status-row">'
+            f'<span class="live-badge"><span class="live-dot"></span>LIVE MATCH</span>'
+            f'<span class="live-phase-chip">{phase_label}</span>'
             f'</div>'
-            f'<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">'
-            f'<div style="flex:1;text-align:right;"><span style="font-size:1rem;font-weight:700;color:#f3f4f6;">{hflag} {lm["home_team"]}</span></div>'
-            f'<div style="text-align:center;min-width:100px;"><span style="font-size:1.6rem;font-weight:900;color:#f87171;letter-spacing:4px;">{hs} &mdash; {as_}</span></div>'
-            f'<div style="flex:1;text-align:left;"><span style="font-size:1rem;font-weight:700;color:#f3f4f6;">{aflag} {lm["away_team"]}</span></div>'
+            f'<div class="live-arena-inner">'
+            f'<div class="live-club home"><span class="live-club-flag">{hflag}</span><div class="live-club-name">{lm["home_team"]}</div><div class="live-club-meta">Home</div></div>'
+            f'<div class="live-score-tower"><div class="live-clock-pill">{timer_html}</div><div class="live-main-score"><span>{hs}</span><span class="dash">-</span><span>{as_}</span></div></div>'
+            f'<div class="live-club away"><span class="live-club-flag">{aflag}</span><div class="live-club-name">{lm["away_team"]}</div><div class="live-club-meta">Away</div></div>'
             f'</div>'
             f'{scorers_html}'
+            f'<div class="live-source-row"><span class="source-chip">Updated from live feed</span></div>'
             f'</div>',
             unsafe_allow_html=True
         )
     st.markdown("<br>", unsafe_allow_html=True)
+else:
+    latest_results = fixtures[fixtures["status"] == "completed"].copy()
+    if not latest_results.empty:
+        latest = latest_results.iloc[-1]
+        hs = int(latest.get("home_score", 0) or 0)
+        as_ = int(latest.get("away_score", 0) or 0)
+        hcode = _get_flag_code(latest["home_team"])
+        acode = _get_flag_code(latest["away_team"])
+        hflag = f'<img src="https://flagcdn.com/w40/{hcode}.png" class="flag-icon">' if hcode else "&#127987;"
+        aflag = f'<img src="https://flagcdn.com/w40/{acode}.png" class="flag-icon">' if acode else "&#127987;"
+        phase_label = "Group Stage"
+        group_label = latest.get("group")
+        if group_label is not None and not pd.isna(group_label):
+            group_text = str(group_label).strip()
+            if group_text and group_text.upper() not in {"R32", "NAN", "NONE", "NULL"}:
+                phase_label = f"Group {group_text}"
+
+        st.markdown(
+            f'<div style="display:inline-flex; align-items:center; gap:8px; margin-bottom:8px;">'
+            f'<span class="live-badge" style="background:rgba(52,211,153,0.08);border-color:rgba(52,211,153,0.24);color:#34d399;"><span class="live-dot" style="background:#34d399;"></span>LATEST RESULT</span>'
+            f'</div>',
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            f'<div class="glass-card live-arena result-arena">'
+            f'<div class="live-status-row">'
+            f'<span class="source-chip">FULL TIME</span>'
+            f'<span class="live-phase-chip">{phase_label}</span>'
+            f'</div>'
+            f'<div class="live-arena-inner">'
+            f'<div class="live-club home"><span class="live-club-flag">{hflag}</span><div class="live-club-name">{latest["home_team"]}</div><div class="live-club-meta">Home</div></div>'
+            f'<div class="live-score-tower"><div class="live-clock-pill">FT</div><div class="live-main-score"><span>{hs}</span><span class="dash">-</span><span>{as_}</span></div></div>'
+            f'<div class="live-club away"><span class="live-club-flag">{aflag}</span><div class="live-club-name">{latest["away_team"]}</div><div class="live-club-meta">Away</div></div>'
+            f'</div>'
+            f'<div class="live-source-row"><span class="source-chip">Latest completed match</span></div>'
+            f'</div>',
+            unsafe_allow_html=True,
+        )
+        st.markdown("<br>", unsafe_allow_html=True)
+
+# ── Filters ───────────────────────────────────────────────────────────────────
+col_f1, col_f2 = st.columns([2, 3])
+with col_f1:
+    default_rounds = [r for r in ["Group Stage"] if r in available_rounds]
+    selected_rounds = st.multiselect(
+        "Stage filter",
+        options=available_rounds,
+        default=default_rounds,
+        help="Choose which tournament stages to show in the fixture lists"
+    )
+with col_f2:
+    selected_team = st.selectbox("Team filter", ["All Teams"] + all_teams)
 
 # ── Completed Matches Section ─────────────────────────────────────────────────
 completed_all = fixtures[fixtures["status"] == "completed"].copy()
@@ -236,12 +310,33 @@ if not completed_filtered.empty:
     for _, cmatch in completed_filtered.iterrows():
         hs = cmatch.get("home_score", 0) or 0
         as_ = cmatch.get("away_score", 0) or 0
-        if hs > as_:
-            h_cls = "winner-team-name"; a_cls = "loser-team-name"; outcome_badge = '<span class="result-win">WIN</span>'
-        elif as_ > hs:
-            h_cls = "loser-team-name"; a_cls = "winner-team-name"; outcome_badge = '<span class="result-loss">LOSS</span>'
+        
+        hp = cmatch.get("home_penalty_score")
+        ap = cmatch.get("away_penalty_score")
+        import pandas as pd
+        has_pens = pd.notna(hp) and pd.notna(ap)
+        
+        if has_pens and int(hp) != int(ap):
+            h_w = int(hp) > int(ap)
+            a_w = int(ap) > int(hp)
         else:
-            h_cls = "team-name"; a_cls = "team-name"; outcome_badge = '<span class="result-draw">DRAW</span>'
+            h_w = hs > as_
+            a_w = as_ > hs
+            
+        if h_w:
+            h_cls = "winner-team-name"; a_cls = "loser-team-name"
+            outcome_badge = '<span class="result-win">WIN (P)</span>' if has_pens else '<span class="result-win">WIN</span>'
+        elif a_w:
+            h_cls = "loser-team-name"; a_cls = "winner-team-name"
+            outcome_badge = '<span class="result-loss">LOSS (P)</span>' if has_pens else '<span class="result-loss">LOSS</span>'
+        else:
+            h_cls = "team-name"; a_cls = "team-name"
+            outcome_badge = '<span class="result-draw">DRAW</span>'
+            
+        if has_pens and int(hp) != int(ap):
+            score_display = f"{int(hs)} — {int(as_)}<br><span style='font-size:0.65rem; font-weight:normal; opacity:0.85;'>({int(hp)}-{int(ap)} pens)</span>"
+        else:
+            score_display = f"{int(hs)} — {int(as_)}"
         hcode = _get_flag_code(cmatch["home_team"])
         acode = _get_flag_code(cmatch["away_team"])
         hflag = f'<img src="https://flagcdn.com/w40/{hcode}.png" class="flag-icon">' if hcode else "🏳️"
@@ -249,25 +344,7 @@ if not completed_filtered.empty:
 
         # AI prediction badge
         try:
-            from ml.prediction_log import log_prediction, get_outcome_badge_html
-            pred_c = predict_match(
-                home_team=cmatch["home_team"],
-                away_team=cmatch["away_team"],
-                round_name=cmatch.get("round", "Group Stage"),
-                wc_df=wc_df,
-            )
-            log_prediction(
-                match_id=int(cmatch["match_id"]),
-                home_team=cmatch["home_team"],
-                away_team=cmatch["away_team"],
-                round_name=cmatch.get("round", "Group Stage"),
-                predicted_outcome=pred_c["predicted_outcome"],
-                confidence=pred_c["confidence"] or 0,
-                home_win_prob=pred_c["home_win_prob"] or 0,
-                draw_prob=pred_c["draw_prob"] or 0,
-                away_win_prob=pred_c["away_win_prob"] or 0,
-                match_date=str(cmatch.get("date", "")),
-            )
+            from ml.prediction_log import get_outcome_badge_html
             ai_badge = get_outcome_badge_html(int(cmatch["match_id"]), cmatch["home_team"], cmatch["away_team"])
         except Exception:
             ai_badge = ""
@@ -282,7 +359,7 @@ if not completed_filtered.empty:
                     <span class="{h_cls}" style="font-size:0.95rem;">{hflag} {cmatch['home_team']}</span>
                 </div>
                 <div style="text-align:center; min-width:90px;">
-                    <span class="score-badge completed">{int(hs)} — {int(as_)}</span>
+                    <span class="score-badge completed" style="display:inline-block; line-height:1.2; padding:6px 14px;">{score_display}</span>
                     <div style="margin-top:4px; font-size:0.65rem;">
                         <span class="date-chip {date_cls}">{date_label}</span>
                     </div>

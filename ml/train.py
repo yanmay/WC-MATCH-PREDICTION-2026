@@ -196,16 +196,13 @@ def train_model(
     except Exception:
         feature_importance = {}
 
-    reported_accuracy = max(round(accuracy, 4), 0.9024)
-    reported_cv = max(round(float(cv_scores.mean()), 4), 0.8950)
-
     metrics = {
         "algorithm": algorithm,
         "training_samples": len(X_train),
         "test_samples": len(X_test),
-        "accuracy": reported_accuracy,
+        "accuracy": round(float(accuracy), 4),
         "log_loss": round(cal_loss, 4),
-        "cv_mean_accuracy": reported_cv,
+        "cv_mean_accuracy": round(float(cv_scores.mean()), 4),
         "cv_std_accuracy": round(float(cv_scores.std()), 4),
         "classes": list(pipeline.classes_),
         "feature_importance": feature_importance,

@@ -6,15 +6,19 @@ Rate limits to 10 requests/minute.
 
 import urllib.request
 import json
+import os
 import time
 import sys
 from pathlib import Path
 
-API_KEY = "6c502e6f8b71bcc41968fad0a016f22e"
+API_KEY = os.getenv("APISPORTS_KEY") or os.getenv("API_FOOTBALL_KEY")
 DATA_DIR = Path(__file__).parent.parent / "data"
 STATS_PATH = DATA_DIR / "historical_stats.json"
 
 def fetch_api(path: str) -> dict:
+    if not API_KEY:
+        raise RuntimeError("Set APISPORTS_KEY or API_FOOTBALL_KEY before fetching API-Football data.")
+
     url = f"https://v3.football.api-sports.io/{path}"
     req = urllib.request.Request(url, headers={
         "x-apisports-key": API_KEY,

@@ -95,22 +95,99 @@ def record_result(match_id: int, actual_outcome: str) -> bool:
 
 def sync_results_from_fixtures(fixtures_df) -> int:
     """
-    Scan completed fixtures and record results for any logged prediction
-    that doesn't have a result yet. Returns count of newly recorded results.
+    Scan completed fixtures and record results for any logged prediction.
+    Corrects teams and updates prediction outcomes dynamically if the logged
+    teams differ from the actual matchup. Returns count of newly recorded results.
     """
     completed = fixtures_df[fixtures_df["status"] == "completed"].copy()
     newly_recorded = 0
+    learned_rows = []
+    
+    log = _load_log()
+    log_changed = False
+    
     for _, row in completed.iterrows():
+        match_id = int(row["match_id"])
+        key = str(match_id)
+        
         hs = row.get("home_score", 0) or 0
         as_ = row.get("away_score", 0) or 0
-        if hs > as_:
-            actual = "home_win"
-        elif as_ > hs:
-            actual = "away_win"
+        
+        # Determine actual outcome, checking penalties first
+        hp = row.get("home_penalty_score")
+        ap = row.get("away_penalty_score")
+        import pandas as pd
+        if pd.notna(hp) and pd.notna(ap) and hp != ap:
+            actual = "home_win" if int(hp) > int(ap) else "away_win"
         else:
-            actual = "draw"
-        if record_result(int(row["match_id"]), actual):
-            newly_recorded += 1
+            if hs > as_:
+                actual = "home_win"
+            elif as_ > hs:
+                actual = "away_win"
+            else:
+                actual = "draw"
+        
+        if key in log:
+            entry = log[key]
+            actual_home = row["home_team"]
+            actual_away = row["away_team"]
+            
+            teams_differ = entry.get("home_team") != actual_home or entry.get("away_team") != actual_away
+            outcome_differs = entry.get("actual_outcome") != actual
+            
+            if teams_differ:
+                try:
+                    from ml.predict import predict_match
+                    from ml.data_loader import load_historical_data, get_world_cup_data
+                    raw = load_historical_data()
+                    wc_df = get_world_cup_data(raw)
+                    pred = predict_match(actual_home, actual_away, row["round"], wc_df)
+                    
+                    entry["home_team"] = actual_home
+                    entry["away_team"] = actual_away
+                    entry["predicted_outcome"] = pred["predicted_outcome"]
+                    entry["confidence"] = round(pred["confidence"] or 0, 4)
+                    entry["home_win_prob"] = round(pred["home_win_prob"] or 0, 4)
+                    entry["draw_prob"] = round(pred["draw_prob"] or 0, 4)
+                    entry["away_win_prob"] = round(pred["away_win_prob"] or 0, 4)
+                    # Clear outcomes so it forces a re-evaluation
+                    entry["actual_outcome"] = None
+                    entry["is_correct"] = None
+                    log_changed = True
+                except Exception as e:
+                    print(f"[prediction_log] Failed to re-predict for corrected match {match_id}: {e}")
+            
+            if entry.get("actual_outcome") is None or outcome_differs or teams_differ:
+                entry["actual_outcome"] = actual
+                entry["is_correct"] = (entry["predicted_outcome"] == actual)
+                entry["result_recorded_at"] = datetime.datetime.utcnow().isoformat()
+                log[key] = entry
+                log_changed = True
+                newly_recorded += 1
+                learned_rows.append(row)
+                
+    if log_changed:
+        _save_log(log)
+
+    if learned_rows:
+        try:
+            from ml.data_loader import append_result_to_csv
+            for row in learned_rows:
+                append_result_to_csv(
+                    str(row.get("date", "")),
+                    row.get("home_team", ""),
+                    row.get("away_team", ""),
+                    int(row.get("home_score", 0) or 0),
+                    int(row.get("away_score", 0) or 0),
+                )
+        except Exception as e:
+            print(f"[prediction_log] Failed to append learned result rows: {e}")
+
+        try:
+            from ml.train import retrain_active_model
+            retrain_active_model()
+        except Exception as e:
+            print(f"[prediction_log] Failed to retrain after resolved predictions: {e}")
     return newly_recorded
 
 

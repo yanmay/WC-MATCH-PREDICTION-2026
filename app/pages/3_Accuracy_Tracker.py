@@ -43,28 +43,10 @@ completed_2026 = fixtures[fixtures["status"] == "completed"].copy()
 st.markdown("### \U0001f3df\ufe0f 2026 World Cup -- AI Prediction Accuracy")
 
 try:
-    from ml.prediction_log import get_live_accuracy_stats, log_prediction, get_outcome_badge_html
+    from ml.prediction_log import get_live_accuracy_stats, sync_results_from_fixtures
 
-    # Ensure all completed matches are logged
-    for _, match in completed_2026.iterrows():
-        pred_c = predict_match(
-            home_team=match["home_team"],
-            away_team=match["away_team"],
-            round_name=match.get("round", "Group Stage"),
-            wc_df=wc_df,
-        )
-        log_prediction(
-            match_id=int(match["match_id"]),
-            home_team=match["home_team"],
-            away_team=match["away_team"],
-            round_name=match.get("round", "Group Stage"),
-            predicted_outcome=pred_c["predicted_outcome"],
-            confidence=pred_c["confidence"] or 0,
-            home_win_prob=pred_c["home_win_prob"] or 0,
-            draw_prob=pred_c["draw_prob"] or 0,
-            away_win_prob=pred_c["away_win_prob"] or 0,
-            match_date=str(match.get("date", "")),
-        )
+    # Resolve only predictions that were already logged before the result arrived.
+    sync_results_from_fixtures(fixtures)
 
     plog_stats = get_live_accuracy_stats()
     resolved  = plog_stats["resolved"]

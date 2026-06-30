@@ -46,10 +46,10 @@ def predict_match(
     away_team: str,
     round_name: str,
     wc_df: pd.DataFrame,
-    home_goals_pg: float = 1.5,
-    away_goals_pg: float = 1.5,
-    home_conceded_pg: float = 1.0,
-    away_conceded_pg: float = 1.0,
+    home_goals_pg: Optional[float] = None,
+    away_goals_pg: Optional[float] = None,
+    home_conceded_pg: Optional[float] = None,
+    away_conceded_pg: Optional[float] = None,
     home_rest_days: int = 7,
     away_rest_days: int = 7,
 ) -> Dict[str, Any]:
@@ -135,10 +135,10 @@ def predict_match_with_evidence(
     away_team: str,
     round_name: str,
     wc_df: pd.DataFrame,
-    home_goals_pg: float = 1.5,
-    away_goals_pg: float = 1.5,
-    home_conceded_pg: float = 1.0,
-    away_conceded_pg: float = 1.0,
+    home_goals_pg: Optional[float] = None,
+    away_goals_pg: Optional[float] = None,
+    home_conceded_pg: Optional[float] = None,
+    away_conceded_pg: Optional[float] = None,
     home_rest_days: int = 7,
     away_rest_days: int = 7,
 ) -> Dict[str, Any]:
@@ -147,8 +147,20 @@ def predict_match_with_evidence(
     Returns base prediction + evidence chain, risk factors, feature contributions,
     H2H history, and team form trajectory.
     """
-    # Cache key based on teams, round and dataset size
-    cache_key = (home_team, away_team, round_name, len(wc_df))
+    # Cache key includes user-adjustable simulator inputs so sliders cannot
+    # return stale evidence/probability payloads.
+    cache_key = (
+        home_team,
+        away_team,
+        round_name,
+        len(wc_df),
+        home_goals_pg,
+        away_goals_pg,
+        home_conceded_pg,
+        away_conceded_pg,
+        home_rest_days,
+        away_rest_days,
+    )
     if cache_key in _prediction_cache:
         return _prediction_cache[cache_key]
 

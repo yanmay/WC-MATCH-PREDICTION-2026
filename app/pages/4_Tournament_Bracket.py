@@ -13,7 +13,6 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from app.utils import load_data, get_model_and_metrics, get_team_flag, CSS, format_team_html, format_team_emoji, render_sidebar
-from ml.data_loader import get_2026_fixtures
 from ml.predict import predict_match, get_winner_label
 
 st.set_page_config(
@@ -129,16 +128,32 @@ with st.spinner("Preparing tournament simulator..."):
 
 # ── Simulation Logic ──────────────────────────────────────────────────────────
 @st.cache_data(show_spinner=False)
-def run_bracket_simulation(wc_df_local):
+def run_bracket_simulation(wc_df_local, fixtures_signature):
     """Propagate predictions stage-by-stage to simulate the full tournament."""
     # Round of 32
-    r32_fixtures = get_2026_fixtures(wc_df_local)
-    r32_matches = r32_fixtures[r32_fixtures["round"] == "Round of 32"].copy()
+    _, synced_fixtures = load_data()
+    r32_matches = synced_fixtures[synced_fixtures["round"] == "Round of 32"].copy()
+    r32_matches = r32_matches.sort_values("match_id")
     
     r32_results = []
     for _, match in r32_matches.iterrows():
-        pred = predict_match(match["home_team"], match["away_team"], "Round of 32", wc_df_local)
-        winner = get_winner_label(pred["predicted_outcome"], match["home_team"], match["away_team"])
+        if match["status"] == "completed" and pd.notna(match.get("home_score")) and pd.notna(match.get("away_score")):
+            if match["home_score"] > match["away_score"]:
+                winner = match["home_team"]
+            elif match["away_score"] > match["home_score"]:
+                winner = match["away_team"]
+            else:
+                home_pen = match.get("home_penalty_score")
+                away_pen = match.get("away_penalty_score")
+                if pd.notna(home_pen) and pd.notna(away_pen) and home_pen != away_pen:
+                    winner = match["home_team"] if home_pen > away_pen else match["away_team"]
+                else:
+                    pred = predict_match(match["home_team"], match["away_team"], "Round of 32", wc_df_local)
+                    winner = get_winner_label(pred["predicted_outcome"], match["home_team"], match["away_team"])
+            pred = predict_match(match["home_team"], match["away_team"], "Round of 32", wc_df_local)
+        else:
+            pred = predict_match(match["home_team"], match["away_team"], "Round of 32", wc_df_local)
+            winner = get_winner_label(pred["predicted_outcome"], match["home_team"], match["away_team"])
         loser = match["away_team"] if winner == match["home_team"] else match["home_team"]
         r32_results.append({
             "match_id": match["match_id"],
@@ -237,7 +252,12 @@ def run_bracket_simulation(wc_df_local):
     }
 
 # Run simulation
-sim_data = run_bracket_simulation(wc_df)
+fixtures_signature_cols = [
+    "match_id", "home_team", "away_team", "status", "home_score", "away_score",
+    "home_penalty_score", "away_penalty_score"
+]
+fixtures_signature = fixtures[[c for c in fixtures_signature_cols if c in fixtures.columns]].astype(str).to_json()
+sim_data = run_bracket_simulation(wc_df, fixtures_signature)
 
 # Champion Spotlight Card
 champion = sim_data["Final"]["winner"]

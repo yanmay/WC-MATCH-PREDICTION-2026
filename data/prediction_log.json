@@ -395,9 +395,9 @@
     "draw_prob": 0.2698,
     "away_win_prob": 0.5728,
     "logged_at": "2026-06-27T07:00:25.001029",
-    "actual_outcome": "draw",
-    "is_correct": false,
-    "result_recorded_at": "2026-06-28T10:51:45.321541"
+    "actual_outcome": "away_win",
+    "is_correct": true,
+    "result_recorded_at": "2026-06-30T19:41:45.001063"
   },
   "127": {
     "match_id": 127,
@@ -491,9 +491,9 @@
     "draw_prob": 0,
     "away_win_prob": 0.3119,
     "logged_at": "2026-06-27T07:00:25.464285",
-    "actual_outcome": null,
-    "is_correct": null,
-    "result_recorded_at": null
+    "actual_outcome": "away_win",
+    "is_correct": false,
+    "result_recorded_at": "2026-06-28T20:59:14.142862"
   },
   "2": {
     "match_id": 2,
@@ -507,25 +507,25 @@
     "draw_prob": 0,
     "away_win_prob": 0.1893,
     "logged_at": "2026-06-27T07:00:25.542877",
-    "actual_outcome": null,
-    "is_correct": null,
-    "result_recorded_at": null
+    "actual_outcome": "home_win",
+    "is_correct": true,
+    "result_recorded_at": "2026-06-29T19:09:06.826655"
   },
   "3": {
     "match_id": 3,
     "home_team": "Germany",
-    "away_team": "Senegal",
+    "away_team": "Paraguay",
     "round": "Round of 32",
     "date": "2026-06-30",
     "predicted_outcome": "home_win",
-    "confidence": 0.8717,
-    "home_win_prob": 0.8717,
+    "confidence": 0.9241,
+    "home_win_prob": 0.9241,
     "draw_prob": 0,
-    "away_win_prob": 0.1283,
+    "away_win_prob": 0.0759,
     "logged_at": "2026-06-27T07:00:25.617987",
-    "actual_outcome": null,
-    "is_correct": null,
-    "result_recorded_at": null
+    "actual_outcome": "away_win",
+    "is_correct": false,
+    "result_recorded_at": "2026-06-30T19:41:45.783534"
   },
   "4": {
     "match_id": 4,
@@ -539,25 +539,25 @@
     "draw_prob": 0,
     "away_win_prob": 0.1931,
     "logged_at": "2026-06-27T07:00:25.703184",
-    "actual_outcome": null,
-    "is_correct": null,
-    "result_recorded_at": null
+    "actual_outcome": "away_win",
+    "is_correct": false,
+    "result_recorded_at": "2026-06-30T19:41:45.783662"
   },
   "5": {
     "match_id": 5,
     "home_team": "Ivory Coast",
-    "away_team": "Uzbekistan",
+    "away_team": "Norway",
     "round": "Round of 32",
     "date": "2026-06-30",
     "predicted_outcome": "home_win",
-    "confidence": 0.6985,
-    "home_win_prob": 0.6985,
+    "confidence": 0.8539,
+    "home_win_prob": 0.8539,
     "draw_prob": 0,
-    "away_win_prob": 0.3015,
+    "away_win_prob": 0.1461,
     "logged_at": "2026-06-27T07:00:25.776959",
-    "actual_outcome": null,
-    "is_correct": null,
-    "result_recorded_at": null
+    "actual_outcome": "away_win",
+    "is_correct": false,
+    "result_recorded_at": "2026-06-30T19:41:47.005445"
   },
   "6": {
     "match_id": 6,

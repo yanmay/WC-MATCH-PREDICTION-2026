@@ -125,9 +125,9 @@ def get_2026_fixtures(wc_df=None) -> pd.DataFrame:
                     if hc_row["away_team"] == "TBD":
                         fixtures_df.at[idx, "away_team"] = "TBD"
 
-    # Check and update any completed fixtures
-    if wc_df is not None:
-        fixtures_df, did_change = check_and_update_completed_fixtures(fixtures_df, wc_df)
+    # Completed fixtures must come from fixture JSON, manual admin edits, or live APIs.
+    # Do not auto-complete past scheduled matches from model predictions; doing so
+    # turns predictions into fake labels and inflates the accuracy tracker.
 
     # Dynamically resolve TBD slots in the Round of 32 using simulated standings
     if wc_df is not None:
@@ -517,22 +517,36 @@ def save_2026_fixtures(fixtures_df: pd.DataFrame):
     """Serialize the updated 2026 fixtures back to fixtures_2026.json."""
     fixture_path = DATA_DIR / "fixtures_2026.json"
     fixtures_list = fixtures_df.to_dict("records")
+
+    def _is_missing(value) -> bool:
+        if value is None:
+            return True
+        if isinstance(value, (list, dict)):
+            return False
+        try:
+            return bool(pd.isna(value))
+        except Exception:
+            return False
+
+    def _clean_scalar(value):
+        return None if _is_missing(value) else value
+
     for f in fixtures_list:
-        if f.get("home_score") is not None and not pd.isna(f["home_score"]):
-            f["home_score"] = int(f["home_score"])
-        else:
-            f["home_score"] = None
-        if f.get("away_score") is not None and not pd.isna(f["away_score"]):
-            f["away_score"] = int(f["away_score"])
-        else:
-            f["away_score"] = None
+        for key in list(f.keys()):
+            f[key] = _clean_scalar(f[key])
+
+        for score_key in ["home_score", "away_score", "home_penalty_score", "away_penalty_score"]:
+            if f.get(score_key) is not None:
+                f[score_key] = int(f[score_key])
+            else:
+                f[score_key] = None
         if "match_id" in f:
             f["match_id"] = int(f["match_id"])
         if "minute" in f:
-            f["minute"] = str(f["minute"]) if f["minute"] is not None and not pd.isna(f["minute"]) else None
+            f["minute"] = str(f["minute"]) if f["minute"] is not None else None
         if "scorers" in f:
             val = f["scorers"]
-            if val is not None and not pd.isna(val):
+            if val is not None:
                 if isinstance(val, str):
                     try:
                         f["scorers"] = json.loads(val)

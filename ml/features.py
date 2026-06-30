@@ -54,7 +54,8 @@ def _get_or_estimate_match_stats(home, away, hs, as_, date_str) -> dict:
         return _stats_lookup[key]
         
     import random
-    seed = hash(f"{home}_{away}_{hs}_{as_}")
+    seed_src = f"{home}_{away}_{hs}_{as_}_{date_str}".encode("utf-8")
+    seed = int(hashlib.md5(seed_src).hexdigest()[:12], 16)
     rng = random.Random(seed)
     
     if hs > as_:
@@ -372,10 +373,10 @@ def build_prediction_features(
     away_team: str,
     round_name: str,
     wc_df: pd.DataFrame,
-    home_goals_pg: float = 1.5,
-    away_goals_pg: float = 1.5,
-    home_conceded_pg: float = 1.0,
-    away_conceded_pg: float = 1.0,
+    home_goals_pg: float | None = None,
+    away_goals_pg: float | None = None,
+    home_conceded_pg: float | None = None,
+    away_conceded_pg: float | None = None,
     home_rest_days: int = 7,
     away_rest_days: int = 7,
 ) -> pd.DataFrame:
@@ -404,6 +405,10 @@ def build_prediction_features(
     team_stats = _compute_team_stats(wc_df)
     h_stats = team_stats.get(home_team, {"win_rate": 0.33, "draw_rate": 0.20, "goals_pg": 1.5, "conceded_pg": 1.0})
     a_stats = team_stats.get(away_team, {"win_rate": 0.33, "draw_rate": 0.20, "goals_pg": 1.5, "conceded_pg": 1.0})
+    home_goals_pg = h_stats["goals_pg"] if home_goals_pg is None else home_goals_pg
+    away_goals_pg = a_stats["goals_pg"] if away_goals_pg is None else away_goals_pg
+    home_conceded_pg = h_stats["conceded_pg"] if home_conceded_pg is None else home_conceded_pg
+    away_conceded_pg = a_stats["conceded_pg"] if away_conceded_pg is None else away_conceded_pg
 
     h_conf = get_confederation(home_team)
     a_conf = get_confederation(away_team)

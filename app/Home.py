@@ -356,10 +356,28 @@ if model_ready:
         for _, cm in recent.iterrows():
             hs = int(cm.get("home_score") or 0)
             as_ = int(cm.get("away_score") or 0)
-            h_w = hs > as_; a_w = as_ > hs
+            
+            hp = cm.get("home_penalty_score")
+            ap = cm.get("away_penalty_score")
+            import pandas as pd
+            has_pens = pd.notna(hp) and pd.notna(ap)
+            
+            if has_pens and int(hp) != int(ap):
+                h_w = int(hp) > int(ap)
+                a_w = int(ap) > int(hp)
+            else:
+                h_w = hs > as_
+                a_w = as_ > hs
+                
             h_style = "color:#34d399; font-weight:800;" if h_w else ("color:#4b5563;" if a_w else "color:#f3f4f6;")
             a_style = "color:#34d399; font-weight:800;" if a_w else ("color:#4b5563;" if h_w else "color:#f3f4f6;")
-            h_result = '<span class="result-win">WIN</span>' if h_w else ('<span class="result-loss">LOSS</span>' if a_w else '<span class="result-draw">DRAW</span>')
+            
+            if has_pens and int(hp) != int(ap):
+                h_result = '<span class="result-win">WIN (P)</span>' if h_w else '<span class="result-loss">LOSS (P)</span>'
+                score_display = f"{hs} — {as_}<br><span style='font-size:0.65rem; font-weight:normal; opacity:0.85;'>({int(hp)}-{int(ap)} pens)</span>"
+            else:
+                h_result = '<span class="result-win">WIN</span>' if h_w else ('<span class="result-loss">LOSS</span>' if a_w else '<span class="result-draw">DRAW</span>')
+                score_display = f"{hs} — {as_}"
 
             # AI prediction badge for this completed match
             try:
@@ -402,7 +420,7 @@ if model_ready:
                         <span style="{h_style} font-size:0.88rem;">{_flag_img(cm['home_team'])} {cm['home_team']}</span>
                     </div>
                     <div style="text-align:center; min-width:80px;">
-                        <span class="score-badge completed">{hs} — {as_}</span>
+                        <span class="score-badge completed" style="display:inline-block; line-height:1.2; padding:6px 14px;">{score_display}</span>
                         <div style="margin-top:3px;">{h_result}</div>
                     </div>
                     <div style="display:flex; align-items:center; gap:8px; flex:1;">
