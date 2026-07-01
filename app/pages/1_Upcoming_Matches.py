@@ -352,34 +352,25 @@ if not completed_filtered.empty:
         date_label = format_match_date(str(cmatch.get("date", "")))
         date_cls = "today" if date_label == "Today" else ("yesterday" if date_label == "Yesterday" else "")
 
-        card_html = f"""
-        <div class="completed-match-card">
-            <div class="completed-match-header">
-                <div class="completed-match-header-left">
-                    <span class="date-chip {date_cls}">{date_label}</span>
-                    <span style="opacity:0.3; margin:0 4px;">·</span>
-                    <b style="color:#10b981;">{cmatch.get('round', 'Round of 32')}</b>
+        st.markdown(f"""
+        <div class="glass-card" style="padding:12px 18px; margin:4px 0;">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+                <div style="display:flex; align-items:center; gap:10px; flex:1; justify-content:flex-end;">
+                    <span class="{h_cls}" style="font-size:0.95rem;">{hflag} {cmatch['home_team']}</span>
                 </div>
-                <div class="completed-match-header-right">
-                    {ai_badge}
-                </div>
-            </div>
-            <div class="completed-match-body">
-                <div class="completed-match-team home">
-                    <span class="{h_cls}">{cmatch['home_team']}</span>
-                    {hflag}
-                </div>
-                <div class="completed-match-score-sec">
-                    <span class="score-badge completed">{score_display}</span>
+                <div style="text-align:center; min-width:90px;">
+                    <span class="score-badge completed" style="display:inline-block; line-height:1.2; padding:6px 14px;">{score_display}</span>
+                    <div style="margin-top:4px; font-size:0.65rem;">
+                        <span class="date-chip {date_cls}">{date_label}</span>
+                    </div>
                     <div style="margin-top:2px;">{outcome_badge}</div>
                 </div>
-                <div class="completed-match-team away">
-                    {aflag}
-                    <span class="{a_cls}">{cmatch['away_team']}</span>
+                <div style="display:flex; align-items:center; gap:10px; flex:1;">
+                    <span class="{a_cls}" style="font-size:0.95rem;">{aflag} {cmatch['away_team']}</span>
                 </div>
+                <div style="min-width:88px; text-align:right;">{ai_badge}</div>
             </div>
-        </div>""".replace('\n', ' ')
-        st.markdown(card_html, unsafe_allow_html=True)
+        </div>""", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
 # ── Filter Upcoming Fixtures ──────────────────────────────────────────────────

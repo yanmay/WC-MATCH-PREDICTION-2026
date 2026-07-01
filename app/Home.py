@@ -409,34 +409,26 @@ if model_ready:
             date_label = format_match_date(str(cm.get("date", "")))
             date_cls = "today" if date_label == "Today" else ("yesterday" if date_label == "Yesterday" else "")
 
-            card_html = textwrap.dedent(f"""
-            <div class="completed-match-card">
-                <div class="completed-match-header">
-                    <div class="completed-match-header-left">
+            st.markdown(textwrap.dedent(f"""
+            <div class="glass-card" style="padding:10px 16px; margin:3px 0;">
+                <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px;">
+                    <span style="font-size:0.68rem; color:#64748b; min-width:70px;">
                         <span class="date-chip {date_cls}">{date_label}</span>
-                        <span style="opacity:0.3; margin:0 4px;">·</span>
-                        <b style="color:#10b981;">{cm.get('round', 'Round of 32') if cm.get('round') else cm.get('group', 'GS')}</b>
+                        &nbsp;·&nbsp;<b style="color:#10b981;">{cm.get('group','GS')}</b>
+                    </span>
+                    <div style="display:flex; align-items:center; gap:8px; flex:1; justify-content:flex-end;">
+                        <span style="{h_style} font-size:0.88rem;">{_flag_img(cm['home_team'])} {cm['home_team']}</span>
                     </div>
-                    <div class="completed-match-header-right">
-                        {ai_badge_html}
+                    <div style="text-align:center; min-width:80px;">
+                        <span class="score-badge completed" style="display:inline-block; line-height:1.2; padding:6px 14px;">{score_display}</span>
+                        <div style="margin-top:3px;">{h_result}</div>
                     </div>
+                    <div style="display:flex; align-items:center; gap:8px; flex:1;">
+                        <span style="{a_style} font-size:0.88rem;">{_flag_img(cm['away_team'])} {cm['away_team']}</span>
+                    </div>
+                    <div style="min-width:90px; text-align:right;">{ai_badge_html}</div>
                 </div>
-                <div class="completed-match-body">
-                    <div class="completed-match-team home">
-                        <span style="{h_style}">{cm['home_team']}</span>
-                        {_flag_img(cm['home_team'])}
-                    </div>
-                    <div class="completed-match-score-sec">
-                        <span class="score-badge completed">{score_display}</span>
-                        <div style="margin-top:2px;">{h_result}</div>
-                    </div>
-                    <div class="completed-match-team away">
-                        {_flag_img(cm['away_team'])}
-                        <span style="{a_style}">{cm['away_team']}</span>
-                    </div>
-                </div>
-            </div>""").replace('\n', ' ')
-            st.markdown(card_html, unsafe_allow_html=True)
+            </div>"""), unsafe_allow_html=True)
 
 # ── Feature Importance ─────────────────────────────────────────────────────────
 if model_ready:
