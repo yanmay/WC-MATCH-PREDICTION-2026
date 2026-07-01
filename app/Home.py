@@ -589,6 +589,12 @@ elif page == "accuracy":
 elif page == "bracket":
     from app.views.bracket import render_view as render_bracket
     render_bracket()
+elif page == "insights":
+    from app.views.insights import render_view as render_insights
+    render_insights()
+elif page == "history":
+    from app.views.history import render_view as render_history
+    render_history()
 else:
     # default: home or standings
     render_dashboard_view()

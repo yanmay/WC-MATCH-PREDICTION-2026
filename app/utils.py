@@ -1293,182 +1293,211 @@ button[data-testid="collapsedControl"] { display: none !important; }
   border-radius: 4px;
 }
 
-/* ── Premium shadcn-inspired Football Menubar ── */
-.football-menubar {
+/* ── 365scores Inspired Football Header System ── */
+.scores-top-header {
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(6, 78, 59, 0.15) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 8px 18px;
-  gap: 8px;
-  font-family: var(--font-main);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  margin-bottom: 20px;
+  background: #000000;
+  height: 48px;
   width: 100%;
-  position: relative;
-  overflow: visible; /* Show dropdowns */
+  padding: 0 16px;
+  font-family: var(--font-main);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.football-menubar::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent-green), var(--accent-purple));
-  opacity: 0.6;
-}
-
-.menubar-brand {
+.brand-365 {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  margin-right: 16px;
-  padding-right: 16px;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  line-height: 1;
+  margin-right: 20px;
 }
 
-.nav-logo {
-  font-size: 1.2rem;
+.brand-365 .brand-number {
+  font-size: 1.15rem;
   font-weight: 900;
-  background: linear-gradient(135deg, var(--accent-green), var(--accent-purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
+  letter-spacing: -0.5px;
 }
 
-.nav-tagline {
+.brand-365 .brand-text {
   font-size: 0.6rem;
   font-weight: 700;
-  color: var(--text-muted);
-  letter-spacing: 0.5px;
-  margin-top: 1px;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: -2px;
 }
 
-.menubar-menu {
-  position: relative;
-  display: inline-block;
+.scores-top-header .header-tab-active {
+  background: #1a1d24;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.menubar-trigger {
-  background: transparent;
-  border: 1px solid transparent;
-  color: var(--text-secondary);
+.scores-top-header .header-title-text {
+  color: #9ca3af;
   font-size: 0.82rem;
   font-weight: 600;
-  padding: 8px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s;
+  margin-left: 16px;
 }
 
-.menubar-trigger:hover, .menubar-menu:hover .menubar-trigger {
-  background: rgba(52, 211, 153, 0.08);
-  color: var(--accent-green);
-}
-
-.menubar-trigger.active {
-  background: rgba(52, 211, 153, 0.12);
-  color: var(--accent-green);
-  border: 1px solid rgba(52, 211, 153, 0.2);
-  font-weight: 700;
-}
-
-.menubar-trigger-link {
-  text-decoration: none !important;
-  color: var(--text-secondary) !important;
-  font-size: 0.82rem;
-  font-weight: 600;
-  padding: 8px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s;
-  border: 1px solid transparent;
-}
-
-.menubar-trigger-link:hover, .menubar-trigger-link.active {
-  background: rgba(52, 211, 153, 0.08);
-  color: var(--accent-green) !important;
-}
-
-.menubar-trigger-link.active {
-  background: rgba(52, 211, 153, 0.12);
-  color: var(--accent-green) !important;
-  border: 1px solid rgba(52, 211, 153, 0.2);
-  font-weight: 700;
-}
-
-.menubar-content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #111827; /* solid dark background for popup list */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  min-width: 220px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-  padding: 4px;
-  z-index: 9999;
-  margin-top: 6px;
-}
-
-.menubar-menu:hover .menubar-content {
-  display: block;
-}
-
-.menubar-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  color: var(--text-secondary) !important;
-  text-decoration: none !important;
-  font-size: 0.78rem;
-  border-radius: 6px;
-  transition: all 0.2s;
-  cursor: pointer;
-}
-
-.menubar-item:hover {
-  background: rgba(52, 211, 153, 0.08);
-  color: var(--accent-green) !important;
-}
-
-.menubar-item-static {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  color: var(--text-muted);
-  font-size: 0.78rem;
-  border-radius: 6px;
-}
-
-.menubar-right {
+.scores-top-header .predictions-cup-banner {
   margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-main);
+}
+
+.predictions-cup-banner .cup-logo {
+  font-size: 1.1rem;
+}
+
+.predictions-cup-banner .cup-text {
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.header-right-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #9ca3af;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.header-right-actions span:hover {
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.scores-breadcrumbs {
+  background: #111317;
+  padding: 6px 16px;
+  font-size: 0.68rem;
+  color: #6b7280;
+  font-weight: 600;
+  width: 100%;
+}
+
+.scores-main-header {
+  background: #111317;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.wc-badge-large {
+  width: 44px;
+  height: 44px;
+  background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
+  border: 1px solid rgba(250, 204, 21, 0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 0 10px rgba(250, 204, 21, 0.15);
+}
+
+.wc-title-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.wc-title-row {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.nav-accuracy-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid rgba(52, 211, 153, 0.3);
-  background: rgba(52, 211, 153, 0.04);
-  padding: 4px 10px;
+.wc-main-title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.wc-follow-btn {
+  background: transparent;
+  border: 1px solid #3b82f6;
+  color: #3b82f6 !important;
+  font-size: 0.7rem;
+  font-weight: 700;
   border-radius: 20px;
+  padding: 2px 12px;
+  cursor: pointer;
+  text-decoration: none !important;
+  transition: all 0.2s;
+}
+
+.wc-follow-btn:hover {
+  background: #3b82f6;
+  color: #ffffff !important;
+}
+
+.wc-follower-count {
   font-size: 0.72rem;
+  color: #6b7280;
   font-weight: 600;
-  color: var(--accent-green) !important;
+}
+
+.scores-tabs-row {
+  background: #111317;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  padding: 0 16px;
+  gap: 20px;
+  width: 100%;
+}
+
+.score-tab-item {
+  color: #9ca3af !important;
+  text-decoration: none !important;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 10px 4px;
+  position: relative;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.score-tab-item:hover {
+  color: #ffffff !important;
+}
+
+.score-tab-item.active {
+  color: #3b82f6 !important;
+  font-weight: 700;
+}
+
+.score-tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #3b82f6;
+  border-radius: 3px 3px 0 0;
 }
 
 .pulse-dot {
@@ -1480,9 +1509,9 @@ button[data-testid="collapsedControl"] { display: none !important; }
 }
 
 @keyframes pulse-animation {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(251, 191, 36, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
 }
 
 /* Ensure Streamlit page content stretches nicely since there is no sidebar */
@@ -1493,48 +1522,57 @@ button[data-testid="collapsedControl"] { display: none !important; }
   padding-top: 1rem !important;
 }
 
-/* ── Mobile styles for Football Menubar ── */
-@media (max-width: 768px) {
-  .football-menubar {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 6px;
-    padding: 10px;
-    border-radius: 12px;
+/* ── Mobile styles for Sports Header System ── */
+  @media (max-width: 768px) {
+    .scores-top-header {
+      flex-wrap: wrap;
+      height: auto;
+      padding: 8px;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .scores-top-header .predictions-cup-banner {
+      width: 100%;
+      justify-content: center;
+      order: 3;
+      margin-top: 4px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 4px;
+    }
+    .scores-main-header {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 8px;
+      padding: 12px;
+    }
+    .wc-title-row {
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .wc-main-title {
+      font-size: 1.15rem;
+      text-align: center;
+    }
+    .scores-tabs-row {
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      white-space: nowrap !important;
+      gap: 14px;
+      padding: 0 8px;
+      justify-content: flex-start;
+    }
+    .scores-tabs-row::-webkit-scrollbar {
+      display: none;
+    }
+    .score-tab-item {
+      display: inline-block;
+      font-size: 0.78rem;
+      padding: 8px 2px;
+      white-space: nowrap;
+    }
   }
-  .menubar-brand {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding-bottom: 6px;
-    margin-right: 0;
-    margin-bottom: 4px;
-    align-items: center;
-    text-align: center;
-  }
-  .menubar-menu {
-    width: 100%;
-  }
-  .menubar-trigger, .menubar-trigger-link {
-    width: 100%;
-    justify-content: space-between;
-    font-size: 0.78rem;
-    padding: 8px 10px;
-  }
-  .menubar-content {
-    position: static;
-    box-shadow: none;
-    width: 100%;
-    border: none;
-    background: rgba(255, 255, 255, 0.02);
-    padding-left: 12px;
-    margin-top: 2px;
-  }
-  .menubar-right {
-    margin-left: 0;
-    margin-top: 6px;
-    justify-content: center;
-  }
-}
 
 /* ─── Comprehensive Mobile Phone Layout ─── */
 @media (max-width: 768px) {
