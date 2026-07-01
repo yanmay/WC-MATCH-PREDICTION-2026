@@ -172,15 +172,15 @@ def render_sidebar():
         pass
 
     refresh_seconds = 0
-    if page_name == "Home.py":
+    if page == "home":
         refresh_seconds = 30 if is_live_active else 60
-    elif page_name == "1_Upcoming_Matches.py":
+    elif page == "upcoming" or page == "completed":
         refresh_seconds = 30 if is_live_active else 60
-    elif page_name == "3_Accuracy_Tracker.py":
+    elif page == "accuracy":
         refresh_seconds = 30 if is_live_active else 60
-    elif page_name == "4_Tournament_Bracket.py":
+    elif page == "bracket":
         refresh_seconds = 30 if is_live_active else 120
-    elif page_name == "2_Match_Detail.py":
+    elif page == "detail":
         if is_live_active:
             refresh_seconds = 30
 
