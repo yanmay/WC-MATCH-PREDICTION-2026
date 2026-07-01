@@ -127,7 +127,7 @@ with st.spinner("Preparing tournament simulator..."):
     pipeline, model_metrics = get_model_and_metrics()
 
 # ── Simulation Logic ──────────────────────────────────────────────────────────
-@st.cache_data(show_spinner=False)
+@st.cache_data(show_spinner=False, ttl=5)
 def run_bracket_simulation(wc_df_local, fixtures_signature):
     """Propagate predictions stage-by-stage to simulate the full tournament."""
     # Round of 32
