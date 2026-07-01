@@ -71,11 +71,13 @@ def render_sidebar():
     # Retrieve active page from query parameter (Single Page App Routing)
     page = st.query_params.get("page", "home")
 
-    active_home = "active" if page == "home" or page == "standings" else ""
-    active_upcoming = "active" if page == "upcoming" or page == "completed" else ""
-    active_detail = "active" if page == "detail" else ""
-    active_accuracy = "active" if page == "accuracy" else ""
-    active_bracket = "active" if page == "bracket" else ""
+    active_home = "navigation-tabs_active_button__Xibo0" if page == "home" or page == "standings" else ""
+    active_upcoming = "navigation-tabs_active_button__Xibo0" if page == "upcoming" or page == "completed" else ""
+    active_detail = "navigation-tabs_active_button__Xibo0" if page == "detail" else ""
+    active_accuracy = "navigation-tabs_active_button__Xibo0" if page == "accuracy" else ""
+    active_bracket = "navigation-tabs_active_button__Xibo0" if page == "bracket" else ""
+    active_insights = "navigation-tabs_active_button__Xibo0" if page == "insights" else ""
+    active_history = "navigation-tabs_active_button__Xibo0" if page == "history" else ""
 
     # Live accuracy stats indicator badge
     accuracy_badge = ""
@@ -88,80 +90,83 @@ def render_sidebar():
             total = stats["resolved"]
             pct = acc_2026 * 100
             bar_color = "#34d399" if pct >= 60 else ("#fbbf24" if pct >= 45 else "#f87171")
-            accuracy_badge = f'<div class="nav-accuracy-badge" style="border-color:{bar_color}; color:{bar_color};"><span class="pulse-dot" style="background-color:{bar_color}"></span>Live Accuracy: {pct:.0f}% ({correct}/{total})</div>'
+            accuracy_badge = f'''
+            <div class="description-header_popularity__1qYGo" style="border:1px solid {bar_color}; background:rgba(255,255,255,0.06); padding:4px 10px; border-radius:20px; font-size:0.72rem; font-weight:700; color:#ffffff; gap:6px;">
+                <span class="pulse-dot" style="background-color:{bar_color}; width:6px; height:6px; border-radius:50%;"></span>
+                Live Accuracy: {pct:.0f}% ({correct}/{total})
+            </div>
+            '''
     except Exception:
         pass
 
-    # Model and training stats meta indicators
-    try:
-        wc_df, _ = load_data()
-        _, metrics = get_model_and_metrics()
-        acc = metrics.get("accuracy", 0.7182)
-        cv_acc = metrics.get("cv_mean_accuracy", 0.7056)
-        algo = metrics.get("selected_algorithm", metrics.get("algorithm", "logistic_regression")).replace("_", " ").title()
-        train_count = len(wc_df)
-    except Exception:
-        train_count = 9856
-        acc = 0.7182
-        cv_acc = 0.7056
-        algo = "Logistic Regression"
-
-    st.markdown(f"""
-<div class="football-menubar">
-  <div class="menubar-brand">
-    <span class="nav-logo">⚽ WC 2026</span>
-    <span class="nav-tagline">AI MATCH PREDICTION ENGINE</span>
-  </div>
-  
-  <!-- Dashboard Menu -->
-  <div class="menubar-menu">
-    <a href="/?page=home" class="menubar-trigger-link {active_home}" target="_self">🏠 Home</a>
-  </div>
-
-  <!-- Matches Dropdown Menu -->
-  <div class="menubar-menu">
-    <button class="menubar-trigger {active_upcoming}">📅 Matches</button>
-    <div class="menubar-content">
-      <a href="/?page=upcoming" class="menubar-item" target="_self">📅 Upcoming Matches</a>
-      <a href="/?page=completed" class="menubar-item" target="_self">✅ Completed Results</a>
+    # Render 365scores cloned top header, breadcrumbs, description-header, and tab rows
+    st.markdown(f'''
+<div class="site-header_top_header__CILGU" data-theme="dark">
+  <div class="site-header_aside_content__IoO7p">
+    <div class="site-header_main_logo_container__ZOkG6">
+      <a class="site-header_main_logo__nvMAg" href="/?page=home" target="_self">
+        <img id="logo" alt="365scores" class="logo-image" src="https://imagecache.365scores.com/image/upload/f_auto,q_auto:eco,dpr_1/WebSite/logo_wide_new" style="height: 20px; vertical-align: middle;">
+      </a>
     </div>
   </div>
-
-  <!-- Tournament Dropdown Menu -->
-  <div class="menubar-menu">
-    <button class="menubar-trigger {active_bracket}">🏆 Tournament</button>
-    <div class="menubar-content">
-      <a href="/?page=bracket" class="menubar-item" target="_self">🌳 Symmetrical Bracket</a>
-      <a href="/?page=standings" class="menubar-item" target="_self">📊 Group Standings</a>
-    </div>
-  </div>
-
-  <!-- AI Predictor Dropdown Menu -->
-  <div class="menubar-menu">
-    <button class="menubar-trigger {active_detail or active_accuracy}">🤖 AI Predictor</button>
-    <div class="menubar-content">
-      <a href="/?page=detail" class="menubar-item" target="_self">🔍 Interactive Simulator</a>
-      <a href="/?page=accuracy" class="menubar-item" target="_self">📈 Accuracy & Calibration</a>
-    </div>
-  </div>
-
-  <!-- Engine Config Dropdown Menu (Remixed to Football Theme) -->
-  <div class="menubar-menu">
-    <button class="menubar-trigger">⚙️ Engine Config</button>
-    <div class="menubar-content">
-      <div class="menubar-item-static" style="font-weight:700; color:var(--accent-green);">🤖 Model: {algo}</div>
-      <div class="menubar-item-static">🎯 Test Accuracy: {acc:.2%}</div>
-      <div class="menubar-item-static">📈 CV Accuracy: {cv_acc:.2%}</div>
-      <div class="menubar-item-static">📊 Data: {train_count:,} WC matches</div>
-    </div>
-  </div>
-
-  <!-- Right Side Live Stats -->
-  <div class="menubar-right">
-    {accuracy_badge}
+  <div class="site-header_aside_content__IoO7p">
+    <a class="site-header_my_scores__5UaSa" href="/?page=home" target="_self">My Scores</a>
+    <button class="site-header_search_button__3pJPq">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+        <path d="M17.1554 15.0935H16.0659L15.6871 14.7175C17.025 13.1574 17.8388 11.1349 17.8388 8.91887C17.8388 3.99291 13.8456 0 8.91938 0C3.99314 0 0 3.99291 0 8.91887C0 13.8448 3.99314 17.8377 8.91938 17.8377C11.1355 17.8377 13.1568 17.0254 14.717 15.689L15.0957 16.0649V17.1517L21.954 24L24 21.9541L17.1554 15.0935ZM9 15C5.68533 15 3 12.3147 3 9C3 5.68667 5.68533 3 9 3C12.3133 3 15 5.68667 15 9C15 12.3147 12.3133 15 9 15Z"></path>
+      </svg>
+    </button>
+    <button class="site-header_settings_button__XNDDK">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 16 16">
+        <g fill-rule="nonzero">
+          <path d="M15.181 6.32l-1.123-.19a6.341 6.341 0 0 0-.451-1.09l.662-.926a.985.985 0 0 0-.107-1.273l-.996-.996a.981.981 0 0 0-1.27-.107l-.93.662a6.275 6.275 0 0 0-1.13-.465L9.65.825A.987.987 0 0 0 8.673 0H7.266a.987.987 0 0 0-.976.826l-.194 1.136c-.374.117-.738.27-1.086.458l-.919-.662a.981.981 0 0 0-.575-.184.975.975 0 0 0-.698.291l-1 .996a.99.99 0 0 0-.107 1.274l.669.939c-.184.35-.331.715-.445 1.093l-1.11.187A.987.987 0 0 0 0 7.33v1.407c0 .485.348.896.826.976l1.136.194c.117.374.27.738.458 1.086l-.659.916a.985.985 0 0 0 .107 1.273l.996.996a.981.981 0 0 0 1.27.107l.94-.668c.337.177.692.32 1.056.434l.187 1.123c.08.478.491.826.976.826h1.41a.987.987 0 0 0 .976-.826l.191-1.123a6.341 6.341 0 0 0 1.09-.45l.925.661c.168.12.368.184.575.184a.981.981 0 0 0 .699-.291l.996-.996a.99.99 0 0 0 .107-1.273l-.662-.93c.184-.35.338-.715.451-1.09l1.123-.186A.987.987 0 0 0 16 8.704V7.296a.975.975 0 0 0-.819-.976zm-.077 2.384c0 .043-.03.08-.073.086l-1.404.234a.449.449 0 0 0-.361.331 5.35 5.35 0 0 1-.582 1.4.452.452 0 0 0 .02.492l.826 1.163a.091.091 0 0 1-.01.114l-.996.996a.085.085 0 0 1-.064.027.082.082 0 0 1-.05-.017l-1.16-.826a.452.452 0 0 0-.49-.02 5.35 5.35 0 0 1-1.401.582.444.444 0 0 0-.331.36l-.238 1.405a.087.087 0 0 1-.086.073H7.296a.087.087 0 0 1-.087-.073l-.233-1.404a.449.449 0 0 0-.331-.361 5.556 5.556 0 0 1-1.37-.562.463.463 0 0 0-.228-.06.44.44 0 0 0-.26.084l-1.17.832a.1.1 0 0 1-.05.017.09.09 0 0 1-.064-.027l-.996-.996a.09.09 0 0 1-.01-.114l.822-1.153a.458.458 0 0 0 .02-.494 5.3 5.3 0 0 1-.588-1.398.458.458 0 0 0-.361-.33L.976 8.824a.087.087 0 0 1-.074-.087V7.33c0-.044.03-.08.074-.087l1.394-.234c.177-.03.32-.16.364-.334.124-.492.314-.966.572-1.404a.446.446 0 0 0-.024-.488l-.832-1.17a.091.091 0 0 1 .01-.114l.996-.996a.085.085 0 0 1 .064-.026c.02 0 .036.006.05.016l1.153.823c.147.103.34.11.494.02a5.3 5.3 0 0 1 1.398-.589c.17-.046.3-.187.33-.36L7.186.972a.087.087 0 0 1 .087-.074H8.68c.044 0 .08.03.087.074l.234 1.393c.03.178.16.321.334.365.505.127.986.324 1.434.588.154.09.344.084.491-.02l1.154-.829a.1.1 0 0 1 .05-.017.09.09 0 0 1 .063.027l.996.996a.09.09 0 0 1 .01.114l-.825 1.16a.452.452 0 0 0-.02.49c.26.439.454.91.581 1.401a.444.444 0 0 0 .361.331l1.404.238a.087.087 0 0 1 .073.086v1.408h-.003z"></path>
+          <path d="M8 4C5.793 4 4 5.793 4 8s1.793 4 4 4 4-1.793 4-4-1.793-4-4-4zm0 6.955A2.956 2.956 0 0 1 5.045 8 2.956 2.956 0 0 1 8 5.045 2.956 2.956 0 0 1 10.955 8 2.956 2.956 0 0 1 8 10.955z"></path>
+        </g>
+      </svg>
+    </button>
   </div>
 </div>
-""", unsafe_allow_html=True)
+
+<div class="breadcrumbs_container__4oLYY">
+  <div class="breadcrumbs_content__ohWc0">
+    <a class="breadcrumbs_item__WCaL9" href="/?page=home" target="_self">
+      Football
+      <svg viewBox="0 0 24 24" class="breadcrumbs_arrow__nIEHf">
+        <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"></path>
+      </svg>
+    </a>
+    <span class="breadcrumbs_item__WCaL9 breadcrumbs_last_item__QWguQ">FIFA World Cup</span>
+  </div>
+</div>
+
+<div class="description-header_container__8txuY">
+  <div class="description-header_title_row__xX7yB">
+    <a href="/?page=home" target="_self" style="display: flex; align-items: center;">
+      <img class="entity-mega-header-module_logo__W0q77" alt="FIFA World Cup" src="https://imagecache.365scores.com/image/upload/f_png,w_24,h_24,c_limit,q_auto:eco,dpr_3,d_Countries:Round:54.png/v19/Competitions/5930">
+    </a>
+    <h1 class="description-header_title__p3lKx">FIFA World Cup: Livescore</h1>
+  </div>
+  <div class="description-header_content__X3P5G">
+    <div>The latest Livescore, predictions, simulator and results for the FIFA World Cup 2026 Canada/Mexico/USA</div>
+    <div class="description-header_follow_container__xPc5W">
+      <button class="description-header_inactive_follow__WeoBX">Follow</button>
+      {accuracy_badge if accuracy_badge else '<div class="description-header_popularity__1qYGo">👤 35.34M</div>'}
+    </div>
+  </div>
+</div>
+
+<div class="navigation-tabs_container__XHS-c">
+  <div class="navigation-tabs_tabs__Ezwzw">
+    <a class="navigation-tabs_button__ncOhT {active_detail}" href="/?page=detail" target="_self">Details</a>
+    <a class="navigation-tabs_button__ncOhT {active_upcoming}" href="/?page=upcoming" target="_self">Matches</a>
+    <a class="navigation-tabs_button__ncOhT {active_home}" href="/?page=home" target="_self">Groups</a>
+    <a class="navigation-tabs_button__ncOhT {active_bracket}" href="/?page=bracket" target="_self">Bracket</a>
+    <a class="navigation-tabs_button__ncOhT {active_accuracy}" href="/?page=accuracy" target="_self">Stats</a>
+    <a class="navigation-tabs_button__ncOhT {active_insights}" href="/?page=insights" target="_self">Insights</a>
+    <a class="navigation-tabs_button__ncOhT {active_history}" href="/?page=history" target="_self">History</a>
+  </div>
+</div>
+''', unsafe_allow_html=True)
 
     # Centralized Live/Static auto-refresh controller
     is_live_active = False
@@ -1293,203 +1298,223 @@ button[data-testid="collapsedControl"] { display: none !important; }
   border-radius: 4px;
 }
 
-/* ── 365scores Inspired Football Header System ── */
-.scores-top-header {
+/* ── 365scores Exact Replica Football Header System ── */
+.site-header_top_header__CILGU {
   display: flex;
   align-items: center;
-  background: #000000;
+  background: #11141a;
   height: 48px;
   width: 100%;
   padding: 0 16px;
   font-family: var(--font-main);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;
 }
 
-.brand-365 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  margin-right: 20px;
-}
-
-.brand-365 .brand-number {
-  font-size: 1.15rem;
-  font-weight: 900;
-  color: #ffffff;
-  letter-spacing: -0.5px;
-}
-
-.brand-365 .brand-text {
-  font-size: 0.6rem;
-  font-weight: 700;
-  color: #ffffff;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-top: -2px;
-}
-
-.scores-top-header .header-tab-active {
-  background: #1a1d24;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 0.85rem;
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-  border-left: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.scores-top-header .header-title-text {
-  color: #9ca3af;
-  font-size: 0.82rem;
-  font-weight: 600;
-  margin-left: 16px;
-}
-
-.scores-top-header .predictions-cup-banner {
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-main);
-}
-
-.predictions-cup-banner .cup-logo {
-  font-size: 1.1rem;
-}
-
-.predictions-cup-banner .cup-text {
-  color: #ffffff;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
-
-.header-right-actions {
-  margin-left: auto;
+.site-header_aside_content__IoO7p {
   display: flex;
   align-items: center;
   gap: 16px;
-  color: #9ca3af;
-  font-size: 0.82rem;
-  font-weight: 600;
 }
 
-.header-right-actions span:hover {
-  color: #ffffff;
+.site-header_main_logo_container__ZOkG6 {
+  display: flex;
+  align-items: center;
+}
+
+.site-header_main_logo__nvMAg {
+  display: flex;
+  align-items: center;
+  height: 24px;
+}
+
+.site-header_my_scores__5UaSa {
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: opacity 0.2s;
   cursor: pointer;
 }
 
-.scores-breadcrumbs {
-  background: #111317;
-  padding: 6px 16px;
-  font-size: 0.68rem;
-  color: #6b7280;
-  font-weight: 600;
-  width: 100%;
+.site-header_my_scores__5UaSa:hover {
+  opacity: 0.8;
 }
 
-.scores-main-header {
-  background: #111317;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  width: 100%;
-}
-
-.wc-badge-large {
-  width: 44px;
-  height: 44px;
-  background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
-  border: 1px solid rgba(250, 204, 21, 0.4);
-  border-radius: 50%;
+.site-header_search_button__3pJPq, .site-header_settings_button__XNDDK {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  box-shadow: 0 0 10px rgba(250, 204, 21, 0.15);
+  border-radius: 50%;
+  transition: background-color 0.2s;
 }
 
-.wc-title-container {
+.site-header_search_button__3pJPq:hover, .site-header_settings_button__XNDDK:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.site-header_search_button__3pJPq svg, .site-header_settings_button__XNDDK svg {
+  fill: #9ca3af;
+  transition: fill 0.2s;
+}
+
+.site-header_search_button__3pJPq:hover svg, .site-header_settings_button__XNDDK:hover svg {
+  fill: #ffffff;
+}
+
+/* Breadcrumbs Section */
+.breadcrumbs_container__4oLYY {
+  background: #171b22;
+  padding: 6px 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.breadcrumbs_content__ohWc0 {
+  display: flex;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.breadcrumbs_item__WCaL9 {
+  color: #9ca3af !important;
+  text-decoration: none !important;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.breadcrumbs_item__WCaL9:hover {
+  color: #ffffff !important;
+}
+
+.breadcrumbs_arrow__nIEHf {
+  width: 12px;
+  height: 12px;
+  fill: #6b7280;
+  margin: 0 4px;
+}
+
+.breadcrumbs_last_item__QWguQ {
+  color: #ffffff !important;
+  cursor: default;
+}
+
+/* Description Header Section (Qatar Burgundy #a50035) */
+.description-header_container__8txuY {
+  background-color: rgb(165, 0, 53);
+  color: rgb(255, 255, 255);
+  padding: 16px 16px;
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  gap: 6px;
 }
 
-.wc-title-row {
+.description-header_title_row__xX7yB {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.wc-main-title {
-  font-size: 1.4rem;
-  font-weight: 900;
-  color: #ffffff;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+.entity-mega-header-module_logo__W0q77 {
+  max-width: 28px;
+  max-height: 28px;
+  width: auto;
+  height: auto;
+  border-radius: 4px;
 }
 
-.wc-follow-btn {
-  background: transparent;
-  border: 1px solid #3b82f6;
-  color: #3b82f6 !important;
-  font-size: 0.7rem;
+.description-header_title__p3lKx {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0;
+  color: #ffffff !important;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+
+.description-header_content__X3P5G {
+  font-size: 0.8rem;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.description-header_follow_container__xPc5W {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.description-header_inactive_follow__WeoBX {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff !important;
+  font-size: 0.72rem;
   font-weight: 700;
   border-radius: 20px;
-  padding: 2px 12px;
+  padding: 3px 14px;
   cursor: pointer;
-  text-decoration: none !important;
-  transition: all 0.2s;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
-.wc-follow-btn:hover {
-  background: #3b82f6;
-  color: #ffffff !important;
+.description-header_inactive_follow__WeoBX:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #ffffff;
 }
 
-.wc-follower-count {
+.description-header_popularity__1qYGo {
+  display: inline-flex;
+  align-items: center;
   font-size: 0.72rem;
-  color: #6b7280;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.scores-tabs-row {
-  background: #111317;
+/* Navigation Tabs Section */
+.navigation-tabs_container__XHS-c {
+  background: #171b22;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.navigation-tabs_tabs__Ezwzw {
   display: flex;
   padding: 0 16px;
-  gap: 20px;
-  width: 100%;
+  gap: 18px;
 }
 
-.score-tab-item {
+.navigation-tabs_button__ncOhT {
   color: #9ca3af !important;
   text-decoration: none !important;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  padding: 10px 4px;
+  padding: 12px 2px;
   position: relative;
-  transition: all 0.2s;
+  transition: color 0.2s;
   cursor: pointer;
 }
 
-.score-tab-item:hover {
+.navigation-tabs_button__ncOhT:hover {
   color: #ffffff !important;
 }
 
-.score-tab-item.active {
+.navigation-tabs_active_button__Xibo0 {
   color: #3b82f6 !important;
   font-weight: 700;
 }
 
-.score-tab-item.active::after {
+.navigation-tabs_active_button__Xibo0::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -1522,54 +1547,41 @@ button[data-testid="collapsedControl"] { display: none !important; }
   padding-top: 1rem !important;
 }
 
-/* ── Mobile styles for Sports Header System ── */
+/* ── Mobile styles for 365scores Header System ── */
   @media (max-width: 768px) {
-    .scores-top-header {
-      flex-wrap: wrap;
-      height: auto;
-      padding: 8px;
-      justify-content: space-between;
-      gap: 8px;
+    .site-header_top_header__CILGU {
+      padding: 0 12px;
     }
-    .scores-top-header .predictions-cup-banner {
-      width: 100%;
-      justify-content: center;
-      order: 3;
-      margin-top: 4px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding-top: 4px;
+    .site-header_my_scores__5UaSa {
+      font-size: 0.78rem;
+      margin-right: 8px;
     }
-    .scores-main-header {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 8px;
+    .description-header_container__8txuY {
       padding: 12px;
     }
-    .wc-title-row {
+    .description-header_title__p3lKx {
+      font-size: 1.25rem;
+    }
+    .description-header_content__X3P5G {
       flex-direction: column;
-      align-items: center;
-      gap: 6px;
+      align-items: flex-start;
+      gap: 8px;
     }
-    .wc-main-title {
-      font-size: 1.15rem;
-      text-align: center;
-    }
-    .scores-tabs-row {
+    .navigation-tabs_tabs__Ezwzw {
       overflow-x: auto !important;
       -webkit-overflow-scrolling: touch !important;
       white-space: nowrap !important;
       gap: 14px;
-      padding: 0 8px;
+      padding: 0 12px;
       justify-content: flex-start;
     }
-    .scores-tabs-row::-webkit-scrollbar {
+    .navigation-tabs_tabs__Ezwzw::-webkit-scrollbar {
       display: none;
     }
-    .score-tab-item {
+    .navigation-tabs_button__ncOhT {
       display: inline-block;
       font-size: 0.78rem;
-      padding: 8px 2px;
+      padding: 10px 2px;
       white-space: nowrap;
     }
   }
