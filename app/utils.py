@@ -1775,17 +1775,6 @@ button[data-testid="collapsedControl"] { display: none !important; }
 
   /* Round badge */
   .round-badge { font-size: 0.6rem !important; padding: 2px 8px !important; }
-
-  /* Factor chips */
-  .factor-chip { font-size: 0.65rem !important; padding: 3px 8px !important; }
-
-  /* Buttons */
-  .stButton > button {
-    min-height: 44px !important;
-    font-size: 0.9rem !important;
-    width: 100% !important;
-  }
-
   /* Tabs */
   [data-testid="stTabs"] [data-baseweb="tab"] {
     font-size: 0.78rem !important;
@@ -1801,19 +1790,6 @@ button[data-testid="collapsedControl"] { display: none !important; }
   [data-testid="stTable"], [data-testid="stDataFrame"] {
     overflow-x: auto !important;
   }
-
-  /* Bracket horizontal scroll */
-  .bracket-scroll-container {
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-  .bracket-flow-wrapper {
-    min-width: 900px;
-  }
-
-  /* Dropdown / selectbox */
-  [data-testid="stSelectbox"] > div {
-    font-size: 0.82rem !important;
 
   /* Bracket horizontal scroll */
   .bracket-scroll-container {
