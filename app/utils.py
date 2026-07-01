@@ -68,21 +68,14 @@ def load_data():
 
 
 def render_sidebar():
-    # Identify calling script to highlight active top navigation tab
-    try:
-        import inspect
-        import os
-        stack = inspect.stack()
-        caller_filename = stack[1].filename
-        page_name = os.path.basename(caller_filename)
-    except Exception:
-        page_name = ""
+    # Retrieve active page from query parameter (Single Page App Routing)
+    page = st.query_params.get("page", "home")
 
-    active_home = "active" if page_name == "Home.py" else ""
-    active_upcoming = "active" if page_name == "1_Upcoming_Matches.py" else ""
-    active_detail = "active" if page_name == "2_Match_Detail.py" else ""
-    active_accuracy = "active" if page_name == "3_Accuracy_Tracker.py" else ""
-    active_bracket = "active" if page_name == "4_Tournament_Bracket.py" else ""
+    active_home = "active" if page == "home" or page == "standings" else ""
+    active_upcoming = "active" if page == "upcoming" or page == "completed" else ""
+    active_detail = "active" if page == "detail" else ""
+    active_accuracy = "active" if page == "accuracy" else ""
+    active_bracket = "active" if page == "bracket" else ""
 
     # Live accuracy stats indicator badge
     accuracy_badge = ""
@@ -114,30 +107,58 @@ def render_sidebar():
         algo = "Logistic Regression"
 
     st.markdown(f"""
-<div class="top-nav-bar">
-  <div class="top-nav-main">
-    <div class="mobile-nav-header">
-      <div class="nav-brand">
-        <span class="nav-logo">⚽ WC 2026</span>
-        <span class="nav-tagline">AI MATCH PREDICTION ENGINE</span>
-      </div>
-      <div class="nav-accuracy-badge-container">
-        {accuracy_badge}
-      </div>
-    </div>
-    <div class="nav-links">
-      <a href="/" class="nav-item {active_home}">🏠 Home</a>
-      <a href="/Upcoming_Matches" class="nav-item {active_upcoming}">📅 Matches</a>
-      <a href="/Match_Detail" class="nav-item {active_detail}">🔍 Detail</a>
-      <a href="/Accuracy_Tracker" class="nav-item {active_accuracy}">📊 Accuracy</a>
-      <a href="/Tournament_Bracket" class="nav-item {active_bracket}">🏆 Bracket</a>
+<div class="football-menubar">
+  <div class="menubar-brand">
+    <span class="nav-logo">⚽ WC 2026</span>
+    <span class="nav-tagline">AI MATCH PREDICTION ENGINE</span>
+  </div>
+  
+  <!-- Dashboard Menu -->
+  <div class="menubar-menu">
+    <a href="/?page=home" class="menubar-trigger-link {active_home}" target="_self">🏠 Home</a>
+  </div>
+
+  <!-- Matches Dropdown Menu -->
+  <div class="menubar-menu">
+    <button class="menubar-trigger {active_upcoming}">📅 Matches</button>
+    <div class="menubar-content">
+      <a href="/?page=upcoming" class="menubar-item" target="_self">📅 Upcoming Matches</a>
+      <a href="/?page=completed" class="menubar-item" target="_self">✅ Completed Results</a>
     </div>
   </div>
-  <div class="top-nav-meta">
-    <span>🤖 Model: {algo} + CalibratedCV</span>
-    <span>🎯 Test Accuracy: {acc:.2%}</span>
-    <span>📈 CV Accuracy: {cv_acc:.2%}</span>
-    <span>📊 Data: {train_count:,} WC matches</span>
+
+  <!-- Tournament Dropdown Menu -->
+  <div class="menubar-menu">
+    <button class="menubar-trigger {active_bracket}">🏆 Tournament</button>
+    <div class="menubar-content">
+      <a href="/?page=bracket" class="menubar-item" target="_self">🌳 Symmetrical Bracket</a>
+      <a href="/?page=standings" class="menubar-item" target="_self">📊 Group Standings</a>
+    </div>
+  </div>
+
+  <!-- AI Predictor Dropdown Menu -->
+  <div class="menubar-menu">
+    <button class="menubar-trigger {active_detail or active_accuracy}">🤖 AI Predictor</button>
+    <div class="menubar-content">
+      <a href="/?page=detail" class="menubar-item" target="_self">🔍 Interactive Simulator</a>
+      <a href="/?page=accuracy" class="menubar-item" target="_self">📈 Accuracy & Calibration</a>
+    </div>
+  </div>
+
+  <!-- Engine Config Dropdown Menu (Remixed to Football Theme) -->
+  <div class="menubar-menu">
+    <button class="menubar-trigger">⚙️ Engine Config</button>
+    <div class="menubar-content">
+      <div class="menubar-item-static" style="font-weight:700; color:var(--accent-green);">🤖 Model: {algo}</div>
+      <div class="menubar-item-static">🎯 Test Accuracy: {acc:.2%}</div>
+      <div class="menubar-item-static">📈 CV Accuracy: {cv_acc:.2%}</div>
+      <div class="menubar-item-static">📊 Data: {train_count:,} WC matches</div>
+    </div>
+  </div>
+
+  <!-- Right Side Live Stats -->
+  <div class="menubar-right">
+    {accuracy_badge}
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -1272,22 +1293,24 @@ button[data-testid="collapsedControl"] { display: none !important; }
   border-radius: 4px;
 }
 
-/* ── Premium Top Navigation Bar ── */
-.top-nav-bar {
+/* ── Premium shadcn-inspired Football Menubar ── */
+.football-menubar {
+  display: flex;
+  align-items: center;
   background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(6, 78, 59, 0.15) 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 14px;
-  padding: 12px 18px;
-  margin-bottom: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  position: relative;
-  overflow: hidden;
+  padding: 8px 18px;
+  gap: 8px;
+  font-family: var(--font-main);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  margin-bottom: 20px;
   width: 100%;
+  position: relative;
+  overflow: visible; /* Show dropdowns */
 }
 
-.top-nav-bar::after {
+.football-menubar::after {
   content: '';
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -1296,26 +1319,17 @@ button[data-testid="collapsedControl"] { display: none !important; }
   opacity: 0.6;
 }
 
-.top-nav-main {
+.menubar-brand {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.mobile-nav-header {
-  display: contents; /* flat layout on desktop */
-}
-
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  order: 1;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 16px;
+  padding-right: 16px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-logo {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 900;
   background: linear-gradient(135deg, var(--accent-green), var(--accent-purple));
   -webkit-background-clip: text;
@@ -1324,44 +1338,124 @@ button[data-testid="collapsedControl"] { display: none !important; }
 }
 
 .nav-tagline {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
   color: var(--text-muted);
   letter-spacing: 0.5px;
+  margin-top: 1px;
 }
 
-.nav-links {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  order: 2;
+.menubar-menu {
+  position: relative;
+  display: inline-block;
 }
 
-.nav-accuracy-badge-container {
-  order: 3;
-}
-
-.nav-item {
-  color: var(--text-secondary) !important;
-  text-decoration: none !important;
+.menubar-trigger {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
   font-size: 0.82rem;
   font-weight: 600;
   padding: 8px 14px;
   border-radius: 8px;
-  transition: all 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.menubar-trigger:hover, .menubar-menu:hover .menubar-trigger {
+  background: rgba(52, 211, 153, 0.08);
+  color: var(--accent-green);
+}
+
+.menubar-trigger.active {
+  background: rgba(52, 211, 153, 0.12);
+  color: var(--accent-green);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  font-weight: 700;
+}
+
+.menubar-trigger-link {
+  text-decoration: none !important;
+  color: var(--text-secondary) !important;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
   border: 1px solid transparent;
 }
 
-.nav-item:hover {
+.menubar-trigger-link:hover, .menubar-trigger-link.active {
   background: rgba(52, 211, 153, 0.08);
   color: var(--accent-green) !important;
 }
 
-.nav-item.active {
+.menubar-trigger-link.active {
   background: rgba(52, 211, 153, 0.12);
   color: var(--accent-green) !important;
   border: 1px solid rgba(52, 211, 153, 0.2);
   font-weight: 700;
+}
+
+.menubar-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #111827; /* solid dark background for popup list */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  min-width: 220px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  padding: 4px;
+  z-index: 9999;
+  margin-top: 6px;
+}
+
+.menubar-menu:hover .menubar-content {
+  display: block;
+}
+
+.menubar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  color: var(--text-secondary) !important;
+  text-decoration: none !important;
+  font-size: 0.78rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.menubar-item:hover {
+  background: rgba(52, 211, 153, 0.08);
+  color: var(--accent-green) !important;
+}
+
+.menubar-item-static {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  border-radius: 6px;
+}
+
+.menubar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .nav-accuracy-badge {
@@ -1391,17 +1485,6 @@ button[data-testid="collapsedControl"] { display: none !important; }
   100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
 }
 
-.top-nav-meta {
-  display: none;
-  gap: 16px;
-  font-size: 0.68rem;
-  color: var(--text-muted);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding-top: 8px;
-  width: 100%;
-  justify-content: flex-end;
-}
-
 /* Ensure Streamlit page content stretches nicely since there is no sidebar */
 [data-testid="stAppViewBlockContainer"] {
   max-width: 100% !important;
@@ -1410,59 +1493,47 @@ button[data-testid="collapsedControl"] { display: none !important; }
   padding-top: 1rem !important;
 }
 
-/* ── Mobile styles for Top Nav ── */
+/* ── Mobile styles for Football Menubar ── */
 @media (max-width: 768px) {
-  .top-nav-bar {
-    padding: 10px 10px;
-    gap: 8px;
-    align-items: flex-start;
+  .football-menubar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 10px;
     border-radius: 12px;
   }
-  .top-nav-main {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    width: 100%;
-  }
-  .mobile-nav-header {
-    display: flex !important;
-    justify-content: space-between;
+  .menubar-brand {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 6px;
+    margin-right: 0;
+    margin-bottom: 4px;
     align-items: center;
-    width: 100%;
-  }
-  .nav-links {
-    width: 100%;
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    overflow: visible;
-    white-space: normal;
-    justify-content: stretch;
-    padding-bottom: 0;
-    gap: 6px;
-  }
-  /* Hide scrollbar for Chrome/Safari/Opera */
-  .nav-links::-webkit-scrollbar { display: none; }
-  /* Hide scrollbar for IE, Edge and Firefox */
-  .nav-links { -ms-overflow-style: none; scrollbar-width: none; }
-  .nav-item {
-    padding: 8px 6px;
-    font-size: 0.7rem;
     text-align: center;
-    min-height: 36px;
-    display: inline-flex;
-    align-items: center;
+  }
+  .menubar-menu {
+    width: 100%;
+  }
+  .menubar-trigger, .menubar-trigger-link {
+    width: 100%;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    padding: 8px 10px;
+  }
+  .menubar-content {
+    position: static;
+    box-shadow: none;
+    width: 100%;
+    border: none;
+    background: rgba(255, 255, 255, 0.02);
+    padding-left: 12px;
+    margin-top: 2px;
+  }
+  .menubar-right {
+    margin-left: 0;
+    margin-top: 6px;
     justify-content: center;
-    white-space: nowrap;
   }
-  .nav-logo { font-size: 1.05rem; }
-  .nav-tagline { display: none; }
-  .top-nav-meta {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 6px;
-    font-size: 0.6rem;
-  }
-  .nav-accuracy-badge { font-size: 0.65rem; padding: 3px 8px; }
 }
 
 /* ─── Comprehensive Mobile Phone Layout ─── */
