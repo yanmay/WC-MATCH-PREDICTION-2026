@@ -409,7 +409,7 @@ if model_ready:
             date_label = format_match_date(str(cm.get("date", "")))
             date_cls = "today" if date_label == "Today" else ("yesterday" if date_label == "Yesterday" else "")
 
-            st.markdown(textwrap.dedent(f"""
+            card_html = textwrap.dedent(f"""
             <div class="completed-match-card">
                 <div class="completed-match-header">
                     <div class="completed-match-header-left">
@@ -435,7 +435,8 @@ if model_ready:
                         <span style="{a_style}">{cm['away_team']}</span>
                     </div>
                 </div>
-            </div>"""), unsafe_allow_html=True)
+            </div>""").replace('\n', ' ')
+            st.markdown(card_html, unsafe_allow_html=True)
 
 # ── Feature Importance ─────────────────────────────────────────────────────────
 if model_ready:
