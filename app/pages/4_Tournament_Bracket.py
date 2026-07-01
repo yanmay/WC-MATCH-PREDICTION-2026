@@ -318,8 +318,9 @@ html += '<div class="bracket-flow-wrapper">'
 # Column 1: Round of 32 Left
 html += '<div class="bracket-column">'
 html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">ROUND OF 32</div>'
-for i in range(8):
-    match = sim_data["Round of 32"][i]
+left_r32_ids = [1, 4, 6, 3, 2, 5, 7, 8]
+for m_id in left_r32_ids:
+    match = next(m for m in sim_data["Round of 32"] if m["match_id"] == m_id)
     html += render_match_html(match)
 html += '</div>'
 
@@ -379,8 +380,9 @@ html += '</div>'
 # Column 9: Round of 32 Right
 html += '<div class="bracket-column">'
 html += '<div style="text-align:center; font-size:0.6rem; font-weight:700; color:#9ca3af; letter-spacing:1px; margin-bottom:4px;">ROUND OF 32</div>'
-for i in range(8, 16):
-    match = sim_data["Round of 32"][i]
+right_r32_ids = [9, 10, 11, 12, 13, 16, 15, 14]
+for m_id in right_r32_ids:
+    match = next(m for m in sim_data["Round of 32"] if m["match_id"] == m_id)
     html += render_match_html(match)
 html += '</div>'
 
