@@ -20,13 +20,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 102,
@@ -52,13 +52,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 103,
@@ -82,13 +82,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 104,
@@ -113,13 +113,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 105,
@@ -138,13 +138,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 106,
@@ -165,13 +165,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 107,
@@ -192,13 +192,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 108,
@@ -222,13 +222,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 109,
@@ -253,13 +253,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 110,
@@ -286,13 +286,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 111,
@@ -315,13 +315,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 112,
@@ -342,13 +342,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 113,
@@ -371,13 +371,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 114,
@@ -399,13 +399,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 115,
@@ -429,13 +429,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 116,
@@ -460,13 +460,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 117,
@@ -489,13 +489,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 118,
@@ -521,13 +521,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 119,
@@ -546,13 +546,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 120,
@@ -578,13 +578,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 121,
@@ -609,13 +609,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 122,
@@ -634,13 +634,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 123,
@@ -661,13 +661,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 124,
@@ -694,13 +694,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 125,
@@ -723,13 +723,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 126,
@@ -753,11 +753,11 @@
     "elapsed_secs": 0.0,
     "kick_off_utc": "2026-06-27T21:19:00Z",
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 127,
@@ -781,13 +781,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 128,
@@ -806,13 +806,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 129,
@@ -836,13 +836,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 130,
@@ -869,13 +869,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 131,
@@ -900,13 +900,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 1,
@@ -919,8 +919,8 @@
     "away_score": 1,
     "group": "R32",
     "scorers": {
-      "South Africa": [],
-      "Canada": [
+      "home": [],
+      "away": [
         "Astfan Avstakviv 90+2'"
       ]
     },
@@ -932,8 +932,8 @@
     "source_match_id": "73",
     "home_team_label": "Runner-up Group A",
     "away_team_label": "Runner-up Group B",
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 2,
@@ -946,11 +946,11 @@
     "away_score": 1,
     "group": "R32",
     "scorers": {
-      "Brazil": [
+      "home": [
         "Casemiro 56'",
         "Gabriel Martinelli 90+5'"
       ],
-      "Japan": [
+      "away": [
         "Kaish\u016b Sano 29'"
       ]
     },
@@ -962,8 +962,8 @@
     "source_match_id": "76",
     "home_team_label": "Winner Group C",
     "away_team_label": "Runner-up Group F",
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 3,
@@ -986,13 +986,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
     "source_match_id": "74",
     "home_team_label": "Winner Group E",
     "away_team_label": "3rd Group A/B/C/D/F",
-    "home_penalty_score": 3.0,
-    "away_penalty_score": 4.0
+    "home_penalty_score": 3,
+    "away_penalty_score": 4
   },
   {
     "match_id": 4,
@@ -1015,13 +1015,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
     "source_match_id": "75",
     "home_team_label": "Winner Group F",
     "away_team_label": "Runner-up Group C",
-    "home_penalty_score": 2.0,
-    "away_penalty_score": 3.0
+    "home_penalty_score": 2,
+    "away_penalty_score": 3
   },
   {
     "match_id": 5,
@@ -1034,10 +1034,10 @@
     "away_score": 2,
     "group": "R32",
     "scorers": {
-      "Ivory Coast": [
+      "home": [
         "Amad Diallo 74'"
       ],
-      "Norway": [
+      "away": [
         "Antonio Nusa 39'",
         "Erling Haaland 86'"
       ]
@@ -1045,13 +1045,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
     "source_match_id": "78",
     "home_team_label": "Runner-up Group E",
     "away_team_label": "Runner-up Group I",
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 6,
@@ -1059,21 +1059,28 @@
     "date": "2026-06-30",
     "home_team": "France",
     "away_team": "Sweden",
-    "status": "scheduled",
-    "home_score": null,
-    "away_score": null,
+    "status": "completed",
+    "home_score": 3,
+    "away_score": 0,
     "group": "R32",
-    "scorers": null,
+    "scorers": {
+      "home": [
+        "Kylian Mbapp\u00e9 45'",
+        "Bradley Barcola 53'",
+        "Kylian Mbapp\u00e9 74'"
+      ],
+      "away": []
+    },
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
     "source_match_id": "77",
     "home_team_label": "Winner Group I",
     "away_team_label": "3rd Group C/D/F/G/H",
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 7,
@@ -1081,21 +1088,27 @@
     "date": "2026-06-30",
     "home_team": "Mexico",
     "away_team": "Ecuador",
-    "status": "scheduled",
-    "home_score": null,
-    "away_score": null,
+    "status": "completed",
+    "home_score": 2,
+    "away_score": 0,
     "group": "R32",
-    "scorers": null,
+    "scorers": {
+      "home": [
+        "Juli\u00e1n Qui\u00f1ones 22'",
+        "Ra\u00fal Jim\u00e9nez 31'"
+      ],
+      "away": []
+    },
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
     "source_match_id": "79",
     "home_team_label": "Winner Group A",
     "away_team_label": "3rd Group C/E/F/H/I",
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 8,
@@ -1111,13 +1124,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
     "source_match_id": "80",
     "home_team_label": "Winner Group L",
     "away_team_label": "3rd Group E/H/I/J/K",
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 9,
@@ -1133,13 +1146,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
     "source_match_id": "82",
     "home_team_label": "Winner Group G",
     "away_team_label": "3rd Group A/E/H/I/J",
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 10,
@@ -1155,13 +1168,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
     "source_match_id": "81",
     "home_team_label": "Winner Group D",
     "away_team_label": "3rd Group B/E/F/I/J",
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 11,
@@ -1177,13 +1190,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
     "source_match_id": "84",
     "home_team_label": "Winner Group H",
     "away_team_label": "Runner-up Group J",
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 12,
@@ -1199,13 +1212,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
     "source_match_id": "83",
     "home_team_label": "Runner-up Group K",
     "away_team_label": "Runner-up Group L",
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 13,
@@ -1221,13 +1234,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
     "source_match_id": "85",
     "home_team_label": "Winner Group B",
     "away_team_label": "3rd Group E/F/G/I/J",
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 14,
@@ -1243,13 +1256,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
     "source_match_id": "88",
     "home_team_label": "Runner-up Group D",
     "away_team_label": "Runner-up Group G",
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 15,
@@ -1265,13 +1278,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
     "source_match_id": "86",
     "home_team_label": "Winner Group J",
     "away_team_label": "Runner-up Group H",
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 16,
@@ -1287,13 +1300,13 @@
     "minute": null,
     "elapsed_mins": 0.0,
     "elapsed_secs": 0.0,
-    "kick_off_utc": NaN,
+    "kick_off_utc": null,
     "clock_is_ticking": false,
     "source_match_id": "87",
     "home_team_label": "Winner Group K",
     "away_team_label": "3rd Group D/E/I/J/L",
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 17,
@@ -1304,18 +1317,18 @@
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
-    "group": NaN,
+    "group": null,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null,
     "clock_is_ticking": null,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 18,
@@ -1326,18 +1339,18 @@
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
-    "group": NaN,
+    "group": null,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null,
     "clock_is_ticking": null,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 19,
@@ -1348,18 +1361,18 @@
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
-    "group": NaN,
+    "group": null,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null,
     "clock_is_ticking": null,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 20,
@@ -1370,18 +1383,18 @@
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
-    "group": NaN,
+    "group": null,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null,
     "clock_is_ticking": null,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 21,
@@ -1392,18 +1405,18 @@
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
-    "group": NaN,
+    "group": null,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null,
     "clock_is_ticking": null,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 22,
@@ -1414,18 +1427,18 @@
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
-    "group": NaN,
+    "group": null,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null,
     "clock_is_ticking": null,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 23,
@@ -1436,18 +1449,18 @@
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
-    "group": NaN,
+    "group": null,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null,
     "clock_is_ticking": null,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 24,
@@ -1458,18 +1471,18 @@
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
-    "group": NaN,
+    "group": null,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null,
     "clock_is_ticking": null,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 25,
@@ -1480,18 +1493,18 @@
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
-    "group": NaN,
+    "group": null,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null,
     "clock_is_ticking": null,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 26,
@@ -1502,18 +1515,18 @@
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
-    "group": NaN,
+    "group": null,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null,
     "clock_is_ticking": null,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 27,
@@ -1524,18 +1537,18 @@
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
-    "group": NaN,
+    "group": null,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null,
     "clock_is_ticking": null,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 28,
@@ -1546,18 +1559,18 @@
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
-    "group": NaN,
+    "group": null,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null,
     "clock_is_ticking": null,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 29,
@@ -1568,18 +1581,18 @@
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
-    "group": NaN,
+    "group": null,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null,
     "clock_is_ticking": null,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 30,
@@ -1590,18 +1603,18 @@
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
-    "group": NaN,
+    "group": null,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null,
     "clock_is_ticking": null,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 31,
@@ -1612,18 +1625,18 @@
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
-    "group": NaN,
+    "group": null,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null,
     "clock_is_ticking": null,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   },
   {
     "match_id": 32,
@@ -1634,17 +1647,17 @@
     "status": "scheduled",
     "home_score": null,
     "away_score": null,
-    "group": NaN,
+    "group": null,
     "scorers": null,
     "minute": null,
-    "elapsed_mins": NaN,
-    "elapsed_secs": NaN,
-    "kick_off_utc": NaN,
+    "elapsed_mins": null,
+    "elapsed_secs": null,
+    "kick_off_utc": null,
     "clock_is_ticking": null,
-    "source_match_id": NaN,
-    "home_team_label": NaN,
-    "away_team_label": NaN,
-    "home_penalty_score": NaN,
-    "away_penalty_score": NaN
+    "source_match_id": null,
+    "home_team_label": null,
+    "away_team_label": null,
+    "home_penalty_score": null,
+    "away_penalty_score": null
   }
 ]

@@ -717,22 +717,22 @@ def resolve_tbd_slots(fixtures: pd.DataFrame, wc_df: pd.DataFrame) -> pd.DataFra
 
     updated = fixtures.copy()
     slot_map = {
-        1: (None, None),
-        2: (None, None),
-        3: (None, get_third(0)),
-        4: (None, None),
-        5: (None, get_third(1)),
-        6: (get_winner("I"), get_runner_up("J")),
-        7: (None, get_third(2)),
-        8: (get_winner("G"), get_runner_up("H")),
-        9: (get_winner("L"), get_runner_up("K")),
-        10: (None, None),
-        11: (get_winner("H"), get_runner_up("G")),
-        12: (get_winner("K"), get_runner_up("L")),
-        13: (None, get_third(3)),
-        14: (None, get_third(4)),
-        15: (get_winner("J"), get_third(5)),
-        16: (get_runner_up("I"), get_third(6)),
+        1: (get_runner_up("A"), get_runner_up("B")),
+        2: (get_winner("C"), get_runner_up("F")),
+        3: (get_winner("E"), get_third(0)),
+        4: (get_winner("F"), get_runner_up("C")),
+        5: (get_runner_up("E"), get_runner_up("I")),
+        6: (get_winner("I"), get_third(1)),
+        7: (get_winner("A"), get_third(2)),
+        8: (get_winner("L"), get_third(3)),
+        9: (get_winner("G"), get_third(4)),
+        10: (get_winner("D"), get_third(5)),
+        11: (get_winner("H"), get_runner_up("J")),
+        12: (get_runner_up("K"), get_runner_up("L")),
+        13: (get_winner("B"), get_third(6)),
+        14: (get_runner_up("D"), get_runner_up("G")),
+        15: (get_winner("J"), get_runner_up("H")),
+        16: (get_winner("K"), get_third(7)),
     }
     
     for match_id, (h_slot, a_slot) in slot_map.items():

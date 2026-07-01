@@ -167,8 +167,8 @@ def run_bracket_simulation(wc_df_local, fixtures_signature):
     # Round of 16
     r16_results = []
     r16_pairs = [
-        (1, 2), (3, 4), (5, 6), (7, 8),
-        (9, 10), (11, 12), (13, 14), (15, 16)
+        (1, 4), (6, 3), (2, 5), (7, 8),
+        (9, 10), (11, 12), (13, 16), (15, 14)
     ]
     for idx, (m1_id, m2_id) in enumerate(r16_pairs):
         t1 = next(r["winner"] for r in r32_results if r["match_id"] == m1_id)

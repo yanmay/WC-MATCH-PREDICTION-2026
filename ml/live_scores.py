@@ -795,33 +795,38 @@ def sync_live_results_to_fixtures(fixtures_df, wc_df=None) -> tuple:
     # 0. Sync provider knockout bracket slots before applying live/completed deltas.
     provider_r32 = get_provider_knockout_fixtures("r32")
     if provider_r32:
-        r32_indices = list(updated[updated["round"] == "Round of 32"].sort_values("match_id").index)
-        for slot_idx, provider in zip(r32_indices, provider_r32):
-            idx = slot_idx
-            was_completed = str(updated.at[idx, "status"]) == "completed"
-            fields = [
-                "round", "date", "home_team", "away_team", "status", "home_score",
-                "away_score", "home_penalty_score", "away_penalty_score",
-                "group", "minute", "elapsed_mins", "elapsed_secs",
-                "kick_off_utc", "clock_is_ticking", "source_match_id",
-                "home_team_label", "away_team_label"
-            ]
-            for key in fields:
-                new_val = provider.get(key)
-                old_val = updated.at[idx, key] if key in updated.columns else None
-                old_cmp = "" if old_val is None or str(old_val).lower() == "nan" else str(old_val)
-                new_cmp = "" if new_val is None or str(new_val).lower() == "nan" else str(new_val)
-                if old_cmp != new_cmp:
-                    updated.at[idx, key] = new_val
+        for provider in provider_r32:
+            source_id = str(provider.get("source_match_id") or "")
+            if not source_id:
+                continue
+            # Find matching match in updated fixtures by source_match_id
+            match_idx = updated[(updated["round"] == "Round of 32") & (updated["source_match_id"].astype(str) == source_id)].index
+            if len(match_idx) > 0:
+                idx = match_idx[0]
+                was_completed = str(updated.at[idx, "status"]) == "completed"
+                fields = [
+                    "round", "date", "home_team", "away_team", "status", "home_score",
+                    "away_score", "home_penalty_score", "away_penalty_score",
+                    "group", "minute", "elapsed_mins", "elapsed_secs",
+                    "kick_off_utc", "clock_is_ticking", "source_match_id",
+                    "home_team_label", "away_team_label"
+                ]
+                for key in fields:
+                    new_val = provider.get(key)
+                    old_val = updated.at[idx, key] if key in updated.columns else None
+                    old_cmp = "" if old_val is None or str(old_val).lower() == "nan" else str(old_val)
+                    new_cmp = "" if new_val is None or str(new_val).lower() == "nan" else str(new_val)
+                    if old_cmp != new_cmp:
+                        updated.at[idx, key] = new_val
+                        changed = True
+                scorers_json = json.dumps(provider.get("scorers", {}))
+                old_scorers = updated.at[idx, "scorers"]
+                old_scorers_cmp = old_scorers if isinstance(old_scorers, str) else json.dumps(old_scorers or {})
+                if old_scorers_cmp != scorers_json:
+                    updated.at[idx, "scorers"] = scorers_json
                     changed = True
-            scorers_json = json.dumps(provider.get("scorers", {}))
-            old_scorers = updated.at[idx, "scorers"]
-            old_scorers_cmp = old_scorers if isinstance(old_scorers, str) else json.dumps(old_scorers or {})
-            if old_scorers_cmp != scorers_json:
-                updated.at[idx, "scorers"] = scorers_json
-                changed = True
-            if provider.get("status") == "completed" and not was_completed:
-                newly_completed.append(provider)
+                if provider.get("status") == "completed" and not was_completed:
+                    newly_completed.append(provider)
 
         duplicate_mask = updated["source_match_id"].notna() & (updated["source_match_id"].astype(str).str.lower() != "nan") & (updated["source_match_id"].astype(str) != "")
         duplicate_ids = updated.loc[duplicate_mask, "source_match_id"][updated.loc[duplicate_mask, "source_match_id"].duplicated()].unique()
